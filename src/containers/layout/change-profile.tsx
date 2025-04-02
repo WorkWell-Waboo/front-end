@@ -8,15 +8,25 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { SignJWT } from 'jose';
+import { SignJWT, decodeJwt } from 'jose';
+import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 function ChangeProfile({
-	role: initial,
+	cookies,
 }: {
-	role: Role;
+	cookies: Promise<ReadonlyRequestCookies>;
 }) {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	const auth = (use(cookies) as unknown as any[]).find(
+		(e) => e[0] === 'token',
+	)[1].value as string;
+
+	const payload = decodeJwt(auth);
+
+	const initial = payload.role;
+
 	const router = useRouter();
 	const [role, setRole] = useState<Role>(initial);
 
