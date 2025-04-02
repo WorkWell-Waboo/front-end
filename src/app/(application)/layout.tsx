@@ -1,22 +1,22 @@
+import { ChangeProfile } from '@/containers/layout/change-profile';
 import { Header } from '@/containers/layout/header';
 import { Sidebar } from '@/containers/layout/sidebar';
+import { decodeJwt } from 'jose';
 import { cookies } from 'next/headers';
-import { Fragment, Suspense } from 'react';
+import { Fragment } from 'react';
 
-function ApplicationLayoutRoot({ children }: React.PropsWithChildren) {
-	async function getCookies() {
-		'use server';
+async function ApplicationLayoutRoot({ children }: React.PropsWithChildren) {
+	const auth = (await cookies()).get('token')?.value as string;
 
-		return cookies();
-	}
+	const payload = decodeJwt(auth);
+
+	const role = payload.role;
 
 	return (
 		<Fragment>
-			{/* <ChangeProfile cookies={getCookies()} /> */}
+			<ChangeProfile role={role} />
 			<section className='grid grid-cols-[256px_calc(100%-256px)] min-h-dvh'>
-				<Suspense>
-					<Sidebar cookies={getCookies()} />
-				</Suspense>
+				<Sidebar role={role} />
 				<main>
 					<Header />
 					{children}

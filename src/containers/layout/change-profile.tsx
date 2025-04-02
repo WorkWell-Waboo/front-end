@@ -8,29 +8,15 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { SignJWT, decodeJwt } from 'jose';
+import { SignJWT } from 'jose';
 import { useRouter } from 'next/navigation';
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 function ChangeProfile({
-	cookies,
+	role: initial,
 }: {
-	cookies: Promise<
-		[
-			string,
-			{
-				name: string;
-				value: string;
-			},
-		][]
-	>;
+	role: Role;
 }) {
-	const auth = use(cookies).find((e) => e[0] === 'token')?.[1].value as string;
-
-	const payload = decodeJwt(auth);
-
-	const initial = payload.role;
-
 	const router = useRouter();
 	const [role, setRole] = useState<Role>(initial);
 
