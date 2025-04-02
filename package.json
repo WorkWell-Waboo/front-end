@@ -6,7 +6,10 @@
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"format": "bunx biome format --write src",
+		"lint": "bunx biome lint --write src",
+		"check": "bunx biome check --write src",
+		"deploy": "git add . && git commit -m 'commit: automatic' && git push"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.0.0",
