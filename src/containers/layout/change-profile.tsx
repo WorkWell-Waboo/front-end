@@ -9,19 +9,23 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { SignJWT, decodeJwt } from 'jose';
-import type { ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies';
 import { useRouter } from 'next/navigation';
 import { use, useState } from 'react';
 
 function ChangeProfile({
 	cookies,
 }: {
-	cookies: Promise<ReadonlyRequestCookies>;
+	cookies: Promise<
+		[
+			string,
+			{
+				name: string;
+				value: string;
+			},
+		][]
+	>;
 }) {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	const auth = (use(cookies) as unknown as any[]).find(
-		(e) => e[0] === 'token',
-	)[1].value as string;
+	const auth = use(cookies).find((e) => e[0] === 'token')?.[1].value as string;
 
 	const payload = decodeJwt(auth);
 
