@@ -1,6 +1,8 @@
-import { decodeJwt } from 'jose';
+import type { Role } from '@/@types/authentication/role';
+
 import { type NextRequest, NextResponse } from 'next/server';
-import type { Role } from './@types/authentication/role';
+
+import { decodeJwt } from 'jose';
 
 const pathnameAuth = ['/sign-in', '/sign-up', '/forgot'];
 

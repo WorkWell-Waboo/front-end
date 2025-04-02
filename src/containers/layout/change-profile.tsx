@@ -1,6 +1,11 @@
 'use client';
 
 import type { Role } from '@/@types/authentication/role';
+
+import { useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
 import {
 	Select,
 	SelectContent,
@@ -8,9 +13,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
+
 import { SignJWT } from 'jose';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 function ChangeProfile({
 	role: initial,
