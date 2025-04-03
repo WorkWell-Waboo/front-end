@@ -1,14 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { HeaderCogSVG } from '@/assets/svgs/header-cog';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 function CardProfissional() {
   return (
