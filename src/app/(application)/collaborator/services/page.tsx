@@ -126,18 +126,34 @@ function ClickableCard({
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
-          <div>
+          <div className="flex justify-center -mt-13">
             <Avatar>
               <AvatarFallback className="bg-white">
-                <ParkOutlineSVG className="w-10 h-10 text-purple-600" />
+                <ParkOutlineSVG className="w-10 h-10 text-primary" />
               </AvatarFallback>
             </Avatar>
           </div>
           <DialogHeader>
-            <DialogTitle>Detalhes sobre {service.name}</DialogTitle>
+            <DialogTitle className="text-center">
+              Consultas indisponíveis
+            </DialogTitle>
           </DialogHeader>
-          <p>Aqui você pode adicionar mais informações sobre {service.name}.</p>
-          <Button onClick={() => setOpen(false)}>Fechar</Button>
+          <p className="text-center">
+            Para aceder a esta especialidade, terá de adquirir novas consultas
+            ou pacotes. Confira os planos disponíveis e continue o seu
+            atendimento sem interrupções..
+          </p>
+
+          <div className="grid grid-cols-2 gap-2 text-[#691FB1] px-10 mb-5">
+            <Button
+              variant="ghost"
+              className="border border-[#691FB1]"
+              onClick={() => setOpen(false)}
+            >
+              Voltar
+            </Button>
+            <Button className="bg-[#691FB1] text-white">Ir para planos</Button>
+          </div>
         </DialogContent>
       </Dialog>
     </>
