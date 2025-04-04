@@ -1,5 +1,3 @@
-import {ArrowSVG} from '../../../../assets/svgs/arrow';
-
 function CollaboratorDashboardPage() {
 	return (
 		<main className="p-10 grid grid-cols-2 gap-4">
