@@ -1,3 +1,5 @@
+import {ArrowSVG} from '../../../../assets/svgs/arrow';
+
 function CollaboratorDashboardPage() {
 	return (
 		<main className="p-10 grid grid-cols-2 gap-4">
@@ -7,14 +9,27 @@ function CollaboratorDashboardPage() {
 			</div>
 			<div className="bg-white border-b-2 border-b-primary p-5 rounded-lg">
 				<div className="flex justify-between items-center">
-					<h2 className="">Sessões disponíveis</h2>
+					<h2 className="font-bold text-xl text-[#4f4f4f] mb-2">Sessões disponíveis</h2>
 					<div className="flex gap-2">
-						
+						<ArrowSVG className="w-60 h-6 text-red-500"/>
 					</div>
 				</div>
-				
-				<p className="text-white">Bem-vinda! Que tal dar o próximo passo no cuidado com você? Escolha um profissional e agende um horário para sua sessão.</p>
+				<div className="grid grid-cols-2 gap-0.5">
+					<p className="font-bold text-sm text-primary">Psicologia: 
+						<span className="font-semibold text-[#4f4f4f]"> 0 sessões</span>
+					</p>
+					<p className="font-bold text-sm text-primary">Psicologia: 
+						<span className="font-semibold text-[#4f4f4f]"> 0 sessões</span>
+					</p>
+					<p className="font-bold text-sm text-primary">Psicologia: 
+						<span className="font-semibold text-[#4f4f4f]"> 0 sessões</span>
+					</p>
+					<p className="font-bold text-sm text-primary">Psicologia: 
+						<span className="font-semibold text-[#4f4f4f]"> 0 sessões</span>
+					</p>
+				</div>
 			</div>
+		
 		</main>
 	);
 }
