@@ -48,7 +48,7 @@ export default function ServicesGrid() {
   const [activeService, setActiveService] = useState<string | null>(null);
 
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-4 p-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 p-10">
       {services.map((service) => (
         <ClickableCard
           key={service.name}
