@@ -1,5 +1,5 @@
 'use client';
-import parkOutlineSVG from '@/assets/svgs/park-outline';
+import ParkOutlineSVG from '@/assets/svgs/park-outline';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -32,7 +32,6 @@ const serviceIcons: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   Massagem: MassagemSVG,
   Fisioterapia: FisioterapiaSVG,
   Sono: SonoSVG,
-  'park Outline': parkOutlineSVG,
 };
 const services: Service[] = [
   { name: 'Psicologia', hasService: true },
@@ -130,16 +129,7 @@ function ClickableCard({
           <div>
             <Avatar>
               <AvatarFallback className="bg-white">
-                {IconComponent ? (
-                  <IconComponent
-                    data-status={status}
-                    className={` text-primary bg-accent
-                  
-                    }`}
-                  />
-                ) : (
-                  <span>?</span>
-                )}
+                <ParkOutlineSVG className="w-10 h-10 text-purple-600" />
               </AvatarFallback>
             </Avatar>
           </div>
