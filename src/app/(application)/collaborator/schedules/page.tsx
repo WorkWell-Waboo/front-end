@@ -1,9 +1,24 @@
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 function CollaboratorSchedulesPage() {
-	return (
-		<main>
-			<h1>Meus Agendamento</h1>
-		</main>
-	);
+  return (
+    <main>
+      <Carousel>
+        <CarouselContent>
+          <CarouselItem>...</CarouselItem>
+          <CarouselItem>...</CarouselItem>
+          <CarouselItem>...</CarouselItem>
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </main>
+  );
 }
 
 export default CollaboratorSchedulesPage;
