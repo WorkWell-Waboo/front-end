@@ -1,7 +1,9 @@
 'use client'
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
 	type CarouselApi,
@@ -9,9 +11,17 @@ import {
   CarouselItem
 } from "@/components/ui/carousel"
 
+import PhotoBlog from "@/assets/imgs/blog.png"
+import Photo from "@/assets/imgs/cliente.png"
+import PhotoQuiz from "@/assets/imgs/quiz.png"
+import PhotoWebinar1 from "@/assets/imgs/webinar-1.png"
+
 import ArrowLeft from "@/assets/svgs/arrowLeft";
 import ArrowRight from "@/assets/svgs/arrowRight";
-
+import EllipsisIcon from "@/assets/svgs/ellipsis";
+import EllipsisIconDark from "@/assets/svgs/ellipsis-dark";
+import FlagIcon from "@/assets/svgs/flag";
+import FlagIconDark from "@/assets/svgs/flag-dark";
 
 function CollaboratorDashboardPage() {
 	const [carousel1, setCarousel1] = useState<CarouselApi>()
@@ -46,7 +56,8 @@ function CollaboratorDashboardPage() {
 
 	return (
 		<main className="p-10 flex flex-col gap-4">
-			<div className="grid grid-cols-2 gap-4">
+			{/* TOPO */}
+			<div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
 				<div className="bg-gradient-to-r from-primary to-primary/50 p-5 rounded-lg">
 					<h2 className="font-medium text-2xl text-white mb-2"><span>Olá, Mariana Lemos</span></h2>
 					<p className="font-normal text-sm text-white ">Bem-vinda! Que tal dar o próximo passo no cuidado com você? Escolha um profissional e agende um horário para sua sessão.</p>
@@ -67,7 +78,7 @@ function CollaboratorDashboardPage() {
 						<CarouselContent>
 							{Array.from({ length: 5 }).map((_, index) => (
 								<CarouselItem key={`carousel-item-${Date.now()}-${index}`}>
-									<div className="grid grid-cols-2 gap-0.5">
+									<div className="grid grid-cols-2 gap-2">
 										<p className="font-bold text-sm text-primary">Psicologia: 
 											<span className="font-semibold text-[#4f4f4f]"> 0 sessões</span>
 										</p>
@@ -87,28 +98,143 @@ function CollaboratorDashboardPage() {
 					</Carousel>
 				</div>
 			</div>
+			{/* Agendamentos futuros */}
 			<div className="flex flex-col gap-4">
 				<div className="col-span-full">
-					<h2 className="font-bold text-lg text-[#4f4f4f] ">Agendamentos futuros</h2>
+					<h2 className="font-semibold text-lg text-[#4f4f4f] ">Agendamentos futuros</h2>
 				</div>
-				<div className="w-full">
-					<button type="button" className="bg-[#F9F3FF] w-5 h-5 flex justify-center items-center drop-shadow-md rounded-full cursor-pointer" onClick={()=> carousel2?.scrollTo(currentCarousel2 - 1)}>
+				<div className="relative w-full">
+					<button type="button" className="absolute -left-2 top-1/2 transform -translate-y-1/2 z-2 bg-[#F9F3FF] w-7 h-7 flex justify-center items-center drop-shadow-md rounded-full cursor-pointer" onClick={()=> carousel2?.scrollTo(currentCarousel2 - 1)}>
 						<ArrowRight/>
+					</button>
+					<button type="button" className="absolute -right-2 top-1/2 transform -translate-y-1/2 z-2 bg-[#F9F3FF] w-7 h-7 flex justify-center items-center drop-shadow-md rounded-full cursor-pointer" onClick={()=> carousel2?.scrollTo(currentCarousel2 + 1)}>
+						<ArrowLeft/>
 					</button>
 					<Carousel setApi={setCarousel2} opts={{align: "start", loop: true}}> 
 						<CarouselContent >
 							{Array.from({ length: 6 }).map((_, index) => (
 								<CarouselItem className="basis-1/2"  key={`carousel-item-${Date.now()}-${index}`}>
-									<div className="bg-white border-b-2 border-b-primary p-5 rounded-lg">
-										
+									<div className="bg-white border-b-2 border-b-primary px-8 py-4 rounded-lg flex items-center gap-5">
+										<Image src={Photo} alt="foto cliente" width={75} height={75} className="rounded-full"/>
+										<div className="flex flex-col flex-1">
+											<span className="font-bold text-lg text-primary">
+												Sandra Amaral
+											</span>
+											<span className="font-light text-sm">
+												Psicanalista
+											</span>
+										</div>
+										<div className="flex flex-col font-light text-xs text-[#4f4f4f] text-right w-[110px]">
+											<span>
+												Quinta - Jan 16
+											</span>
+											<span >
+												14:00 - 15:00 PM
+											</span>
+											<Button className="mt-2 text-xs rounded-full">
+												Ver agenda
+											</Button>
+										</div>
 									</div>
 								</CarouselItem>
 							))}
 						</CarouselContent>
 					</Carousel>
-					<button type="button" className="bg-[#F9F3FF] w-5 h-5 flex justify-center items-center drop-shadow-md rounded-full cursor-pointer" onClick={()=> carousel2?.scrollTo(currentCarousel2 + 1)}>
-						<ArrowLeft/>
-					</button>
+				</div>
+			</div>
+			{/* Webinars */}
+			<div className="grid grid-cols-2 gap-4">
+				<div className="col-span-full">
+					<h2 className="font-semibold text-lg text-[#4f4f4f] ">Webinars</h2>
+				</div>
+				{Array.from({ length: 2 }).map((_, index) => (
+					<div className="bg-primary border-b-2 border-b-white p-4 rounded-lg flex items-center gap-5" key={`carousel-item-${Date.now()}-${index}`}>
+						<Image src={PhotoWebinar1} alt="foto cliente" width={145} height={145} className="rounded-lg h-[150] w-[150] object-cover" />
+						<div className="flex flex-col flex-1 gap-3">
+							<h3 className="font-bold text-sm text-white">
+								Expanda sua mente: Webinars exclusivos todo mês
+							</h3>
+							<p className="font-light text-xs text-white">
+								Aprofunde seu autoconhecimento com encontros mensais sobre bem-estar, reflexões e novas perspectivas.
+							</p>
+							<div className="flex justify-between items-center">
+								<span className="font-light text-xs text-white">
+									5 min read
+								</span>
+								<div className="flex gap-2">
+									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
+										<FlagIcon/>
+									</button>			
+									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
+										<EllipsisIcon/>
+									</button>						
+								</div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+			{/* blog e quiz */}
+			<div className="grid grid-cols-2 gap-4">
+				<div className="flex flex-col gap-4">
+					<div className="flex justify-between items-center">
+						<h2 className="font-semibold text-lg text-[#4f4f4f] ">Matéria/Blog</h2>
+						<Button variant="outline" className="rounded-full text-sm">Ver mais</Button>
+					</div>
+					<div className="bg-white border-b-2 border-b-primary p-4 rounded-lg flex items-center gap-5">
+						<Image src={PhotoBlog} alt="foto cliente" width={145} height={145} className="rounded-lg h-[150] w-[150] object-cover" />
+						<div className="flex flex-col flex-1 gap-3">
+							<h3 className="font-bold text-sm text-primary">
+								Descubra Quem Você Realmente É: Primeiros Passos do Autoconhecimento
+							</h3>
+							<p className="font-light text-xs text-[#4f4f4f]">
+								Autoconhecimento é a chave para tomar decisões mais conscientes e viver alinhado aos seus valores. Entenda como começar!
+							</p>
+							<div className="flex justify-between items-center">
+								<span className="font-light text-xs text-[#828282]">
+									5 min read
+								</span>
+								<div className="flex gap-2">
+									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
+										<FlagIconDark/>
+									</button>			
+									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
+										<EllipsisIconDark/>
+									</button>						
+								</div>
+							</div>
+						</div>		
+						</div>
+				</div>
+				<div className="flex flex-col gap-4">
+					<div className="flex justify-between items-center">
+						<h2 className="font-semibold text-lg text-[#4f4f4f] ">Quiz</h2>
+						<Button variant="outline" className="rounded-full text-sm">Ver mais</Button>
+					</div>
+					<div className="bg-white border-b-2 border-b-primary p-4 rounded-lg flex items-center gap-5">
+						<Image src={PhotoQuiz} alt="foto cliente" width={145} height={145} className="rounded-lg h-[150] w-[150] object-cover" />
+						<div className="flex flex-col flex-1 gap-3">
+							<h3 className="font-bold text-sm text-primary">
+								Você Se Conhece Bem o Suficiente? Teste Aqui!
+							</h3>
+							<p className="font-light text-xs text-[#4f4f4f]">
+								Explore aspectos únicos da sua personalidade e descubra como o autoconhecimento impacta sua rotina.
+							</p>
+							<div className="flex justify-between items-center">
+								<span className="font-light text-xs text-[#828282]">
+									5 min read
+								</span>
+								<div className="flex gap-2">
+									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
+										<FlagIconDark/>
+									</button>			
+									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
+										<EllipsisIconDark/>
+									</button>						
+								</div>
+							</div>
+						</div>		
+						</div>
 				</div>
 			</div>
 		</main>
