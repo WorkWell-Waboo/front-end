@@ -1,8 +1,5 @@
 'use client'
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -11,6 +8,9 @@ import {
   CarouselItem
 } from "@/components/ui/carousel"
 
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
 import PhotoBlog from "@/assets/imgs/blog.png"
 import Photo from "@/assets/imgs/cliente.png"
 import PhotoQuiz from "@/assets/imgs/quiz.png"
@@ -18,10 +18,8 @@ import PhotoWebinar1 from "@/assets/imgs/webinar-1.png"
 
 import ArrowLeft from "@/assets/svgs/arrowLeft";
 import ArrowRight from "@/assets/svgs/arrowRight";
-import EllipsisIcon from "@/assets/svgs/ellipsis";
-import EllipsisIconDark from "@/assets/svgs/ellipsis-dark";
-import FlagIcon from "@/assets/svgs/flag";
-import FlagIconDark from "@/assets/svgs/flag-dark";
+import {EllipsisIcon} from "@/assets/svgs/ellipsis";
+import {FlagIcon} from "@/assets/svgs/flag";
 
 function CollaboratorDashboardPage() {
 	const [carousel1, setCarousel1] = useState<CarouselApi>()
@@ -88,7 +86,7 @@ function CollaboratorDashboardPage() {
 										<p className="font-bold text-sm text-primary">Nutrição: 
 											<span className="font-semibold text-[#4f4f4f]"> 0 sessões</span>
 										</p>
-										<p className="font-bold text-sm text-primary">Health coaching: 
+										<p className="font-bold text-sm text-primary">Health coaching 
 											<span className="font-semibold text-[#4f4f4f]"> 0 sessões</span>
 										</p>
 									</div>
@@ -163,10 +161,10 @@ function CollaboratorDashboardPage() {
 								</span>
 								<div className="flex gap-2">
 									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
-										<FlagIcon/>
+										<FlagIcon className="text-white"/>
 									</button>			
 									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
-										<EllipsisIcon/>
+										<EllipsisIcon className="text-white"/>
 									</button>						
 								</div>
 							</div>
@@ -196,10 +194,10 @@ function CollaboratorDashboardPage() {
 								</span>
 								<div className="flex gap-2">
 									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
-										<FlagIconDark/>
+										<FlagIcon className="text-[#828282]"/>
 									</button>			
 									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
-										<EllipsisIconDark/>
+										<EllipsisIcon className="text-[#828282]"/>
 									</button>						
 								</div>
 							</div>
@@ -226,15 +224,15 @@ function CollaboratorDashboardPage() {
 								</span>
 								<div className="flex gap-2">
 									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
-										<FlagIconDark/>
+										<FlagIcon  className="text-[#828282]"/>
 									</button>			
 									<button type="button" className="flex justify-center items-center cursor-pointer w-[20] h-[20]">
-										<EllipsisIconDark/>
+										<EllipsisIcon className="text-[#828282]"/>
 									</button>						
 								</div>
 							</div>
 						</div>		
-						</div>
+					</div>
 				</div>
 			</div>
 		</main>
