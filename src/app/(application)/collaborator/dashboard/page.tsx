@@ -7,6 +7,7 @@ import {
   CarouselContent,
   CarouselItem
 } from "@/components/ui/carousel"
+import { cn } from "@/libraries/utils";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -22,6 +23,37 @@ import {EllipsisIcon} from "@/assets/svgs/ellipsis";
 import {FlagIcon} from "@/assets/svgs/flag";
 
 function CollaboratorDashboardPage() {
+
+	const appointments = [
+		{
+			id: 1,
+			photo:Photo,
+			name: "Sandra Amaral",
+			profession: "Psicanalista",
+			date: "Quinta - Jan 16",
+			time: "14:00 - 15:00 PM",
+			isActive: true, 
+		},
+		{
+			id: 2,
+			photo: Photo,
+			name: "Carlos Oliveira",
+			profession: "Coach de Vida",
+			date: "Sexta - Jan 17",
+			time: "10:00 - 11:00 AM",
+			isActive: false, 
+		},
+		{
+			id: 3,
+			photo: Photo,
+			name: "Adriele Cunha",
+			profession: "Nutricionista",
+			date: "Sexta - Jan 17",
+			time: "10:00 - 11:00 AM",
+			isActive: false, 
+		},
+	];
+
 	const [carousel1, setCarousel1] = useState<CarouselApi>()
   const [currentCarousel1, setCurrentCarousel1] = useState(0)
 
@@ -110,30 +142,57 @@ function CollaboratorDashboardPage() {
 					</button>
 					<Carousel setApi={setCarousel2} opts={{align: "start", loop: true}}> 
 						<CarouselContent >
-							{Array.from({ length: 6 }).map((_, index) => (
-								<CarouselItem className="basis-1/2"  key={`carousel-item-${Date.now()}-${index}`}>
-									<div className="bg-white border-b-2 border-b-primary px-8 py-4 rounded-lg flex items-center gap-5">
-										<Image src={Photo} alt="foto cliente" width={75} height={75} className="rounded-full"/>
-										<div className="flex flex-col flex-1">
-											<span className="font-bold text-lg text-primary">
-												Sandra Amaral
-											</span>
-											<span className="font-light text-sm">
-												Psicanalista
-											</span>
-										</div>
-										<div className="flex flex-col font-light text-xs text-[#4f4f4f] text-right w-[110px]">
-											<span>
-												Quinta - Jan 16
-											</span>
-											<span >
-												14:00 - 15:00 PM
-											</span>
-											<Button className="mt-2 text-xs rounded-full">
-												Ver agenda
-											</Button>
-										</div>
+							{appointments.map((appointment) => (
+								<CarouselItem className="basis-1/2"  key={appointment.id}>
+								<div
+									key={appointment.id}
+									className={cn(
+										"px-8 py-4 rounded-lg flex items-center gap-5 border-b-2 h-full",
+										appointment.isActive
+											? "bg-primary border-b-white"
+											: "bg-white border-b-primary"
+								)}>
+									<Image
+										src={appointment.photo}
+										alt={`Foto de ${appointment.name}`}
+										width={75}
+										height={75}
+										className="rounded-full w-[75] h-[75]"
+									/>
+									<div className="flex flex-col flex-1">
+										<span
+											className={cn(
+												"font-bold text-lg",
+												appointment.isActive ? "text-white" : "text-primary"
+										)}>
+											{appointment.name}
+										</span>
+										<span
+											className={cn(
+												"font-light text-sm",
+												appointment.isActive ? "text-white" : "text-[#4f4f4f]"
+										)}>
+											{appointment.profession}
+										</span>
 									</div>
+									<div
+										className={cn(
+											"flex flex-col font-light text-xs text-right w-[110px]",
+											appointment.isActive ? "text-white" : "text-[#4f4f4f]"
+									)}>
+										<span>{appointment.date}</span>
+										<span>{appointment.time}</span>
+										<Button
+											className={cn(
+												"mt-2 text-xs rounded-full",
+												appointment.isActive
+													? "bg-white hover:bg-white/75 text-black"
+													: "bg-primary text-white "
+										)}>
+											Ver agenda
+										</Button>
+									</div>
+								</div>
 								</CarouselItem>
 							))}
 						</CarouselContent>
