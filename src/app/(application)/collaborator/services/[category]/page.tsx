@@ -80,7 +80,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
 
               {/* Avaliações e sessões */}
               <div className="flex justify-start gap-2 font-light text-sm text-foreground">
-                <span>
+                <span className="flex gap-2 text-sm">
                   <StarSVG /> {pro.rating} ({pro.reviews} comentários)
                 </span>
                 <span className="flex items-center gap-2">
