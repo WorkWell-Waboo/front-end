@@ -3,6 +3,7 @@ import ParkOutlineSVG from '@/assets/svgs/park-outline';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+
 import {
   Dialog,
   DialogContent,
@@ -10,14 +11,17 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useState } from 'react';
-import AconselhamentoFinanceiroSVG from '../../../../assets/svgs/aconselhamento-financeiro';
-import FisioterapiaSVG from '../../../../assets/svgs/fisioterapia';
-import HealthCoachingSVG from '../../../../assets/svgs/health-coaching';
-import MassagemSVG from '../../../../assets/svgs/massagem';
-import NutricaoSVG from '../../../../assets/svgs/nutricion';
-import PsicologiaSVG from '../../../../assets/svgs/psicologia';
-import PsiquiatriaSVG from '../../../../assets/svgs/psiquiatria';
-import SonoSVG from '../../../../assets/svgs/sono';
+
+import AconselhamentoFinanceiroSVG from '@/assets/svgs/aconselhamento-financeiro';
+import FisioterapiaSVG from '@/assets/svgs/fisioterapia';
+import HealthCoachingSVG from '@/assets/svgs/health-coaching';
+import MassagemSVG from '@/assets/svgs/massagem';
+import NutricaoSVG from '@/assets/svgs/nutricion';
+import PsicologiaSVG from '@/assets/svgs/psicologia';
+import PsiquiatriaSVG from '@/assets/svgs/psiquiatria';
+import SonoSVG from '@/assets/svgs/sono';
+import { useRouter } from 'next/navigation';
+
 interface Service {
   name: string;
   hasService: boolean;
@@ -44,8 +48,9 @@ const services: Service[] = [
   { name: 'Sono', hasService: true },
 ];
 
-export default function ServicesGrid() {
+export default function CollaboratorServices() {
   const [activeService, setActiveService] = useState<string | null>(null);
+  const [isSubscriber, setSubscriber] = useState(true);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 p-10">
@@ -55,6 +60,7 @@ export default function ServicesGrid() {
           service={service}
           isActive={activeService === service.name}
           setActiveService={setActiveService}
+          isSubscriber={isSubscriber}
         />
       ))}
     </div>
@@ -65,12 +71,15 @@ function ClickableCard({
   service,
   isActive,
   setActiveService,
+  isSubscriber,
 }: {
+  isSubscriber: boolean;
   service: Service;
   isActive: boolean;
   setActiveService: (name: string | null) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   const status = service.hasService
     ? isActive
       ? 'active'
@@ -79,10 +88,18 @@ function ClickableCard({
 
   const handleClick = () => {
     if (status === 'disabled') return;
+
+    if (isSubscriber) {
+      router.push('/services/7765776');
+      return;
+    }
+
     setActiveService(service.name);
     setOpen(true);
   };
+
   const IconComponent = serviceIcons[service.name] || null;
+
   return (
     <>
       <Card
@@ -152,7 +169,12 @@ function ClickableCard({
             >
               Voltar
             </Button>
-            <Button className="bg-[#691FB1] text-white">Ir para planos</Button>
+            <Button
+              className="bg-[#691FB1] text-white "
+              onClick={() => router.push('/planos')}
+            >
+              Ir para planos
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
