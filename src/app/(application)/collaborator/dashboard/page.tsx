@@ -143,7 +143,7 @@ function CollaboratorDashboardPage() {
 					<Carousel setApi={setCarousel2} opts={{align: "start", loop: true}}> 
 						<CarouselContent >
 							{appointments.map((appointment) => (
-								<CarouselItem className="basis-1/2"  key={appointment.id}>
+								<CarouselItem className=" lg:basis-1/2"  key={appointment.id}>
 								<div
 									key={appointment.id}
 									className={cn(
