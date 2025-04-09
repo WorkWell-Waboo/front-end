@@ -5,6 +5,16 @@ import PersonaSVG from '@/assets/svgs/persona';
 import StarSVG from '@/assets/svgs/star';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 import {
   Select,
   SelectContent,
@@ -12,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -162,9 +173,15 @@ function CollaboratorServicesCategory(): React.ReactNode {
             </SelectContent>
           </Select>
           <div className="-m-4 pl-4 border-l border-[#4F4F4F]">
-            <span className="text-[#4F4F4F] font-medium text-sm">
-              Disponível Agora
-            </span>
+            <div className="flex items-center space-x-2">
+              <Label
+                htmlFor="airplane-mode"
+                className="text-[#4F4F4F] font-medium text-sm"
+              >
+                Disponível Agora
+                <Switch className="bg-muted" id="airplane-mode" />
+              </Label>
+            </div>
           </div>
         </div>
       </div>
@@ -251,6 +268,22 @@ function CollaboratorServicesCategory(): React.ReactNode {
           );
         })}
       </div>
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 }
