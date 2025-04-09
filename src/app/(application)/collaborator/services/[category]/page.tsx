@@ -5,6 +5,13 @@ import PersonaSVG from '@/assets/svgs/persona';
 import StarSVG from '@/assets/svgs/star';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -54,15 +61,86 @@ function CollaboratorServicesCategory(): React.ReactNode {
 
   return (
     <div className="p-10 space-y-6">
-      <div className="flex justify-between items-center">
-        <span className="font-medium text-muted-foreground">Filtros</span>
-        <span className="font-medium text-muted-foreground">Ordenar por:</span>
+      {/* Filtros e Favoritos */}
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-4 justify-between items-center">
+          {/* Filtros */}
+          <div className="flex flex-wrap gap-2 items-center">
+            <span className="font-medium text-muted-foreground">Filtros</span>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Especialistas" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="especialista1">Especialista 1</SelectItem>
+                <SelectItem value="especialista2">Especialista 2</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="LGBTQIAPN+" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="sim">Sim</SelectItem>
+                <SelectItem value="nao">Não</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Etnia" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="negra">Negra</SelectItem>
+                <SelectItem value="branca">Branca</SelectItem>
+              </SelectContent>
+            </Select>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Gênero" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="masculino">Masculino</SelectItem>
+                <SelectItem value="feminino">Feminino</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Meus Favoritos */}
+          <div className="flex items-center gap-2 text-muted-foreground whitespace-nowrap">
+            <span>Meus Favoritos</span> <HeartLikeSVG />
+          </div>
+        </div>
+
+        {/* Ordenação */}
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="font-medium text-muted-foreground">
+            Ordenar por:
+          </span>
+          <Select>
+            <SelectTrigger className="w-[200px]">
+              <SelectValue placeholder="Mais bem avaliados" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="avaliacao">Avaliação</SelectItem>
+              <SelectItem value="atendimentos">Atendimentos</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger className="w-[200px]">
+              <SelectValue placeholder="Mais recentes" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="recentes">Recentes</SelectItem>
+              <SelectItem value="antigos">Antigos</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
+      {/* Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {professionals.map((pro, index) => {
           const isFavorited = favorites[pro.name];
-
           return (
             <Card
               key={index.toString()}
