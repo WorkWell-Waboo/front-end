@@ -145,7 +145,6 @@ function CollaboratorDashboardPage() {
 							{appointments.map((appointment) => (
 								<CarouselItem className=" lg:basis-1/2"  key={appointment.id}>
 								<div
-									key={appointment.id}
 									className={cn(
 										"px-8 py-4 rounded-lg flex items-center gap-5 border-b-2 h-full",
 										appointment.isActive
