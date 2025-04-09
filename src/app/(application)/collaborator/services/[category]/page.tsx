@@ -49,8 +49,10 @@ const professionals: Professional[] = [
 ];
 
 function CollaboratorServicesCategory(): React.ReactNode {
-  // Estados para favoritos
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const [selectedTimezone, setSelectedTimezone] = useState<string | undefined>(
+    undefined
+  );
 
   const toggleFavorite = (name: string) => {
     setFavorites((prev) => ({
@@ -59,17 +61,39 @@ function CollaboratorServicesCategory(): React.ReactNode {
     }));
   };
 
+  const timezones = [
+    'America/Sao_Paulo',
+    'America/Boa_Vista',
+    'America/Manaus',
+    'America/New_York',
+    'Europe/London',
+  ];
+
+  const formatarNomeFuso = (str: string) =>
+    str.split('/')[1]?.replace(/_/g, ' ') || str;
+
+  const capitalize = (text: string) =>
+    text.toLowerCase().replace(/\b\w/g, (l) => l.toUpperCase());
+
+  const timezoneAtual = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const fusoFormatado = capitalize(
+    formatarNomeFuso(selectedTimezone || timezoneAtual)
+  );
+
   return (
     <div className="p-10 space-y-6">
       {/* Filtros e Favoritos */}
       <div className="space-y-4">
-        <div className="flex flex-wrap gap-4 justify-between items-center">
+        <div className="flex flex-wrap gap-4 justify-between items-center text-accent-foreground">
           {/* Filtros */}
           <div className="flex flex-wrap gap-2 items-center">
-            <span className="font-medium text-muted-foreground">Filtros</span>
+            <span className="font-medium pr-10">Filtros</span>
             <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Especialistas" />
+              <SelectTrigger className="w-[210px]">
+                <SelectValue
+                  placeholder="Tipos de especialistas"
+                  className=""
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="especialista1">Especialista 1</SelectItem>
@@ -77,7 +101,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[150px]">
                 <SelectValue placeholder="LGBTQIAPN+" />
               </SelectTrigger>
               <SelectContent>
@@ -86,7 +110,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[100px]">
                 <SelectValue placeholder="Etnia" />
               </SelectTrigger>
               <SelectContent>
@@ -95,7 +119,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="md:w-[110px]">
                 <SelectValue placeholder="Gênero" />
               </SelectTrigger>
               <SelectContent>
@@ -106,34 +130,42 @@ function CollaboratorServicesCategory(): React.ReactNode {
           </div>
 
           {/* Meus Favoritos */}
-          <div className="flex items-center gap-2 text-muted-foreground whitespace-nowrap">
+          <div className="flex items-center gap-2 text-accent-foreground whitespace-nowrap">
             <span>Meus Favoritos</span> <HeartLikeSVG />
           </div>
         </div>
 
         {/* Ordenação */}
-        <div className="flex flex-wrap gap-2 items-center">
-          <span className="font-medium text-muted-foreground">
-            Ordenar por:
-          </span>
+        <div className="flex flex-wrap gap-2 items-center text-accent-foreground">
+          <span className="font-normal">Ordenar por:</span>
           <Select>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Mais bem avaliados" />
+            <SelectTrigger className="w-[200px] border-0! bg-background! shadow-none data-[placeholder]:font-medium">
+              <SelectValue placeholder="Mais Relevantes" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="avaliacao">Avaliação</SelectItem>
               <SelectItem value="atendimentos">Atendimentos</SelectItem>
             </SelectContent>
           </Select>
-          <Select>
-            <SelectTrigger className="w-[200px]">
-              <SelectValue placeholder="Mais recentes" />
+
+          {/* Fuso horário */}
+          <Select onValueChange={(value) => setSelectedTimezone(value)}>
+            <SelectTrigger className="w-[180px] border-0! bg-background! shadow-none">
+              <SelectValue placeholder={`Fuso horário: ${fusoFormatado}`} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="recentes">Recentes</SelectItem>
-              <SelectItem value="antigos">Antigos</SelectItem>
+              {timezones.map((tz) => (
+                <SelectItem key={tz} value={tz}>
+                  {capitalize(formatarNomeFuso(tz))}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
+          <div className="-m-4 pl-4 border-l border-[#4F4F4F]">
+            <span className="text-[#4F4F4F] font-medium text-sm">
+              Disponível Agora
+            </span>
+          </div>
         </div>
       </div>
 
