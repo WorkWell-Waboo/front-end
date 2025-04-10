@@ -24,6 +24,7 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 interface Professional {
@@ -46,6 +47,26 @@ const professionals: Professional[] = [
     reviews: 12,
     sessions: 18,
     tags: ['angústia', 'ansiedade'],
+  },
+  {
+    name: 'Carlos Silva',
+    role: 'Psicólogo Clínico',
+    description:
+      'Carlos atende com escuta ativa e empatia, com foco em depressão, estresse e autoestima.',
+    rating: 4.8,
+    reviews: 8,
+    sessions: 22,
+    tags: ['depressão', 'estresse'],
+  },
+  {
+    name: 'Carlos Silva',
+    role: 'Psicólogo Clínico',
+    description:
+      'Carlos atende com escuta ativa e empatia, com foco em depressão, estresse e autoestima.',
+    rating: 4.8,
+    reviews: 8,
+    sessions: 22,
+    tags: ['depressão', 'estresse'],
   },
   {
     name: 'Carlos Silva',
@@ -90,9 +111,9 @@ function CollaboratorServicesCategory(): React.ReactNode {
   const fusoFormatado = capitalize(
     formatarNomeFuso(selectedTimezone || timezoneAtual)
   );
-
+  const router = useRouter();
   return (
-    <div className="p-10 space-y-6">
+    <div className="flex flex-col min-h-screen p-10 space-y-6 ">
       {/* Filtros e Favoritos */}
       <div className="space-y-4">
         <div className="flex flex-wrap gap-4 justify-between items-center text-accent-foreground">
@@ -259,7 +280,10 @@ function CollaboratorServicesCategory(): React.ReactNode {
                       </span>
                     ))}
                   </div>
-                  <Button className="whitespace-nowrap text-sm rounded-md">
+                  <Button
+                    onClick={() => router.push('/services/77677434')}
+                    className="whitespace-nowrap text-sm rounded-md"
+                  >
                     Agendar consulta
                   </Button>
                 </div>
@@ -268,6 +292,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
           );
         })}
       </div>
+
       <Pagination>
         <PaginationContent>
           <PaginationItem>
