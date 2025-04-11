@@ -200,16 +200,16 @@ function CollaboratorSchedulesPage() {
                           </Select>
                           <Select>
                             <SelectTrigger className="w-full border-none">
-                              <SelectValue className="text-[#636C77]" placeholder="Selecione a data" />
+                              <SelectValue className="text-[#636C77]" placeholder="Selecione  o horário" />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectGroup>
-                                <SelectLabel>Selecione  o horário</SelectLabel>
-                                <SelectItem value="horario1">Horario1</SelectItem>
-                                <SelectItem value="horario2">Horario2</SelectItem>
-                                <SelectItem value="horario3">Horario3</SelectItem>
-                                <SelectItem value="horario4">Horario4</SelectItem>
-                                <SelectItem value="horario5">Horario5</SelectItem>
+                                <SelectLabel>Horários</SelectLabel>
+                                <SelectItem value="horario1">Horário 1</SelectItem>
+                                <SelectItem value="horario2">Horário 2</SelectItem>
+                                <SelectItem value="horario3">Horário 3</SelectItem>
+                                <SelectItem value="horario4">Horário 4</SelectItem>
+                                <SelectItem value="horario5">Horário 5</SelectItem>
                               </SelectGroup>
                             </SelectContent>
                           </Select>
