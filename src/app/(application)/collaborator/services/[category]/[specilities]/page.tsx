@@ -1,4 +1,12 @@
 'use client';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -10,35 +18,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { addDays, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { Calendar, ChevronLeft, Heart, Star, Video } from 'lucide-react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function SpecialistProfile() {
   const [favorite, setFavorite] = useState(false);
 
-  interface WeekDay {
-    day: string;
-    date: string;
-    month: string;
-  }
+  const today = new Date();
+  const weekDays = Array.from({ length: 7 }, (_, i) => {
+    const date = addDays(today, i);
+    return {
+      day: format(date, 'EEE', { locale: ptBR }).toUpperCase(),
+      date: format(date, 'd'),
+      month: format(date, 'MMM', { locale: ptBR }).toUpperCase(),
+      fullDate: date,
+    };
+  });
 
-  const weekDays: WeekDay[] = [
-    { day: 'SEG', date: '23', month: 'DEZ' },
-    { day: 'TER', date: '24', month: 'DEZ' },
-    { day: 'QUA', date: '25', month: 'DEZ' },
-    { day: 'QUI', date: '26', month: 'DEZ' },
-    { day: 'SEX', date: '27', month: 'DEZ' },
-  ];
-
-  const timeSlots: string[] = [
-    '07:00',
-    '08:00',
-    '09:00',
-    '10:00',
-    '11:00',
-    '12:00',
-  ];
+  const timeSlots: string[] = Array.from(
+    { length: 24 },
+    (_, i) => `${i.toString().padStart(2, '0')}:00`
+  );
 
   const specialties: string[] = ['Angústia', 'Ansiedade', 'Autoestima'];
 
@@ -54,9 +57,9 @@ export default function SpecialistProfile() {
   ];
 
   return (
-    <div className="bg-[#EFF1F7] p-10 rounded-xl max-w-full  mx-auto">
+    <div className="bg-[#EFF1F7] p-10 rounded-xl max-w-full mx-auto">
       {/* Cabeçalho */}
-      <div className="flex justify-between ">
+      <div className="flex justify-between">
         <Button
           variant="ghost"
           className="flex items-center text-[#6B5DD3] hover:bg-transparent"
@@ -95,8 +98,8 @@ export default function SpecialistProfile() {
       <div className="flex flex-col gap-6">
         {/* Coluna do especialista */}
         <div className="grid grid-cols-2 w-full rounded-2xl bg-[#FBFBFB]">
-          <Card className="">
-            <CardContent className="">
+          <Card>
+            <CardContent>
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center">
                   <Image
@@ -168,35 +171,41 @@ export default function SpecialistProfile() {
               </div>
             </CardContent>
           </Card>
-          <div className="">
+
+          {/* Coluna do agendamento */}
+          <div>
             <CardContent className="p-5">
-              <div className=" rounded-lg overflow-hidden mb-6">
-                <div className="grid grid-cols-5 text-center">
-                  {weekDays.map((day, i) => (
-                    <div
-                      key={i.toString()}
-                      className="p-2 border-gray-200 last:border-r-0"
-                    >
-                      <div className="text-xs text-gray-500">{day.day}</div>
-                      <div className="text-lg font-semibold text-primary">
-                        {day.date}
-                      </div>
-                      <div className="text-xs text-gray-500">{day.month}</div>
-                    </div>
-                  ))}
-                  {timeSlots.map((time, i) => (
-                    <React.Fragment key={i.toString()}>
-                      {weekDays.map((_, j) => (
-                        <div
-                          key={`${i.toString()}-${j}`}
-                          className="m-1 py-2 px-3 text-sm rounded-2xl bg-background border-gray-200  hover:bg-gray-100 cursor-pointer"
-                        >
-                          {time}
-                        </div>
-                      ))}
-                    </React.Fragment>
-                  ))}
-                </div>
+              {/* Tabela de horários */}
+              <div className="mb-6 overflow-auto">
+                <Table className="bg-white border rounded-xl shadow-sm min-w-full">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-[150px]">Dia</TableHead>
+                      <TableHead>Horários Disponíveis</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {weekDays.map((day, i) => (
+                      <TableRow key={i.toString()}>
+                        <TableCell className="font-medium">
+                          {day.day}, {day.date} {day.month}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex flex-wrap gap-2">
+                            {timeSlots.slice(8, 14).map((time, j) => (
+                              <div
+                                key={j.toString()}
+                                className="px-3 py-1 text-xs rounded-full bg-gray-100 border border-gray-200 text-gray-700 cursor-pointer hover:bg-gray-200"
+                              >
+                                {time}
+                              </div>
+                            ))}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
               </div>
 
               <Button className="w-full bg-[#6B5DD3] text-white hover:bg-[#594cc3]">
@@ -206,7 +215,7 @@ export default function SpecialistProfile() {
           </div>
         </div>
 
-        {/* Coluna do agendamento */}
+        {/* Avaliações */}
         <div className="col-span-2 space-y-6">
           <Card>
             <CardHeader className="text-[#6B5DD3] font-semibold text-sm">
