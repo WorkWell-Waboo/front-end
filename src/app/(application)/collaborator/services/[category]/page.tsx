@@ -281,7 +281,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
                     ))}
                   </div>
                   <Button
-                    onClick={() => router.push('/services/77677434')}
+                    onClick={() => router.push('/services/7765776/6838732')}
                     className="whitespace-nowrap text-sm rounded-md"
                   >
                     Agendar consulta
