@@ -92,7 +92,7 @@ export default function SpecialistProfile() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6">
+      <div className="flex flex-col gap-6">
         {/* Coluna do especialista */}
         <div className="grid grid-cols-2 w-full rounded-2xl bg-[#FBFBFB]">
           <Card className="">
@@ -170,15 +170,17 @@ export default function SpecialistProfile() {
           </Card>
           <div className="">
             <CardContent className="p-5">
-              <div className="border border-gray-200 rounded-lg overflow-hidden mb-6">
+              <div className=" rounded-lg overflow-hidden mb-6">
                 <div className="grid grid-cols-5 text-center">
                   {weekDays.map((day, i) => (
                     <div
                       key={i.toString()}
-                      className="p-2 border-b border-r border-gray-200 last:border-r-0"
+                      className="p-2 border-gray-200 last:border-r-0"
                     >
                       <div className="text-xs text-gray-500">{day.day}</div>
-                      <div className="text-lg font-semibold">{day.date}</div>
+                      <div className="text-lg font-semibold text-primary">
+                        {day.date}
+                      </div>
                       <div className="text-xs text-gray-500">{day.month}</div>
                     </div>
                   ))}
@@ -187,7 +189,7 @@ export default function SpecialistProfile() {
                       {weekDays.map((_, j) => (
                         <div
                           key={`${i.toString()}-${j}`}
-                          className="p-2 text-sm border-b border-r border-gray-200 last:border-r-0 hover:bg-gray-100 cursor-pointer"
+                          className="m-1 py-2 px-3 text-sm rounded-2xl bg-background border-gray-200  hover:bg-gray-100 cursor-pointer"
                         >
                           {time}
                         </div>
