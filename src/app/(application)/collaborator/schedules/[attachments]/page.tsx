@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -6,73 +8,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-]
+
 function SchedulesAttachments() {
   return (
-    <main className="p-10 flex flex-col gap-4">   
-       <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Nome</TableHead>
-            <TableHead>Data</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead>Baixar anexos</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody className="max-h-[250]">
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell>{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell>{invoice.totalAmount}</TableCell>
+    <main className="p-10 flex flex-col gap-4"> 
+      <ScrollArea className="h-[calc(100vh-100px)]">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Nome</TableHead>
+              <TableHead>Data</TableHead>
+              <TableHead className="text-center">Baixar anexos</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+
+          {Array.from({length: 20}).map((_,index)=>
+            <TableRow key={`key-${Date.now()}-${index}`}>
+              <TableCell>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </TableCell>
+              <TableCell>{`${index+1}/03/2025`}</TableCell>
+              <TableCell className="text-center"><Button>Baixar</Button></TableCell>
+            </TableRow>
+          )}
+          </TableBody>
+        </Table> 
+      </ScrollArea>
     </main>
   );
 }
