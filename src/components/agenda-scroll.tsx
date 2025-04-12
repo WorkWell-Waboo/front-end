@@ -1,7 +1,8 @@
+import ArrowLeft from '@/assets/svgs/arrowLeft';
+import ArrowRight from '@/assets/svgs/arrowRight';
 import { Button } from '@/components/ui/button';
 import { addDays, format, setHours, setMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
 export function AgendaScroll() {
@@ -32,23 +33,24 @@ export function AgendaScroll() {
   };
 
   return (
-    <div className="flex items-start gap-2">
+    <div className=" flex items-start gap-2 overflow-y-auto scrollbar-custom ">
       {/* Botão Esquerda */}
       <Button
+        className="mt-3"
         variant="ghost"
         size="icon"
         onClick={handlePrev}
         disabled={startIndex === 0}
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ArrowRight className="w-5 h-5 text-primary" />
       </Button>
 
       {/* Dias e horários */}
-      <div className="flex gap-1 overflow-y-auto scrollbar-thin-">
+      <div className="flex gap-1 w-full  justify-center pb-2">
         {visibleDays.map((date, index) => (
-          <div key={index.toString()} className="min-w-[60px] rounded-xl  ">
+          <div key={index.toString()} className=" min-w-[85px] rounded-xl  ">
             {/* Cabeçalho com Dia */}
-            <div className="text-center mb-2">
+            <div className="text-center mb-4">
               <div className="text-xs text-gray-500 uppercase">
                 {format(date, 'EEE', { locale: ptBR })}
               </div>
@@ -67,7 +69,7 @@ export function AgendaScroll() {
                 {getTimeSlots().map((time, i) => (
                   <div
                     key={i.toString()}
-                    className="text-sm text-center px-2 py-1 rounded-md bg-[#FFFFFF] hover:bg-gray-100 cursor-pointer"
+                    className="text-sm text-center px-2 py-3 rounded-md bg-[#FFFFFF] hover:bg-gray-100 cursor-pointer"
                   >
                     {time}
                   </div>
@@ -80,12 +82,13 @@ export function AgendaScroll() {
 
       {/* Botão Direita */}
       <Button
+        className="mt-3"
         variant="ghost"
         size="icon"
         onClick={handleNext}
         disabled={startIndex + visibleCount >= totalDays}
       >
-        <ChevronRight className="w-5 h-5" />
+        <ArrowLeft className="w-5 h-5" />
       </Button>
     </div>
   );

@@ -1,4 +1,6 @@
 'use client';
+import ImageClient from '@/assets/imgs/cliente.png';
+import PersonaSVG from '@/assets/svgs/persona';
 import { AgendaScroll } from '@/components/agenda-scroll';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -12,10 +14,9 @@ import {
 } from '@/components/ui/select';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { Calendar, ChevronLeft, Heart, Star, Video } from 'lucide-react';
+import { ChevronLeft, Heart, Star, Video } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-
 export default function SpecialistProfile() {
   const [favorite, setFavorite] = useState(false);
 
@@ -49,7 +50,7 @@ export default function SpecialistProfile() {
   ];
 
   return (
-    <div className="bg-[#EFF1F7] p-10 rounded-xl max-w-full mx-auto">
+    <div className="bg-[#EFF1F7] p-10 rounded-xl max-w-full">
       {/* Cabeçalho */}
       <div className="flex justify-between">
         <Button
@@ -89,125 +90,146 @@ export default function SpecialistProfile() {
 
       <div className="flex flex-col gap-6">
         {/* Coluna do especialista */}
-        <div className="grid grid-cols-2 w-full rounded-2xl bg-[#FBFBFB]">
-          <Card>
-            <CardContent>
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center">
-                  <Image
-                    src="/placeholder.svg?height=60&width=60"
-                    alt="Sandra Amaral"
-                    width={60}
-                    height={60}
-                    className="rounded-full"
-                  />
-                  <div className="ml-3">
-                    <h2 className="text-base font-semibold text-gray-900">
-                      Sandra Amaral
-                    </h2>
-                    <p className="text-sm text-gray-600">Psicanalista</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl bg-[#FBFBFB]">
+          <Card className="h-full">
+            <CardContent className="h-full">
+              <div className="flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex items-center">
+                      <Image
+                        src={ImageClient}
+                        alt="Sandra Amaral"
+                        width={60}
+                        height={60}
+                        className="rounded-full"
+                      />
+                      <div className="ml-3">
+                        <h2 className="text-base font-semibold text-gray-900">
+                          Sandra Amaral
+                        </h2>
+                        <p className="text-sm text-gray-600">Psicanalista</p>
+                      </div>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-gray-400 hover:text-red-500 hover:bg-transparent"
+                      onClick={() => setFavorite(!favorite)}
+                    >
+                      <Heart
+                        className={`h-6 w-6 ${
+                          favorite ? 'fill-red-500 text-red-500' : ''
+                        }`}
+                      />
+                    </Button>
+                  </div>
+
+                  <Button
+                    variant="outline"
+                    className="w-full mb-4 text-sm text-[#6B5DD3] border-[#6B5DD3]"
+                  >
+                    <Video className="h-4 w-4 mr-2" />
+                    Meu vídeo de apresentação
+                  </Button>
+
+                  <p className="text-sm text-gray-600 mb-4">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex items-center mb-3 text-sm text-gray-700">
+                    <div className="flex items-center mr-4">
+                      <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
+                      <span className="font-medium">5</span>
+                      <span className="text-xs text-gray-500 ml-1">
+                        (12 comentários)
+                      </span>
+                    </div>
+
+                    <div className="flex items-center">
+                      <PersonaSVG className="h-4 w-4 mr-1" />
+                      <span className="font-medium">18 atendimentos</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-6">
+                    {specialties.map((tag, index) => (
+                      <Badge
+                        key={index.toString()}
+                        variant="default"
+                        className="bg-gray-100 text-[#828282] text-md"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-gray-400 hover:text-red-500 hover:bg-transparent"
-                  onClick={() => setFavorite(!favorite)}
-                >
-                  <Heart
-                    className={`h-6 w-6 ${
-                      favorite ? 'fill-red-500 text-red-500' : ''
-                    }`}
-                  />
-                </Button>
-              </div>
-
-              <Button
-                variant="outline"
-                className="w-full mb-4 text-sm text-[#6B5DD3] border-[#6B5DD3]"
-              >
-                <Video className="h-4 w-4 mr-2" />
-                Meu vídeo de apresentação
-              </Button>
-
-              <p className="text-sm text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-
-              <div className="flex items-center mb-3 text-sm text-gray-700">
-                <div className="flex items-center mr-4">
-                  <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
-                  <span className="font-medium">5</span>
-                  <span className="text-xs text-gray-500 ml-1">
-                    (12 comentários)
-                  </span>
-                </div>
-
-                <div className="flex items-center">
-                  <Calendar className="h-4 w-4 mr-1" />
-                  <span className="font-medium">18 atendimentos</span>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mb-5">
-                {specialties.map((tag, index) => (
-                  <Badge
-                    key={index.toString()}
-                    variant="outline"
-                    className="bg-gray-100 text-gray-700"
-                  >
-                    {tag}
-                  </Badge>
-                ))}
               </div>
             </CardContent>
           </Card>
 
           {/* Coluna do agendamento */}
-          <div>
-            <CardContent className="p-5">
-              {/* Dias da semana com scroll horizontal */}
-              <AgendaScroll />
-            </CardContent>
+          <div className="w-full py-4 ">
+            <AgendaScroll />
           </div>
         </div>
-        <div>
-          <Button className="w-full bg-[#6B5DD3] text-white hover:bg-[#594cc3]">
-            Agendar
-          </Button>
-        </div>
+
         {/* Avaliações */}
-        <div className="col-span-2 space-y-6">
-          <Card>
-            <CardHeader className="text-[#6B5DD3] font-semibold text-sm">
-              O que dizem sobre mim
-            </CardHeader>
-            <CardContent className="p-5">
-              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                “A Sandra é uma profissional incrível! Desde a primeira
-                consulta, ela demonstrou muita atenção, empatia e dedicação…
-                Recomendo de olhos fechados!”
-              </p>
-              <div className="flex justify-between items-center">
-                <Image
-                  src="/placeholder.svg?height=40&width=40"
-                  alt="Avatar"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i.toString()}
-                      className="h-5 w-5 text-yellow-400 fill-yellow-400"
-                    />
-                  ))}
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <Card>
+              <CardHeader className="text-[#6B5DD3] font-semibold text-sm">
+                O que dizem sobre mim
+              </CardHeader>
+              <CardContent className="p-5">
+                <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                  “A Sandra é uma profissional incrível! Desde a primeira
+                  consulta, ela demonstrou muita atenção, empatia e dedicação…
+                  Recomendo de olhos fechados!”
+                </p>
+                <div className="flex justify-between items-center">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i.toString()}
+                        className="h-5 w-5 text-yellow-400 fill-yellow-400"
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Button className="w-full bg-[#6B5DD3] text-white hover:bg-[#594cc3]">
+              Agendar
+            </Button>
+            <Card>
+              <CardHeader className="text-[#6B5DD3] font-semibold text-sm">
+                O que dizem sobre mim
+              </CardHeader>
+              <CardContent className="p-5">
+                <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                  “A Sandra é uma profissional incrível! Desde a primeira
+                  consulta, ela demonstrou muita atenção, empatia e dedicação…
+                  Recomendo de olhos fechados!”
+                </p>
+                <div className="flex justify-between items-center">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i.toString()}
+                        className="h-5 w-5 text-yellow-400 fill-yellow-400"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
