@@ -124,3 +124,32 @@
     @apply bg-background text-foreground;
   }
 }
+@layer utilities {
+  /* WebKit: Chrome, Safari, Edge */
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 2px; /* largura da scroll vertical */
+    height: 4px; /* altura da scroll horizontal */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary); /* cor da barrinha */
+    border-radius: 9999px;
+    margin: 2px; /* funciona junto com o track pra "centralizar" */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--color-primary) 80%, black);
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background-color: transparent; /* ou alguma cor se quiser "posição visual" */
+    margin-block: 2px; /* controla espaço vertical (top/bottom) */
+    margin-inline: 4px; /* controla espaço horizontal (left/right) */
+  }
+
+  /* Firefox */
+  .scrollbar-custom {
+    scrollbar-width: thin; /* opções: auto | thin | none */
+    scrollbar-color: var(--color-primary) transparent; /* thumb e track */
+  }
+}
