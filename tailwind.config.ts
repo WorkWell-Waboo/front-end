@@ -1,5 +1,5 @@
+import scrollbar from 'tailwind-scrollbar'
 import type { Config } from 'tailwindcss';
-
 const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}', // Inclua os caminhos dos seus arquivos
@@ -11,7 +11,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    scrollbar,
+  ],
 };
 
 export default config;

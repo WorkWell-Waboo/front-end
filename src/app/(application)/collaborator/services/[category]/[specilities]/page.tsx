@@ -1,13 +1,5 @@
 'use client';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-
+import { AgendaScroll } from '@/components/agenda-scroll';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -68,13 +60,13 @@ export default function SpecialistProfile() {
           <span className="ml-1 font-medium">Especialista</span>
         </Button>
 
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between gap-3 items-center mb-4">
           <span className="text-sm font-medium text-gray-700">
             Selecione o seu horário
           </span>
           <div className="flex gap-2">
             <Select defaultValue="mes">
-              <SelectTrigger className="w-[100px]">
+              <SelectTrigger className="w-[90px] border-ring">
                 <SelectValue placeholder="Mês" />
               </SelectTrigger>
               <SelectContent>
@@ -175,46 +167,16 @@ export default function SpecialistProfile() {
           {/* Coluna do agendamento */}
           <div>
             <CardContent className="p-5">
-              {/* Tabela de horários */}
-              <div className="mb-6 overflow-auto">
-                <Table className="bg-white border rounded-xl shadow-sm min-w-full">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[150px]">Dia</TableHead>
-                      <TableHead>Horários Disponíveis</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {weekDays.map((day, i) => (
-                      <TableRow key={i.toString()}>
-                        <TableCell className="font-medium">
-                          {day.day}, {day.date} {day.month}
-                        </TableCell>
-                        <TableCell>
-                          <div className="flex flex-wrap gap-2">
-                            {timeSlots.slice(8, 14).map((time, j) => (
-                              <div
-                                key={j.toString()}
-                                className="px-3 py-1 text-xs rounded-full bg-gray-100 border border-gray-200 text-gray-700 cursor-pointer hover:bg-gray-200"
-                              >
-                                {time}
-                              </div>
-                            ))}
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-
-              <Button className="w-full bg-[#6B5DD3] text-white hover:bg-[#594cc3]">
-                Agendar
-              </Button>
+              {/* Dias da semana com scroll horizontal */}
+              <AgendaScroll />
             </CardContent>
           </div>
         </div>
-
+        <div>
+          <Button className="w-full bg-[#6B5DD3] text-white hover:bg-[#594cc3]">
+            Agendar
+          </Button>
+        </div>
         {/* Avaliações */}
         <div className="col-span-2 space-y-6">
           <Card>
