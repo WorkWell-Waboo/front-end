@@ -129,10 +129,10 @@ function CollaboratorSchedulesPage() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4 font-bold text-xl text-[#4f4f4f]">
           <TabsContent value="next-sessions">
-            <h1>Próximas sessões</h1>
+            <h1 className="font-bold text-xl text-[#4f4f4f]">Próximas sessões</h1>
           </TabsContent>
           <TabsContent value="history">
-            <h1>Histórico</h1>
+            <h1 className="font-bold text-xl text-[#4f4f4f]">Histórico</h1>
           </TabsContent>
           </div>  
           <TabsList className="flex gap-5">
@@ -307,7 +307,7 @@ function CollaboratorSchedulesPage() {
                   </div>
                   <div className="flex gap-4">
                     <Button variant="secondary" asChild>
-                      <Link href="#">
+                      <Link href="/schedules/6565">
                         <Clip className="text-primary"/> Anexos
                       </Link>
                     </Button>
