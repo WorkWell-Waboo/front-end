@@ -1,6 +1,7 @@
 'use client';
 import ImageClient from '@/assets/imgs/cliente.png';
 import PersonaSVG from '@/assets/svgs/persona';
+import StarSVG from '@/assets/svgs/star';
 import { AgendaScroll } from '@/components/agenda-scroll';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -179,27 +180,39 @@ export default function SpecialistProfile() {
 
         {/* Avaliações */}
         <div className="grid grid-cols-2 gap-3">
-          <div>
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-2 items-center">
+              <span className=" text-sm font-medium text-muted-foreground mb-1">
+                Tipos de consulta:
+              </span>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione um tipo" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="online">Online</SelectItem>
+                  <SelectItem value="presencial">Presencial</SelectItem>
+                  <SelectItem value="domicilio">Domicílio</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
             <Card>
               <CardHeader className="text-[#6B5DD3] font-semibold text-sm">
-                O que dizem sobre mim
+                Experiência:
               </CardHeader>
-              <CardContent className="p-5">
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                  “A Sandra é uma profissional incrível! Desde a primeira
-                  consulta, ela demonstrou muita atenção, empatia e dedicação…
-                  Recomendo de olhos fechados!”
-                </p>
-                <div className="flex justify-between items-center">
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i.toString()}
-                        className="h-5 w-5 text-yellow-400 fill-yellow-400"
-                      />
-                    ))}
-                  </div>
-                </div>
+              <CardContent className="pb-14">
+                <ul>
+                  {experiences.map((exp) => {
+                    return (
+                      <li
+                        key={exp}
+                        className="text-sm text-gray-600 leading-relaxed"
+                      >
+                        {exp}
+                      </li>
+                    );
+                  })}
+                </ul>
               </CardContent>
             </Card>
           </div>
@@ -208,19 +221,26 @@ export default function SpecialistProfile() {
               Agendar
             </Button>
             <Card>
-              <CardHeader className="text-[#6B5DD3] font-semibold text-sm">
+              <CardHeader className="text-[#6B5DD3] font-semibold text-sm ">
                 O que dizem sobre mim
               </CardHeader>
-              <CardContent className="p-5">
+              <CardContent>
                 <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                   “A Sandra é uma profissional incrível! Desde a primeira
-                  consulta, ela demonstrou muita atenção, empatia e dedicação…
-                  Recomendo de olhos fechados!”
+                  consulta, ela demonstrou muita atenção, empatia e dedicação, o
+                  que me fez sentir totalmente à vontade para compartilhar
+                  minhas questões. Sua abordagem é acolhedora e, ao mesmo tempo,
+                  muito assertiva, sempre trazendo reflexões e orientações que
+                  realmente fazem a diferença. Sinto que evoluí muito desde o
+                  início do tratamento, e cada sessão tem sido essencial para
+                  meu crescimento e bem-estar. Sou extremamente grato pelo seu
+                  trabalho e pela forma cuidadosa com que conduz cada
+                  atendimento. Recomendo de olhos fechados!”
                 </p>
-                <div className="flex justify-between items-center">
-                  <div className="flex">
+                <div className="flex justify-center items-center">
+                  <div className="flex justify-center">
                     {[...Array(5)].map((_, i) => (
-                      <Star
+                      <StarSVG
                         key={i.toString()}
                         className="h-5 w-5 text-yellow-400 fill-yellow-400"
                       />
