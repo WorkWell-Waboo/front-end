@@ -1,18 +1,37 @@
 import ArrowLeft from '@/assets/svgs/arrowLeft';
 import ArrowRight from '@/assets/svgs/arrowRight';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { addDays, format, setHours, setMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+import { CheckCircleIcon, InfoIcon } from 'lucide-react'; // Ou seus SVGs personalizados
 import { useState } from 'react';
-
 export function AgendaScroll() {
-  const totalDays = 30; // Total de dias disponíveis
-  const visibleCount = 5; // Quantos dias mostrar por vez
+  const totalDays = 30;
+  const visibleCount = 5;
   const [startIndex, setStartIndex] = useState(0);
+  const [selectedSlot, setSelectedSlot] = useState<{
+    date: Date;
+    time: string;
+  } | null>(null);
+  const [dialogType, setDialogType] = useState<
+    'available' | 'unavailable' | null
+  >(null);
+
+  const unavailableSlots = [
+    { date: '2025-04-14', time: '09:00' },
+    { date: '2025-04-16', time: '13:00' },
+  ];
 
   const today = new Date();
   const days = Array.from({ length: totalDays }, (_, i) => addDays(today, i));
-
   const visibleDays = days.slice(startIndex, startIndex + visibleCount);
 
   const getTimeSlots = () =>
@@ -32,64 +51,193 @@ export function AgendaScroll() {
     }
   };
 
+  const handleTimeClick = (date: Date, time: string) => {
+    const dateStr = format(date, 'yyyy-MM-dd');
+    const isUnavailable = unavailableSlots.some(
+      (slot) => slot.date === dateStr && slot.time === time
+    );
+
+    setSelectedSlot({ date, time });
+    setDialogType(isUnavailable ? 'unavailable' : 'available');
+  };
+
+  const handleConfirm = async () => {
+    if (!selectedSlot) return;
+
+    try {
+      const response = await fetch('/api/agendamentos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          date: selectedSlot.date.toISOString(),
+          time: selectedSlot.time,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Erro ao agendar');
+
+      console.log('Agendamento enviado com sucesso');
+      setDialogType(null);
+    } catch (error) {
+      console.error('Erro ao enviar agendamento:', error);
+    }
+  };
+
   return (
-    <div className=" flex items-start gap-2 overflow-y-auto scrollbar-custom ">
-      {/* Botão Esquerda */}
-      <Button
-        className="mt-3"
-        variant="ghost"
-        size="icon"
-        onClick={handlePrev}
-        disabled={startIndex === 0}
-      >
-        <ArrowRight className="w-5 h-5 text-primary" />
-      </Button>
+    <>
+      <div className="flex items-start gap-2 overflow-y-auto scrollbar-custom">
+        <Button
+          className="mt-3"
+          variant="ghost"
+          size="icon"
+          onClick={handlePrev}
+          disabled={startIndex === 0}
+        >
+          <ArrowRight className="w-5 h-5 text-primary" />
+        </Button>
 
-      {/* Dias e horários */}
-      <div className="flex gap-1 w-full  justify-center pb-2">
-        {visibleDays.map((date, index) => (
-          <div key={index.toString()} className=" min-w-[85px] rounded-xl  ">
-            {/* Cabeçalho com Dia */}
-            <div className="text-center mb-4">
-              <div className="text-xs text-gray-500 uppercase">
-                {format(date, 'EEE', { locale: ptBR })}
-              </div>
-              <div className="text-lg font-bold text-[#6B5DD3]">
-                {format(date, 'd')}
-              </div>
-              <div className="text-xs text-gray-500 uppercase">
-                {format(date, 'MMM', { locale: ptBR })}
-              </div>
-            </div>
+        <div className="flex gap-1 w-full justify-center pb-2">
+          {visibleDays.map((date, index) => {
+            const isDateSelected =
+              selectedSlot &&
+              selectedSlot.date.getDate() === date.getDate() &&
+              selectedSlot.date.getMonth() === date.getMonth() &&
+              selectedSlot.date.getFullYear() === date.getFullYear();
 
-            {/* Horários */}
-            <div className="">
-              {' '}
-              <div className="flex flex-col gap-2 max-h-[300px] ">
-                {getTimeSlots().map((time, i) => (
-                  <div
-                    key={i.toString()}
-                    className="text-sm text-center px-2 py-3 rounded-md bg-[#FFFFFF] hover:bg-gray-100 cursor-pointer"
-                  >
-                    {time}
+            return (
+              <div key={index.toString()} className="min-w-[85px] rounded-xl">
+                <div
+                  className={`text-center mb-4 p-1 rounded-md ${
+                    isDateSelected ? 'bg-[#F1E8FB] border border-primary' : ''
+                  }`}
+                >
+                  <div className="text-xs uppercase text-gray-500">
+                    {format(date, 'EEE', { locale: ptBR })}
                   </div>
-                ))}
+                  <div className="text-lg font-normal text-[#6B5DD3]">
+                    {format(date, 'd')}
+                  </div>
+                  <div className="text-xs uppercase text-gray-500">
+                    {format(date, 'MMM', { locale: ptBR })}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2 max-h-[300px]">
+                  {getTimeSlots().map((time, i) => {
+                    const isSelected =
+                      selectedSlot?.date.getDate() === date.getDate() &&
+                      selectedSlot?.date.getMonth() === date.getMonth() &&
+                      selectedSlot?.date.getFullYear() === date.getFullYear() &&
+                      selectedSlot?.time === time;
+
+                    const dateStr = format(date, 'yyyy-MM-dd');
+                    const isUnavailable = unavailableSlots.some(
+                      (slot) => slot.date === dateStr && slot.time === time
+                    );
+
+                    return (
+                      <Button
+                        key={i.toString()}
+                        onClick={() => handleTimeClick(date, time)}
+                        className={`text-sm text-center px-2 py-3 rounded-md 
+                          ${
+                            isSelected
+                              ? 'bg-[#F1E8FB] text-[#333333] border border-primary'
+                              : isUnavailable
+                              ? 'bg-gray-200 text-gray-400 '
+                              : 'bg-white text-[#333333] hover:bg-gray-100'
+                          }
+                        `}
+                        aria-pressed={isSelected}
+                        onKeyDown={(e) => {
+                          if (
+                            !isUnavailable &&
+                            (e.key === 'Enter' || e.key === ' ')
+                          ) {
+                            handleTimeClick(date, time);
+                          }
+                        }}
+                        tabIndex={0}
+                      >
+                        {time}
+                      </Button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
+            );
+          })}
+        </div>
+
+        <Button
+          className="mt-3"
+          variant="ghost"
+          size="icon"
+          onClick={handleNext}
+          disabled={startIndex + visibleCount >= totalDays}
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </Button>
       </div>
 
-      {/* Botão Direita */}
-      <Button
-        className="mt-3"
-        variant="ghost"
-        size="icon"
-        onClick={handleNext}
-        disabled={startIndex + visibleCount >= totalDays}
+      {/* Diálogos de Confirmação de Agendamento */}
+      <Dialog
+        open={dialogType !== null}
+        onOpenChange={() => setDialogType(null)}
       >
-        <ArrowLeft className="w-5 h-5" />
-      </Button>
-    </div>
+        <DialogContent>
+          <div className="flex justify-center -mt-12">
+            <Avatar>
+              <AvatarFallback className="bg-white">
+                {dialogType === 'unavailable' ? (
+                  <InfoIcon className="w-10 h-10 text-primary" />
+                ) : (
+                  <CheckCircleIcon className="w-10 h-10 text-primary" />
+                )}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+
+          <DialogHeader>
+            <DialogTitle className="text-center">
+              {dialogType === 'unavailable'
+                ? 'Horário Indisponível'
+                : 'Confirmar Horário'}
+            </DialogTitle>
+          </DialogHeader>
+
+          <DialogDescription className="text-center text-sm text-muted-foreground">
+            {selectedSlot &&
+              (dialogType === 'unavailable'
+                ? `O horário ${selectedSlot.time} de ${format(
+                    selectedSlot.date,
+                    'dd/MM/yyyy'
+                  )} está indisponível. Por favor, escolha outro horário.`
+                : `Você selecionou ${selectedSlot.time} do dia ${format(
+                    selectedSlot.date,
+                    'dd/MM/yyyy'
+                  )}. Deseja confirmar esse agendamento?`)}
+          </DialogDescription>
+
+          <div className="flex justify-end gap-2 mt-4">
+            {dialogType === 'unavailable' && (
+              <Button variant="outline" onClick={() => setDialogType(null)}>
+                Fechar
+              </Button>
+            )}
+            {dialogType === 'available' && (
+              <>
+                <Button variant="outline" onClick={() => setDialogType(null)}>
+                  Cancelar
+                </Button>
+                <Button onClick={handleConfirm}>Confirmar</Button>
+              </>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
