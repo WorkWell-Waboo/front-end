@@ -41,12 +41,15 @@ export function AgendaScroll() {
     );
 
   const handlePrev = () => {
-    if (startIndex > 0) setStartIndex(startIndex - visibleCount);
+    if (startIndex > 0) {
+      setStartIndex(startIndex - visibleCount);
+    }
   };
 
   const handleNext = () => {
-    if (startIndex + visibleCount < totalDays)
+    if (startIndex + visibleCount < totalDays) {
       setStartIndex(startIndex + visibleCount);
+    }
   };
 
   const handleTimeClick = (date: Date, time: string) => {
@@ -59,30 +62,12 @@ export function AgendaScroll() {
     setDialogType(isUnavailable ? 'unavailable' : 'confirm');
   };
 
-  const confirmAgendamento = async () => {
-    if (!selectedSlot) return;
-
-    try {
-      const response = await fetch('/api/agendamentos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          date: selectedSlot.date.toISOString(),
-          time: selectedSlot.time,
-        }),
-      });
-
-      if (!response.ok) throw new Error('Erro ao agendar');
-      console.log('Agendamento enviado com sucesso');
-      setDialogType('success');
-    } catch (error) {
-      console.error('Erro ao enviar agendamento:', error);
-    }
+  const confirmAgendamento = () => {
+    setDialogType('success');
   };
 
   return (
     <>
-      {/* Navegação e dias */}
       <div className="flex items-start gap-2 overflow-y-auto scrollbar-custom">
         <Button
           className="mt-3"
@@ -91,7 +76,7 @@ export function AgendaScroll() {
           onClick={handlePrev}
           disabled={startIndex === 0}
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowRight className="w-5 h-5 text-primary" />
         </Button>
 
         <div className="flex gap-1 w-full justify-center pb-2">
@@ -137,17 +122,25 @@ export function AgendaScroll() {
                       <Button
                         key={i.toString()}
                         onClick={() => handleTimeClick(date, time)}
-                        disabled={isUnavailable}
                         className={`text-sm text-center px-2 py-3 rounded-md 
                           ${
                             isSelected
                               ? 'bg-[#F1E8FB] text-[#333333] border border-primary'
                               : isUnavailable
-                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                              ? 'bg-gray-200 text-gray-400 '
                               : 'bg-white text-[#333333] hover:bg-gray-100'
                           }
                         `}
-                        aria-label={`Horário ${time}`}
+                        aria-pressed={isSelected}
+                        onKeyDown={(e) => {
+                          if (
+                            !isUnavailable &&
+                            (e.key === 'Enter' || e.key === ' ')
+                          ) {
+                            handleTimeClick(date, time);
+                          }
+                        }}
+                        tabIndex={0}
                       >
                         {time}
                       </Button>
@@ -166,11 +159,10 @@ export function AgendaScroll() {
           onClick={handleNext}
           disabled={startIndex + visibleCount >= totalDays}
         >
-          <ArrowRight className="w-5 h-5 text-primary" />
+          <ArrowLeft className="w-5 h-5" />
         </Button>
       </div>
 
-      {/* Diálogo de confirmação, lembrete, sucesso e indisponível */}
       <Dialog
         open={dialogType !== null}
         onOpenChange={() => setDialogType(null)}
