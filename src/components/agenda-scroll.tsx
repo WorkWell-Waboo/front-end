@@ -11,8 +11,9 @@ import {
 } from '@/components/ui/dialog';
 import { addDays, format, setHours, setMinutes } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { CheckCircleIcon, InfoIcon } from 'lucide-react'; // Ou seus SVGs personalizados
+import { CheckCircleIcon, InfoIcon } from 'lucide-react';
 import { useState } from 'react';
+
 export function AgendaScroll() {
   const totalDays = 30;
   const visibleCount = 5;
@@ -22,7 +23,7 @@ export function AgendaScroll() {
     time: string;
   } | null>(null);
   const [dialogType, setDialogType] = useState<
-    'available' | 'unavailable' | null
+    null | 'confirm' | 'reminder' | 'success' | 'unavailable'
   >(null);
 
   const unavailableSlots = [
@@ -40,15 +41,12 @@ export function AgendaScroll() {
     );
 
   const handlePrev = () => {
-    if (startIndex > 0) {
-      setStartIndex(startIndex - visibleCount);
-    }
+    if (startIndex > 0) setStartIndex(startIndex - visibleCount);
   };
 
   const handleNext = () => {
-    if (startIndex + visibleCount < totalDays) {
+    if (startIndex + visibleCount < totalDays)
       setStartIndex(startIndex + visibleCount);
-    }
   };
 
   const handleTimeClick = (date: Date, time: string) => {
@@ -58,18 +56,16 @@ export function AgendaScroll() {
     );
 
     setSelectedSlot({ date, time });
-    setDialogType(isUnavailable ? 'unavailable' : 'available');
+    setDialogType(isUnavailable ? 'unavailable' : 'confirm');
   };
 
-  const handleConfirm = async () => {
+  const confirmAgendamento = async () => {
     if (!selectedSlot) return;
 
     try {
       const response = await fetch('/api/agendamentos', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           date: selectedSlot.date.toISOString(),
           time: selectedSlot.time,
@@ -77,9 +73,8 @@ export function AgendaScroll() {
       });
 
       if (!response.ok) throw new Error('Erro ao agendar');
-
       console.log('Agendamento enviado com sucesso');
-      setDialogType(null);
+      setDialogType('success');
     } catch (error) {
       console.error('Erro ao enviar agendamento:', error);
     }
@@ -87,6 +82,7 @@ export function AgendaScroll() {
 
   return (
     <>
+      {/* Navegação e dias */}
       <div className="flex items-start gap-2 overflow-y-auto scrollbar-custom">
         <Button
           className="mt-3"
@@ -95,7 +91,7 @@ export function AgendaScroll() {
           onClick={handlePrev}
           disabled={startIndex === 0}
         >
-          <ArrowRight className="w-5 h-5 text-primary" />
+          <ArrowLeft className="w-5 h-5" />
         </Button>
 
         <div className="flex gap-1 w-full justify-center pb-2">
@@ -141,25 +137,17 @@ export function AgendaScroll() {
                       <Button
                         key={i.toString()}
                         onClick={() => handleTimeClick(date, time)}
+                        disabled={isUnavailable}
                         className={`text-sm text-center px-2 py-3 rounded-md 
                           ${
                             isSelected
                               ? 'bg-[#F1E8FB] text-[#333333] border border-primary'
                               : isUnavailable
-                              ? 'bg-gray-200 text-gray-400 '
+                              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                               : 'bg-white text-[#333333] hover:bg-gray-100'
                           }
                         `}
-                        aria-pressed={isSelected}
-                        onKeyDown={(e) => {
-                          if (
-                            !isUnavailable &&
-                            (e.key === 'Enter' || e.key === ' ')
-                          ) {
-                            handleTimeClick(date, time);
-                          }
-                        }}
-                        tabIndex={0}
+                        aria-label={`Horário ${time}`}
                       >
                         {time}
                       </Button>
@@ -178,11 +166,11 @@ export function AgendaScroll() {
           onClick={handleNext}
           disabled={startIndex + visibleCount >= totalDays}
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowRight className="w-5 h-5 text-primary" />
         </Button>
       </div>
 
-      {/* Diálogos de Confirmação de Agendamento */}
+      {/* Diálogo de confirmação, lembrete, sucesso e indisponível */}
       <Dialog
         open={dialogType !== null}
         onOpenChange={() => setDialogType(null)}
@@ -191,10 +179,10 @@ export function AgendaScroll() {
           <div className="flex justify-center -mt-12">
             <Avatar>
               <AvatarFallback className="bg-white">
-                {dialogType === 'unavailable' ? (
-                  <InfoIcon className="w-10 h-10 text-primary" />
-                ) : (
+                {dialogType === 'success' ? (
                   <CheckCircleIcon className="w-10 h-10 text-primary" />
+                ) : (
+                  <InfoIcon className="w-10 h-10 text-primary" />
                 )}
               </AvatarFallback>
             </Avatar>
@@ -202,38 +190,59 @@ export function AgendaScroll() {
 
           <DialogHeader>
             <DialogTitle className="text-center">
-              {dialogType === 'unavailable'
-                ? 'Horário Indisponível'
-                : 'Confirmar Horário'}
+              {dialogType === 'confirm' && 'Confirmar Consulta'}
+              {dialogType === 'reminder' && 'Fique Atento!'}
+              {dialogType === 'success' && 'Consulta Agendada'}
+              {dialogType === 'unavailable' && 'Horário Indisponível'}
             </DialogTitle>
           </DialogHeader>
 
           <DialogDescription className="text-center text-sm text-muted-foreground">
-            {selectedSlot &&
-              (dialogType === 'unavailable'
-                ? `O horário ${selectedSlot.time} de ${format(
-                    selectedSlot.date,
-                    'dd/MM/yyyy'
-                  )} está indisponível. Por favor, escolha outro horário.`
-                : `Você selecionou ${selectedSlot.time} do dia ${format(
-                    selectedSlot.date,
-                    'dd/MM/yyyy'
-                  )}. Deseja confirmar esse agendamento?`)}
+            {dialogType === 'confirm' &&
+              selectedSlot &&
+              `Você selecionou ${selectedSlot.time} do dia ${format(
+                selectedSlot.date,
+                'dd/MM/yyyy'
+              )}. Deseja confirmar esse agendamento?`}
+
+            {dialogType === 'reminder' &&
+              'Sua consulta será em 2 dias. Verifique seus dados e esteja disponível no horário.'}
+
+            {dialogType === 'success' &&
+              'Sua consulta foi agendada com sucesso! Você receberá mais informações por e-mail.'}
+
+            {dialogType === 'unavailable' &&
+              selectedSlot &&
+              `O horário ${selectedSlot.time} do dia ${format(
+                selectedSlot.date,
+                'dd/MM/yyyy'
+              )} está indisponível. Por favor, escolha outro horário.`}
           </DialogDescription>
 
           <div className="flex justify-end gap-2 mt-4">
-            {dialogType === 'unavailable' && (
-              <Button variant="outline" onClick={() => setDialogType(null)}>
-                Fechar
-              </Button>
-            )}
-            {dialogType === 'available' && (
+            {dialogType === 'confirm' && (
               <>
                 <Button variant="outline" onClick={() => setDialogType(null)}>
                   Cancelar
                 </Button>
-                <Button onClick={handleConfirm}>Confirmar</Button>
+                <Button onClick={() => setDialogType('reminder')}>
+                  Confirmar
+                </Button>
               </>
+            )}
+
+            {dialogType === 'reminder' && (
+              <Button onClick={confirmAgendamento}>Compreendi</Button>
+            )}
+
+            {dialogType === 'success' && (
+              <Button onClick={() => setDialogType(null)}>Fechar</Button>
+            )}
+
+            {dialogType === 'unavailable' && (
+              <Button variant="outline" onClick={() => setDialogType(null)}>
+                Fechar
+              </Button>
             )}
           </div>
         </DialogContent>
