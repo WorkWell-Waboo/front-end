@@ -6,6 +6,16 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 import AconselhamentoFinanceiroSVG from "@/assets/svgs/aconselhamento-financeiro";
 import { Arrow } from "@/assets/svgs/arrow";
 import FisioterapiaSVG from "@/assets/svgs/fisioterapia";
@@ -110,6 +120,76 @@ export default function CollaboratorPlansPage() {
 												{expertise.name}
 											</p>
 										</Button>
+										<Dialog>
+                      <DialogTrigger asChild>
+                        <Button
+                          className={cn(
+                            "mt-2 text-xs rounded-md w-fit",
+                            nextSession.isActive
+                              ? "bg-white hover:bg-white/75 text-black"
+                              : "bg-primary text-white "
+                          )}>
+                          Ir para a sala 
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[450px] px-8 pb-8 pt-10">
+                        <DialogHeader className="relative">
+                          <div className="w-[60] h-[60] bg-white rounded-full absolute left-[50%] translate-x-[-50%] -top-[70px] flex items-center justify-center">
+                            <CalendarFullColor className="text-primary w-[25px]"/>
+                          </div>
+                          <DialogTitle className="text-center text-[#333333] mb-4">
+                            Reagendamento de sessão
+                          </DialogTitle>
+                          <DialogDescription className="text-center text-[#4f4f4f] text-xs leading-[1.1]">
+                            A sua sessão com o especialista Sandra Amaral foi reagenda
+                            para o dia 10/04/2025 às 15h30min. Confirma a alteração?
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div className="flex flex-col gap-4">
+                          <div className="grid grid-cols-2 gap-4">
+                            <Button variant="outline" className="w-full font-normal">
+                              Sugerir Data
+                            </Button>
+                            <Button  className="w-full font-normal">
+                              Confirmar
+                            </Button>
+                          </div>
+                          <Select>
+                            <SelectTrigger className="w-full border-none">
+                              <SelectValue className="text-[#636C77]" placeholder="Selecione a data" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Datas</SelectLabel>
+                                <SelectItem value="data1">Data1</SelectItem>
+                                <SelectItem value="data2">Data2</SelectItem>
+                                <SelectItem value="data3">Data3</SelectItem>
+                                <SelectItem value="data4">Data4</SelectItem>
+                                <SelectItem value="data5">Data5</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                          <Select>
+                            <SelectTrigger className="w-full border-none">
+                              <SelectValue className="text-[#636C77]" placeholder="Selecione  o horário" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectLabel>Horários</SelectLabel>
+                                <SelectItem value="horario1">Horário 1</SelectItem>
+                                <SelectItem value="horario2">Horário 2</SelectItem>
+                                <SelectItem value="horario3">Horário 3</SelectItem>
+                                <SelectItem value="horario4">Horário 4</SelectItem>
+                                <SelectItem value="horario5">Horário 5</SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <DialogFooter>
+                          <Button className="w-full" type="submit">Enviar</Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
 									</div>
                 );
               })}
