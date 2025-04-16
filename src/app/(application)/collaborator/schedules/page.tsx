@@ -320,7 +320,7 @@ function CollaboratorSchedulesPage() {
                   </div>
                   <div className="flex gap-4">
                     <Button variant="secondary" asChild>
-                      <Link href="/schedules">
+                      <Link href="/schedules/attachments">
                         <Clip className="text-primary"/> Anexos
                       </Link>
                     </Button>

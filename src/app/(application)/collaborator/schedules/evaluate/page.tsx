@@ -67,7 +67,7 @@ function CollaboratorSchedulesEvaluate() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Textarea placeholder="Deixe sua elogio" {...field} className="h-20 mb-5"/>
+                  <Textarea placeholder="Deixe seu elogio" {...field} className="h-20 mb-5"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
