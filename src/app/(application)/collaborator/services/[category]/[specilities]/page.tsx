@@ -1,7 +1,7 @@
 'use client';
 import ImageClient from '@/assets/imgs/cliente.png';
 import PersonaSVG from '@/assets/svgs/persona';
-import StarSVG from '@/assets/svgs/star';
+import StarOpSVG from '@/assets/svgs/starop';
 import { AgendaScroll } from '@/components/agenda-scroll';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -208,7 +208,7 @@ export default function SpecialistProfile() {
                         key={exp}
                         className="text-sm text-gray-600 leading-relaxed"
                       >
-                        {exp}
+                        • {exp}
                       </li>
                     );
                   })}
@@ -240,7 +240,7 @@ export default function SpecialistProfile() {
                 <div className="flex justify-center items-center">
                   <div className="flex justify-center">
                     {[...Array(5)].map((_, i) => (
-                      <StarSVG
+                      <StarOpSVG
                         key={i.toString()}
                         className="h-5 w-5 text-yellow-400 fill-yellow-400"
                       />
