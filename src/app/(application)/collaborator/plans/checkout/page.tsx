@@ -1,6 +1,19 @@
 'use client'
+
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+
 import { Arrow } from "@/assets/svgs/arrow";
+import { Barcode } from "@/assets/svgs/barcode";
+import { Card } from "@/assets/svgs/card";
+import { Pix } from "@/assets/svgs/pix";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@radix-ui/react-checkbox";
 import { Minus, Plus, Trash } from "lucide-react";
 import { useState } from "react";
 
@@ -35,10 +48,11 @@ function plansCheckout() {
         <h2 className="font-bold text-xl text-[#666666] ">Pagamento</h2>
       </div>
       <div className="grid grid-cols-2 gap-5">
+        {/* Items do carrinho */}
         <div className="flex flex-col p-4 bg-[#F4F5FB] rounded-md">
-          <span className=" font-bold text-md text-[#666666] mb-4">Reveja o seu pedido</span>
+          <span className=" font-bold text-md text-[#666666] mb-5">Reveja o seu pedido</span>
           {Array.from({length: 5}).map((_,index)=>
-          <div className="flex justify-between items-start" key={`key-${Date.now()}-${index}`}>
+          <div className="flex justify-between items-start border-b border-gray-300 last:border-none py-5" key={`key-${Date.now()}-${index}`}>
             <div className="flex flex-col gap-1">
               <span className="font-bold text-sm text-[#4f4f4f]">Plano premium</span>
               <span className="font-normal text-sm text-[#8F8F8F]">10 sessões</span>
@@ -72,6 +86,64 @@ function plansCheckout() {
             </div>
           </div>
           )}
+        </div>
+        {/* Formas de pagamento */}
+        <div className="flex flex-col p-4 bg-[#F4F5FB] rounded-md">
+          <span className=" font-bold text-md text-[#666666] mb-5">Selecione a forma de pagamento</span>
+          <Tabs defaultValue="card">
+            <TabsList className="grid grid-cols-3 w-full gap-5">
+              <TabsTrigger className="w-full rounded-md border-1 border-primary data-[state=active]:shadow-none! py-3" value="card">
+                <Card/>
+                Cartão
+              </TabsTrigger>
+              <TabsTrigger className="w-full rounded-md border-1 border-primary data-[state=active]:shadow-none! py-3" value="bank-slip">
+                <Barcode/>
+                Boleto
+              </TabsTrigger>
+              <TabsTrigger className="w-full rounded-md border-1 border-primary data-[state=active]:shadow-none! py-3" value="pix">
+                <Pix/>
+                Pix
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="card">
+              <div className="grid grid-cols-2 gap-3 my-4">
+                <div className="col-span-2">
+                  <Input type="text" placeholder="Nome do titular" />
+                </div>
+                <div className="col-span-2">
+                  <Input type="text" placeholder="NIF do titular" />  
+                </div>
+                <div className="col-span-2">
+                <Input type="number" placeholder="Número do cartão" />
+                </div>
+                <div className="col-span-1">
+                <Input type="text" placeholder="Data de validade" />
+                </div>
+                <div className="col-span-1">
+                <Input type="number" placeholder="CVV" />
+                </div>
+              </div>
+              <div className="flex">
+
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Accept terms and conditions
+                </label>
+              </div>
+            </TabsContent>
+            <TabsContent value="bank-slip">
+              b
+            </TabsContent>
+            <TabsContent value="pix">
+             p 
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </main>
