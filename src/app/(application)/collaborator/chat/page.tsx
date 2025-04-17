@@ -12,7 +12,7 @@ function CollaboratorChatPage() {
   return (
     <main className="p-10 flex flex-col gap-5">
       <span className="font-bold">Escolha a área de atendimento</span>
-      <div className="relative rounded-2xl bg-amber-500 overflow-hidden h-56 md:h-64 lg:h-72">
+      <div className="relative rounded-2xl overflow-hidden h-56 md:h-64 lg:h-72">
         <Image
           src={PessoasImg}
           alt="Grupo de pessoas"
