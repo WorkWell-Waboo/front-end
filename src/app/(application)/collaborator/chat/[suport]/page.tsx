@@ -1,6 +1,7 @@
 'use client';
 import AirPlaneSVG from '@/assets/svgs/airplane';
 import LetterLogoSVG from '@/assets/svgs/letterLogo';
+import WLetterSVG from '@/assets/svgs/wLetter';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
@@ -112,17 +113,30 @@ function SuportChat() {
       </div>
 
       {/* Coluna lateral */}
-      <div className="bg-transparent flex flex-col gap-4 p-4">
-        <div className=" rounded-xl p-4">
-          <Input before={Search} />
+      <div className="bg-transparent flex flex-col gap-4">
+        <div className=" rounded-xl  w-full">
+          <Input
+            className="placeholder:text-[#ADA7A7] w-full"
+            placeholder="Pesquisar"
+            before={{
+              variant: 'ghost',
+              content: <Search className="text-[#ADA7A7]" />,
+            }}
+          />
         </div>
-        <div className="bg-white rounded-xl shadow p-4">
-          <span className="text-sm text-gray-600">
+        <div className="rounded-x">
+          <span className="text-lg text-[#000000]">
             Mensagens: {messages.length.toString().padStart(2, '0')}
           </span>
         </div>
         <div className="bg-white rounded-xl shadow p-4">
-          [Cards personalizados]
+          <div className="flex">
+            <WLetterSVG />
+            <div>
+              <p>Suporte Workwell</p>
+              <span>suporte técnico</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
