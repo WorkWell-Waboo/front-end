@@ -4,7 +4,22 @@ import { BellSVG } from '@/assets/svgs/bell';
 import LetterLogoSVG from '@/assets/svgs/letterLogo';
 import WLetterSVG from '@/assets/svgs/wLetter';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 
@@ -49,6 +64,7 @@ function SuportChat() {
     },
   ]);
   const [input, setInput] = useState('');
+  const [open, setOpen] = useState(false); // controle do dialog
 
   const sendMessage = () => {
     if (!input.trim()) return;
@@ -58,21 +74,25 @@ function SuportChat() {
     setInput('');
   };
 
+  const handleConfirmSOS = () => {
+    console.log('SOS ativado');
+    setOpen(false);
+    // aqui pode disparar lógica de backend, alerta, etc.
+  };
+
   return (
     <div className="grid grid-cols-[2fr_1fr] h-screen p-10 gap-4 bg-gray-100">
       {/* Chat principal */}
       <div className="bg-white shadow flex flex-col rounded-xl overflow-hidden">
-        {/* Cabeçalho */}
         <div className="p-5 flex items-center gap-3">
           <LetterLogoSVG />
         </div>
 
-        {/* Mensagens com scroll */}
         <div className="flex-1 min-h-0 overflow-y-auto px-5 py-6 space-y-4">
           {messages.map((msg, idx) => (
             <div
               key={idx.toString()}
-              className={`relative  px-4 py-4 rounded-xl text-sm ${
+              className={`relative px-4 py-4 rounded-xl text-sm ${
                 msg.from === 'user'
                   ? 'ml-auto bg-violet-500 max-w-[75%] text-white rounded-tr-none'
                   : 'mr-auto bg-gray-200 text-[#646464] rounded-tl-none'
@@ -90,7 +110,6 @@ function SuportChat() {
           ))}
         </div>
 
-        {/* Campo de envio */}
         <div className="p-4">
           <div className="relative">
             <textarea
@@ -112,72 +131,80 @@ function SuportChat() {
       </div>
 
       {/* Sidebar */}
-      <div className="bg-transparent flex flex-col gap-2">
-        {/* Input de busca */}
-        <div className="rounded-xl w-full">
-          <Input
-            className="placeholder:text-[#ADA7A7] w-full"
-            placeholder="Pesquisar"
-            before={{
-              variant: 'ghost',
-              content: <Search className="text-[#ADA7A7]" />,
-            }}
-          />
-        </div>
+      <div className="flex flex-col justify-between">
+        <div>
+          <div className="rounded-xl w-full">
+            <Input
+              className="placeholder:text-[#ADA7A7] w-full"
+              placeholder="Pesquisar"
+              before={{
+                variant: 'ghost',
+                content: <Search className="text-[#ADA7A7]" />,
+              }}
+            />
+          </div>
 
-        {/* Contador */}
-        <div className="mt-2">
-          <span className="text-lg text-[#000000] font-medium ">
-            Mensagens: {messages.length.toString().padStart(2, '0')}
-          </span>
-        </div>
+          <div className="mt-3 mb-1">
+            <span className="text-lg text-[#000000] font-medium ">
+              Mensagens: {messages.length.toString().padStart(2, '0')}
+            </span>
+          </div>
 
-        {/* Lista de mensagens simuladas */}
-        <div className=" rounded-xl flex flex-col gap-2">
-          {[
-            {
-              title: 'Suporte Workwell',
-              type: 'Suporte técnico',
-              date: '20 Jan 2025',
-            },
-            {
-              title: 'Suporte Workwell',
-              type: 'Questões financeiras',
-              date: '07 Jan 2025',
-            },
-            {
-              title: 'Saúde Workwell',
-              type: 'Saúde',
-              date: '02 Jan 2025',
-            },
-          ].map((item, i) => (
-            <div
-              key={i.toString()}
-              className="flex bg-[#FFFFFF] items-start gap- p-4"
-            >
-              <WLetterSVG className="w-10 h-10" />
-              <div className="flex flex-col">
-                <p className="font-semibold text-sm">{item.title}</p>
-                <span className="text-xs text-[#9C9C9C]">{item.type}</span>
-                <span className="text-xs -ml-8 mt-2 text-[#9C9C9C] ">
-                  {item.date}
-                </span>
+          <div className="rounded-xl flex flex-col gap-2">
+            {[
+              {
+                title: 'Suporte Workwell',
+                type: 'Suporte técnico',
+                date: '20 Jan 2025',
+              },
+              {
+                title: 'Suporte Workwell',
+                type: 'Questões financeiras',
+                date: '07 Jan 2025',
+              },
+              {
+                title: 'Saúde Workwell',
+                type: 'Saúde',
+                date: '02 Jan 2025',
+              },
+            ].map((item, i) => (
+              <div
+                key={i.toString()}
+                className="flex bg-[#FFFFFF] items-start gap- p-4"
+              >
+                <WLetterSVG className="w-10 h-10" />
+                <div className="flex flex-col">
+                  <p className="font-semibold text-sm">{item.title}</p>
+                  <span className="text-xs text-[#9C9C9C]">{item.type}</span>
+                  <span className="text-xs -ml-8 mt-2 text-[#9C9C9C] ">
+                    {item.date}
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        {/* Paginação */}
-        <div className="flex justify-center gap-2">
-          <Button className="w-6 h-6 text-sm rounded bg-[#4B4B4B] text-white">
-            1
-          </Button>
-          <Button className="w-6 h-6 text-sm rounded bg-white text-gray-700 border">
-            2
-          </Button>
-          <Button className="w-6 h-6 text-sm rounded bg-white text-gray-700 border">
-            3
-          </Button>
+          <div className="flex pt-4">
+            <Pagination className="flex justify-end">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">2</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">3</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
         </div>
 
         {/* SOS Saúde mental */}
@@ -189,11 +216,45 @@ function SuportChat() {
             Clique no botão de SOS Saúde mental 24/7 para receber ajuda
             imediata.
           </p>
-          <Button className="w-full font-normal bg-[#D94040] hover:bg-[#c53333] text-white rounded-full text-sm">
+          <Button
+            onClick={() => setOpen(true)}
+            className="w-full font-normal bg-[#D94040] hover:bg-[#c53333] text-white rounded-full text-sm"
+          >
             <BellSVG /> Ativar SOS Saúde mental
           </Button>
         </div>
       </div>
+
+      {/* Dialog do SOS */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-sm text-center rounded-none! space-y-4">
+          <DialogHeader>
+            <DialogTitle className="text-lg font-medium text-center">
+              SOS Saúde mental
+            </DialogTitle>
+            <DialogDescription className="text-[#717171] text-sm text-center">
+              Deseja realmente acionar o botão do pânico?
+              <br />
+              Estamos prontos para o ajudar.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-center gap-4 ">
+            <Button
+              onClick={handleConfirmSOS}
+              className="bg-[#D94040] hover:bg-[#c53333] text-white font-normal  rounded-full px-9 py-6"
+            >
+              Sim
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => setOpen(false)}
+              className="border-[#6E56CF] text-[#333333] rounded-full font-normal px-9 py-6"
+            >
+              Não
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
