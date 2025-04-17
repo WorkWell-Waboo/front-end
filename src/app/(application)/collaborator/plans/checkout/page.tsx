@@ -1,5 +1,6 @@
 'use client'
 
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Tabs,
   TabsContent,
@@ -13,7 +14,6 @@ import { Card } from "@/assets/svgs/card";
 import { Pix } from "@/assets/svgs/pix";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@radix-ui/react-checkbox";
 import { Minus, Plus, Trash } from "lucide-react";
 import { useState } from "react";
 
