@@ -8,13 +8,26 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+import Image from "next/image";
+
+import Boleto from "@/assets/imgs/boleto.png"
+import Qrcode from "@/assets/imgs/qrcode.png"
 import { Arrow } from "@/assets/svgs/arrow";
 import { Barcode } from "@/assets/svgs/barcode";
 import { Card } from "@/assets/svgs/card";
 import { Pix } from "@/assets/svgs/pix";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Minus, Plus, Trash } from "lucide-react";
+import { Minus, Plus, Trash, UserCheck } from "lucide-react";
 import { useState } from "react";
 
 function plansCheckout() {
@@ -47,11 +60,12 @@ function plansCheckout() {
         </Button>
         <h2 className="font-bold text-xl text-[#666666] ">Pagamento</h2>
       </div>
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-2 gap-5 items-start">
         {/* Items do carrinho */}
         <div className="flex flex-col p-4 bg-[#F4F5FB] rounded-md">
           <span className=" font-bold text-md text-[#666666] mb-5">Reveja o seu pedido</span>
-          {Array.from({length: 5}).map((_,index)=>
+
+          {Array.from({length: 4}).map((_,index)=>
           <div className="flex justify-between items-start border-b border-gray-300 last:border-none py-5" key={`key-${Date.now()}-${index}`}>
             <div className="flex flex-col gap-1">
               <span className="font-bold text-sm text-[#4f4f4f]">Plano premium</span>
@@ -86,6 +100,7 @@ function plansCheckout() {
             </div>
           </div>
           )}
+
         </div>
         {/* Formas de pagamento */}
         <div className="flex flex-col p-4 bg-[#F4F5FB] rounded-md">
@@ -106,8 +121,8 @@ function plansCheckout() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="card">
-              <div className="grid grid-cols-2 gap-3 my-4">
+            <TabsContent value="card"> 
+              <div className="grid grid-cols-2 gap-4 my-4">
                 <div className="col-span-2">
                   <Input type="text" placeholder="Nome do titular" />
                 </div>
@@ -124,25 +139,85 @@ function plansCheckout() {
                 <Input type="number" placeholder="CVV" />
                 </div>
               </div>
-              <div className="flex">
-
-              </div>
-              <div className="flex items-center space-x-2">
+              
+              <div className="flex items-center space-x-2 mb-4">
                 <Checkbox id="terms" />
                 <label
                   htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="hover:cursor-pointer text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
-                  Accept terms and conditions
+                  Salvar cartão para futuras compras
                 </label>
               </div>
             </TabsContent>
             <TabsContent value="bank-slip">
-              b
+              <div className="flex justify-between">
+                <div className="flex flex-col text-[#4F4F4F]">
+                  <span className="font-medium">Vencimento</span>
+                  <span className="font-regular text-right">Amanhã, 4 Fev.</span>
+                </div>
+                <div className="flex flex-col text-[#4F4F4F]">
+                  <span className="font-medium">Valor do pedido</span>
+                  <span className="font-regular text-left">€1200.00</span>
+                </div>
+              </div>
+              <Image src={Boleto} alt="" className="max-w-full mx-auto my-5"/>
+              <div className="flex gap-4">
+                <Button variant="outline" className="flex-1/2">
+                  Baixar boleto
+                </Button>
+                <Button variant="outline" className="flex-1/2">
+                  Copiar código de boleto
+                </Button>
+              </div>
             </TabsContent>
             <TabsContent value="pix">
-             p 
+              <div className="flex justify-between">
+                <div className="flex flex-col text-[#4F4F4F]">
+                  <span className="font-medium">Vencimento</span>
+                  <span className="font-regular text-right">Amanhã, 4 Fev.</span>
+                </div>
+                <div className="flex flex-col text-[#4F4F4F]">
+                  <span className="font-medium">Valor do pedido</span>
+                  <span className="font-regular text-left">€1200.00</span>
+                </div>
+              </div>
+              <Image src={Qrcode} alt="" className=" mx-auto my-5"/>
+              <Button variant="outline" className="w-full py-3">
+                Copiar código pix
+              </Button>
             </TabsContent>
+            <div className="flex justify-between">
+              <span className="font-semibold text-[#666666]">Total</span>
+              <span className="font-semibold text-[#3B3B3B] text-right">€1200.00</span>
+            </div>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  className="">
+                  Finalizar compra
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[450px] px-8 pb-8 pt-10">
+                <DialogHeader className="relative">
+                  <div className="w-[60] h-[60] bg-white rounded-full absolute left-[50%] translate-x-[-50%] -top-[70px] flex items-center justify-center">
+                    <UserCheck className="text-primary w-[25px]"/>
+                  </div>
+                  <DialogTitle className="text-center text-[#333333] mb-4">
+                    Pagamento confirmado!
+                  </DialogTitle>
+                </DialogHeader>
+                <p className="text-center text-[#4f4f4f] text-xs leading-[1.1]">
+                  O seu pedido foi processado com sucesso! Em breve receberá um e-mail com todos os detalhes.
+                </p>
+                <p className="text-center text-[#4f4f4f] text-xs leading-[1.1]">
+                  Pode acompanhar o status das suas comprar a qualquer momento no histórico de transções.
+                </p>
+                <DialogFooter>
+                  <Button className="w-full" type="submit">Voltar para o início</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </Tabs>
         </div>
       </div>
