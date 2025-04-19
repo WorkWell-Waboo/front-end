@@ -20,6 +20,7 @@ import NutricaoSVG from '@/assets/svgs/nutricion';
 import PsicologiaSVG from '@/assets/svgs/psicologia';
 import PsiquiatriaSVG from '@/assets/svgs/psiquiatria';
 import SonoSVG from '@/assets/svgs/sono';
+import SearchBar from '@/components/header';
 import { useRouter } from 'next/navigation';
 
 interface Service {
@@ -53,16 +54,19 @@ export default function CollaboratorServices() {
   const [isSubscriber, setSubscriber] = useState(true);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 p-10">
-      {services.map((service) => (
-        <ClickableCard
-          key={service.name}
-          service={service}
-          isActive={activeService === service.name}
-          setActiveService={setActiveService}
-          isSubscriber={isSubscriber}
-        />
-      ))}
+    <div className="h-full">
+      <SearchBar placeholder="Procurar por nome" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-4 p-10">
+        {services.map((service) => (
+          <ClickableCard
+            key={service.name}
+            service={service}
+            isActive={activeService === service.name}
+            setActiveService={setActiveService}
+            isSubscriber={isSubscriber}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -113,7 +117,7 @@ function ClickableCard({
           }`}
         onClick={handleClick}
       >
-        <CardContent className="flex flex-col items-center justify-center">
+        <CardContent className="flex flex-col items-center justify-center gap-2">
           <Avatar>
             <AvatarFallback
               data-status={status}

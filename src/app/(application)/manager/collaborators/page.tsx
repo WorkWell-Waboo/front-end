@@ -1,9 +1,5 @@
 function ManagerCollaboratorsPage() {
-	return (
-		<main>
-			<h1>Colaboradores</h1>
-		</main>
-	);
+  return <main>div</main>;
 }
 
 export default ManagerCollaboratorsPage;

@@ -1,48 +1,53 @@
 'use client';
 
+import { BellSVG } from '@/assets/svgs/bell';
+import CartSVG from '@/assets/svgs/cart';
+import GloboSVG from '@/assets/svgs/globo';
+import SearchSVG from '@/assets/svgs/search';
+import { UserSVG } from '@/assets/svgs/user';
 import { Input } from '@/components/ui/input';
-import {
-  FaBell,
-  FaGlobe,
-  FaSearch,
-  FaShoppingCart,
-  FaUser,
-} from 'react-icons/fa';
 import { Button } from './ui/button';
 
 type SearchBarProps = {
   inputDisabled?: boolean;
+  placeholder?: string;
 };
 
-export default function SearchBar({ inputDisabled = false }: SearchBarProps) {
+export default function SearchBar({
+  inputDisabled = false,
+  placeholder,
+}: SearchBarProps) {
   return (
-    <div className="flex items-center justify-between bg-[#f5f7fc] p-4 rounded-xl">
-      {/* Search Input */}
-      <div className="flex items-center bg-white px-4 py-2 rounded-full w-full max-w-xl">
-        <FaSearch className="text-gray-400 mr-2" />
-        <Input
-          type="text"
-          placeholder="Procure por nome"
-          disabled={inputDisabled}
-          className={`border-none shadow-none focus:outline-none focus:ring-0 w-full text-sm ${
-            inputDisabled
-              ? 'text-gray-300 cursor-not-allowed bg-gray-100'
-              : 'text-gray-600'
-          } placeholder:text-gray-400`}
-        />
-      </div>
+    <div className="flex items-center justify-between p-10 rounded-xl ">
+      {/* Search Input (condicional) */}
+      {!inputDisabled && (
+        <div className="rounded-full w-full border-0">
+          <Input
+            placeholder={placeholder || 'Procurar por nome'}
+            rounded="full"
+            before={{
+              variant: 'ghost',
+              content: <SearchSVG className="text-muted-foreground ml-6" />,
+            }}
+          />
+        </div>
+      )}
 
       {/* Icons */}
-      <div className="flex gap-4 ml-4">
+      <div
+        className={`flex gap-4 ${
+          !inputDisabled ? 'ml-4' : 'ml-0 w-full justify-end'
+        }`}
+      >
         {[
-          <FaShoppingCart key="cart" />,
-          <FaGlobe key="globe" />,
-          <FaBell key="bell" />,
-          <FaUser key="user" />,
+          <CartSVG key="cart" />,
+          <GloboSVG key="globe" />,
+          <BellSVG key="bell" />,
+          <UserSVG key="user" />,
         ].map((Icon, idx) => (
           <Button
             key={idx.toString()}
-            className="w-10 h-10 rounded-full bg-[#eef0f8] flex items-center justify-center text-[#7b84d9] hover:bg-[#e0e3f0] transition"
+            className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition"
           >
             {Icon}
           </Button>
