@@ -1,32 +1,46 @@
 import { EllipsisIcon } from '@/assets/svgs/ellipsis';
 import { FlagIcon } from '@/assets/svgs/flag';
+import HeartLikeSVG from '@/assets/svgs/heartlike';
 import { cn } from '@/libraries/utils';
 import Image, { type StaticImageData } from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
-// Tipos aceitos para os botões
 type ButtonType = 'flag' | 'heart' | 'ellipsis' | 'delete';
 
-// Propriedades do componente
 interface WBoxProps {
-  variant: 'white' | 'purple'; // Duas variantes: branca e roxa
-  imageSrc: StaticImageData; // Caminho da imagem
-  imageAlt: string; // Texto alternativo para a imagem
-  title: string; // Título
-  text: string; // Texto descritivo
-  time: string; // Tempo de leitura
-  buttons?: ButtonType[]; // Array com os botões desejados
+  id: number;
+  variant: 'white' | 'purple' | null;
+  imageSrc: StaticImageData;
+  imageAlt: string;
+  title: string;
+  text: string;
+  link: string | '#';
+  time: string | null;
+  buttons?: ButtonType[] | null;
 }
 
 export default function WBox({
+  id,
   variant,
   imageSrc,
   imageAlt,
   title,
   text,
+  link,
   time,
-  buttons = [], // Valor padrão: nenhum botão
+  buttons = [],
 }: WBoxProps) {
-  // Função para renderizar os botões com base no tipo
+  // Estado para armazenar favoritos (botões ativos)
+  const [favorites, setFavorites] = useState<{ [key: number]: boolean }>({}); // Usa ID como chave
+
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) => ({
+      ...prev,
+      [id]: !prev[id], // Alterna entre ativo e inativo
+    }));
+  };
+
   const renderButton = (type: ButtonType) => {
     const buttonClasses =
       'flex justify-center items-center cursor-pointer w-[20px] h-[20px]';
@@ -34,20 +48,45 @@ export default function WBox({
     switch (type) {
       case 'flag':
         return (
-          <FlagIcon
-            className={cn(
-              variant === 'white' ? 'text-[#828282]' : 'text-white'
-            )}
-          />
+          <button type="button" className={cn(buttonClasses)}>
+            <FlagIcon
+              className={cn(
+                variant === 'white' ? 'text-[#828282]' : 'text-white'
+              )}
+            />
+          </button>
         );
       case 'ellipsis':
         return (
-          <EllipsisIcon
-            className={cn(
-              variant === 'white' ? 'text-[#828282]' : 'text-white'
-            )}
-          />
+          <button type="button" className={cn(buttonClasses)}>
+            <EllipsisIcon
+              className={cn(
+                variant === 'white' ? 'text-[#828282]' : 'text-white'
+              )}
+            />
+          </button>
         );
+      case 'heart':{
+        const isFavorite = favorites[id]; // Verifica se este ID está ativo
+        return (
+          <button
+            type="button"
+            className={cn(buttonClasses)}
+            onClick={() => toggleFavorite(id)} // Alterna favorito
+          >
+            <HeartLikeSVG
+              className={cn(
+                isFavorite
+                ? variant === "white"
+                  ? "fill-primary text-primary" 
+                  : "fill-white text-white" 
+                : variant === "white"
+                  ? "text-primary" 
+                  : "text-white" 
+              )}
+            />
+          </button>
+        )}
       default:
         return null;
     }
@@ -62,28 +101,29 @@ export default function WBox({
           : 'bg-primary border-b-white'
       )}
     >
-      {/* Imagem */}
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        width={145}
-        height={145}
-        className="rounded-lg h-[150px] w-[150px] object-cover"
-      />
-
-      {/* Conteúdo */}
+      <Link href={link}>
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          width={145}
+          height={145}
+          className="rounded-lg h-[150px] w-[150px] object-cover"
+        />
+      </Link>
       <div className="flex flex-col flex-1 gap-3">
-        <h3
-          className={cn(
-            'font-bold text-sm',
-            variant === 'white' ? 'text-primary' : 'text-white'
-          )}
-        >
-          {title}
-        </h3>
+        <Link href={link}>
+          <h3
+            className={cn(
+              'font-bold text-sm line-clamp-2',
+              variant === 'white' ? 'text-primary' : 'text-white'
+            )}
+          >
+            {title}
+          </h3>
+        </Link>
         <p
           className={cn(
-            'font-light text-xs',
+            'font-light text-xs line-clamp-3',
             variant === 'white' ? 'text-[#4f4f4f]' : 'text-white'
           )}
         >
@@ -96,19 +136,15 @@ export default function WBox({
               variant === 'white' ? 'text-[#828282]' : 'text-white'
             )}
           >
-            {time}
+            {time ? time : ''}
           </span>
-          {/* Renderização dos botões */}
           <div className="flex gap-2">
-            {buttons.map((buttonType) => (
-              <button
-                key={buttonType}
-                type="button"
-                className="flex justify-center items-center cursor-pointer w-[20px] h-[20px]"
-              >
-                {renderButton(buttonType)}
-              </button>
-            ))}
+            {buttons 
+              ? buttons.map((buttonType) => (
+              <div key={buttonType}>{renderButton(buttonType)}</div>
+              ))
+              : ""
+            }
           </div>
         </div>
       </div>
