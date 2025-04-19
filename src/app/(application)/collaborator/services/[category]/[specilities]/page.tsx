@@ -2,6 +2,7 @@
 import ImageClient from '@/assets/imgs/cliente.png';
 import PersonaSVG from '@/assets/svgs/persona';
 import StarOpSVG from '@/assets/svgs/starop';
+import YoutubeSVG from '@/assets/svgs/youtube';
 import { AgendaScroll } from '@/components/agenda-scroll';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -15,7 +16,7 @@ import {
 } from '@/components/ui/select';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { ChevronLeft, Heart, Star, Video } from 'lucide-react';
+import { ChevronLeft, Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 export default function SpecialistProfile() {
@@ -128,9 +129,9 @@ export default function SpecialistProfile() {
 
                   <Button
                     variant="outline"
-                    className="w-full mb-4 text-sm text-[#6B5DD3] border-[#6B5DD3]"
+                    className=" mb-4 text-sm text-white bg-primary border-[#6B5DD3]"
                   >
-                    <Video className="h-4 w-4 mr-2" />
+                    <YoutubeSVG />
                     Meu vídeo de apresentação
                   </Button>
 
@@ -186,7 +187,7 @@ export default function SpecialistProfile() {
                 Tipos de consulta:
               </span>
               <Select>
-                <SelectTrigger>
+                <SelectTrigger className="flex-1">
                   <SelectValue placeholder="Selecione um tipo" />
                 </SelectTrigger>
                 <SelectContent>

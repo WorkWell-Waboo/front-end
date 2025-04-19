@@ -184,7 +184,7 @@ function SuportChat() {
             ))}
           </div>
 
-          <div className="flex pt-4">
+          <div className="flex py-4">
             <Pagination className="flex justify-end">
               <PaginationContent>
                 <PaginationItem>
