@@ -83,7 +83,7 @@ function SuportChat() {
   return (
     <div className="grid grid-cols-[2fr_1fr] h-screen p-10 gap-4 bg-gray-100">
       {/* Chat principal */}
-      <div className="bg-white shadow flex flex-col rounded-xl overflow-hidden">
+      <div className="bg-white shadow flex flex-col  overflow-hidden">
         <div className="p-5 flex items-center gap-3">
           <LetterLogoSVG />
         </div>
@@ -184,7 +184,7 @@ function SuportChat() {
             ))}
           </div>
 
-          <div className="flex pt-4">
+          <div className="flex py-4">
             <Pagination className="flex justify-end">
               <PaginationContent>
                 <PaginationItem>

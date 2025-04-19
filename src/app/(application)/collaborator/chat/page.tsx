@@ -31,12 +31,13 @@ function CollaboratorChatPage() {
           <p className="text-base mt-3 mb-8">
             Para receber aconselhamento profissional de forma rápida e breve
           </p>
-          <a
-            href="/"
-            className="text-base mt-4 underline underline-offset-4 text-white/80 hover:text-white transition"
+          <Button
+            variant="ghost"
+            onClick={() => router.push('/chat/2090294080')}
+            className="text-base mt-4 underline -ml-3 w-fit underline-offset-4 text-white/80 hover:text-white transition"
           >
             Ir para o equipa de saúde
-          </a>
+          </Button>
         </div>
       </div>
 
@@ -54,9 +55,13 @@ function CollaboratorChatPage() {
               Para questões relacionadas a problemas técnicos com o sistema,
               acesso ou funcionalidades da plataforma.
             </p>
-            <a href="/" className=" underline ">
+            <Button
+              className=" underline text-base -ml-4 "
+              variant="ghost"
+              onClick={() => router.push('/chat/2090294080')}
+            >
               Ir para o suporte
-            </a>
+            </Button>
           </CardContent>
         </Card>
 
@@ -76,7 +81,7 @@ function CollaboratorChatPage() {
             <Button
               onClick={() => router.push('/chat/2090294080')}
               variant="ghost"
-              className="text-base underline"
+              className="text-base underline -ml-4"
             >
               Ir para o financeiro
             </Button>
