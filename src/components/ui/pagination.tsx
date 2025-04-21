@@ -69,7 +69,7 @@ function PaginationPrevious({
       className={cn("hover:text-primary hover:bg-transparent mr-2", className)}
       {...props}
     >
-      <RoundedArrow className="rotate-180" />
+      <RoundedArrow className="rotate-180 w-5 h-5" />
     </PaginationLink>
   )
 }
@@ -85,7 +85,7 @@ function PaginationNext({
       className={cn("hover:text-primary hover:bg-transparent ml-2", className)}
       {...props}
     >
-      <RoundedArrow />
+      <RoundedArrow  className="w-5 h-5" />
     </PaginationLink>
   )
 }

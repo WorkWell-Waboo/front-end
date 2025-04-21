@@ -13,26 +13,26 @@ import CategoriesContents from "@/components/categoriesContents";
 import GoBackButton from "@/components/go-back-button";
 import WBox from "@/components/wbox";
 
-import PhotoVideo from "@/assets/imgs/video.jpg"
+import PhotoWebnar from "@/assets/imgs/webnar.png"
 
-function CollaboratorContentsVideo() {
+function CollaboratorContentsWebnar() {
 
 	return (
 		<main className="p-10 flex flex-col gap-4">
 			<GoBackButton/>
 			<CategoriesContents/>
 			<div className="grid grid-cols-2 gap-4">
-				<h2 className="font-semibold text-lg text-[#4f4f4f] col-span-2">Vídeos</h2>
+				<h2 className="font-semibold text-lg text-[#4f4f4f] col-span-2">Webnars</h2>
 				{Array.from({ length: 6 }).map((_, index) => (	
 					<WBox 
 						key={`carousel-item-${Date.now()}-${index}`}
 						variant="white"
 						id={index}
-						imageSrc={PhotoVideo}
+						imageSrc={PhotoWebnar}
 						imageAlt="foto post" 
-						title={`O Que É Autoconhecimento e Por Que Ele Importa? ${index}`}
+						title={`Movimente-se: sessões de atividade física para seu bem-estar ${index}`}
 						text="Descubra como entender melhor a si mesmo pode transformar sua vida em todos os aspectos!"
-						link={`/contents/video/${index}`}
+						link={`/contents/webnar/${index}`}
 						time="5 min"				
 						buttons={["heart"]}	
 					/>
@@ -65,4 +65,4 @@ function CollaboratorContentsVideo() {
 	);
 }
 
-export default CollaboratorContentsVideo;
+export default CollaboratorContentsWebnar;
