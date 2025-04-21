@@ -13,21 +13,23 @@ function CollaboratorChatPage() {
   return (
     <div>
       <SearchBar inputDisabled={true} />
-      <main className="p-10 flex flex-col gap-5">
-        <span className="font-bold">Escolha a área de atendimento</span>
-        <div className="relative rounded-2xl overflow-hidden h-56 md:h-64 lg:h-72">
+      <main className="p-4 sm:p-10 flex flex-col gap-5">
+        <span className="font-bold text-lg sm:text-xl">
+          Escolha a área de atendimento
+        </span>
+
+        <div className="relative rounded-2xl overflow-hidden h-56 sm:h-64 md:h-72 lg:h-80">
           <Image
             src={PessoasImg}
             alt="Grupo de pessoas"
             fill
-            className="object-cover scale-107 translate-x-56	"
-            // você pode brincar com scale-125, translate-x-16 etc
+            className="object-cover scale-110 translate-x-32 sm:scale-107 sm:translate-x-56 transition-transform"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-[#736CCE] from-41%	 to-[#736CCE4D] to-70%" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#736CCE] from-41% to-[#736CCE4D] to-70%" />
 
-          <div className="relative px-6 pt-6 max-w-md text-white pr-20  flex flex-col justify-start h-full">
-            <span className=" text-[28px] font-medium leading-snug  ">
+          <div className="relative px-4 sm:px-6 pt-6 max-w-full sm:max-w-md text-white sm:pr-20 flex flex-col justify-start h-full">
+            <span className="text-xl sm:text-[28px] font-medium leading-snug">
               Fale com a equipa <br />
               de Saúde e Bem-Estar
             </span>
@@ -44,22 +46,22 @@ function CollaboratorChatPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-5 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Card className="border rounded-2xl shadow-sm p-4 pb-8">
-            <CardHeader className=" items-center gap-2">
+            <CardHeader className="items-center gap-2">
               <SupportSVG className="w-10 h-10 text-[#736CCE]" />
-              <span className="text-[#736CCE] font-semibold text-2xl">
+              <span className="text-[#736CCE] font-semibold text-xl sm:text-2xl">
                 Suporte técnico:
               </span>
             </CardHeader>
 
-            <CardContent className="text-base text-[#4F4F4F]  space-y-2">
+            <CardContent className="text-base text-[#4F4F4F] space-y-2">
               <p>
                 Para questões relacionadas a problemas técnicos com o sistema,
                 acesso ou funcionalidades da plataforma.
               </p>
               <Button
-                className=" underline text-base -ml-4 "
+                className="underline text-base -ml-4"
                 variant="ghost"
                 onClick={() => router.push('/chat/2090294080')}
               >
@@ -69,17 +71,17 @@ function CollaboratorChatPage() {
           </Card>
 
           <Card className="border rounded-2xl shadow-sm p-4">
-            <CardHeader className=" items-center gap-2">
+            <CardHeader className="items-center gap-2">
               <BancoSVG className="w-10 h-10 text-[#736CCE]" />
-              <span className="text-[#736CCE] font-semibold text-2xl">
+              <span className="text-[#736CCE] font-semibold text-xl sm:text-2xl">
                 Questões financeiras:
               </span>
             </CardHeader>
 
             <CardContent className="text-base text-gray-700 space-y-2">
               <p>
-                Para questões relacionadas a problemas técnicos com o sistema,
-                acesso ou funcionalidades da plataforma.
+                Para dúvidas relacionadas a pagamentos, cobranças ou
+                movimentações financeiras da plataforma.
               </p>
               <Button
                 onClick={() => router.push('/chat/2090294080')}
