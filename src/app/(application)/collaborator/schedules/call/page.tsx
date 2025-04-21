@@ -5,27 +5,11 @@ import Image from "next/image";
 
 function CollaboratorSchedulesCall() {
   const videoControlButtons=[
-    {
-      color: '#6E767D',
-      icon: <Mic/>
-    },
-    {
-      color: '#6E767D',
-      icon: <Video/>
-    },
-    {
-      color: '#6E767D',
-      icon: <Monitor/>
-    },
-    {
-      color: '#6E767D',
-      icon: <EllipsisVertical/>
-    },
-    {
-      color: '#FF4667',
-      icon: <PhoneMissed/>
-    }
-
+    {color: '#6E767D', icon: <Mic/>},
+    {color: '#6E767D', icon: <Video/>},
+    {color: '#6E767D', icon: <Monitor/>},
+    {color: '#6E767D', icon: <EllipsisVertical/>},
+    {color: '#FF4667', icon: <PhoneMissed/>}
   ]
 
   return (
