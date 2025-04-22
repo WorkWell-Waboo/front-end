@@ -5,7 +5,15 @@ import CartSVG from '@/assets/svgs/cart';
 import GloboSVG from '@/assets/svgs/globo';
 import SearchSVG from '@/assets/svgs/search';
 import { UserSVG } from '@/assets/svgs/user';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 
 type SearchBarProps = {
@@ -17,13 +25,14 @@ export default function SearchBar({
   inputDisabled = false,
   placeholder,
 }: SearchBarProps) {
+  const router = useRouter();
   return (
-    <div className="flex items-center justify-between p-10 rounded-xl ">
+    <div className="flex items-center justify-between px-10 pt-12 rounded-xl">
       {/* Search Input (condicional) */}
       {!inputDisabled && (
         <div className="rounded-full w-full border-0">
           <Input
-            placeholder={placeholder || 'Procurar por nome'}
+            placeholder={placeholder || 'Buscar nome...'}
             rounded="full"
             before={{
               variant: 'ghost',
@@ -39,11 +48,11 @@ export default function SearchBar({
           !inputDisabled ? 'ml-4' : 'ml-0 w-full justify-end'
         }`}
       >
+        {/* Outros ícones */}
         {[
           <CartSVG key="cart" />,
           <GloboSVG key="globe" />,
           <BellSVG key="bell" />,
-          <UserSVG key="user" />,
         ].map((Icon, idx) => (
           <Button
             key={idx.toString()}
@@ -52,6 +61,32 @@ export default function SearchBar({
             {Icon}
           </Button>
         ))}
+
+        {/* Dropdown do usuário */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition">
+              <UserSVG />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuItem onClick={() => router.push('/dashboard/9309848')}>
+              Meu perfil
+            </DropdownMenuItem>
+            <DropdownMenuItem>Minhas sessões</DropdownMenuItem>
+            <DropdownMenuItem>Conteúdos</DropdownMenuItem>
+            <DropdownMenuItem>Meus favoritos</DropdownMenuItem>
+            <DropdownMenuItem>Botão de pânico</DropdownMenuItem>
+            <DropdownMenuItem>Comprar sessões</DropdownMenuItem>
+            <DropdownMenuItem>Meus eventos</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Política de privacidade</DropdownMenuItem>
+            <DropdownMenuItem>Termos e condições</DropdownMenuItem>
+            <DropdownMenuItem>Avaliar o app</DropdownMenuItem>
+            <DropdownMenuItem>Ajuda</DropdownMenuItem>
+            <DropdownMenuItem>Sair</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );

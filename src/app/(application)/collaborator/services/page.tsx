@@ -48,10 +48,10 @@ const services: Service[] = [
   { name: 'Fisioterapia', hasService: false },
   { name: 'Sono', hasService: true },
 ];
-
+const planoAtivo = true;
 export default function CollaboratorServices() {
   const [activeService, setActiveService] = useState<string | null>(null);
-  const [isSubscriber, setSubscriber] = useState(true);
+  const [isSubscriber, setSubscriber] = useState(planoAtivo);
 
   return (
     <div className="h-full">
@@ -175,7 +175,7 @@ function ClickableCard({
             </Button>
             <Button
               className="bg-[#691FB1] text-white "
-              onClick={() => router.push('/planos')}
+              onClick={() => router.push('/plans')}
             >
               Ir para planos
             </Button>
