@@ -1,3 +1,4 @@
+'use client'
 import {
   Dialog,
   DialogClose,
@@ -10,16 +11,19 @@ import {
 
 import GoBackButton from "@/components/go-back-button";
 import { Button } from "@/components/ui/button";
-import { Clock, Heart, MapPin, Share2, X } from "lucide-react";
+import {  CircleCheck, Clock, Heart, MapPin, Share2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import PhotoWebnar from "@/assets/imgs/webnar.png"
+import SearchBar from "@/components/header";
+import { useState } from "react";
 
 function CollaboratorContentsWebnarPost() {
-
+  const [step, setStep] = useState("details"); 
 	return (
 		<main className="p-10 flex flex-col gap-4">
+			<SearchBar/>
 			<GoBackButton/>
 			<div className="flex gap-2 font-semibold text-lg text-[#4f4f4f]">
 				<Link href='/contents/webnar'>
@@ -57,96 +61,81 @@ function CollaboratorContentsWebnarPost() {
 				</p>
 			</div>
 			<Dialog>
+				
 				<DialogTrigger asChild>
 					<Button>
 						Inscrever-se
 					</Button>
 				</DialogTrigger>
-				<DialogContent className="sm:max-w-[450px] p-5">
-					<DialogClose asChild className="absolute top-0 right-0">
-						<Button variant="ghost">
-							<X/>
-						</Button>
-					</DialogClose>
-					<DialogHeader className="flex flex-row gap-3 items-center pr-10">
-						<Image src={PhotoWebnar} alt="" className="w-10 h-10 rounded-full object-cover"/>
-						<DialogTitle className="text-md! text-[#333333]">
-							Sessões de atividade 
-							física 
-						</DialogTitle>
-					</DialogHeader>
-					<div className="block">
-						<p className="text-[#4f4f4f] text-sm leading-[1.0] font-normal pb-4">
-							Confira os detalhes do nosso evento abaixo e inscreva-se
-							para participar!
-						</p>
-						<ul className="space-y-1 mb-3">
-							<li className="flex items-center gap-1">
-								<MapPin className="text-primary h-3 w-3"/>
-								<span className="text-[#4f4f4f] text-sm leading-[1.1] font-normal">Sala de Videoconferência no Microsoft Teams</span>
-							</li>
-							<li className="flex items-center gap-1">
-								<Clock className="text-primary h-3 w-3"/>
-								<span className="text-[#4f4f4f] text-sm leading-[1.1] font-normal">10 de Março às 09:00h</span>
-							</li>
-						</ul>
-					</div>
-					<DialogFooter className="flex gap-4">
-						<DialogClose asChild>
-							<Button variant="outline" className="flex-1 font-normal">
-								Cancelar
+					{step === "details" && (
+					<DialogContent className="max-w-[350px] p-5">
+
+						<DialogClose asChild className="absolute top-0 right-0">
+							<Button variant="ghost">
+								<X />
 							</Button>
 						</DialogClose>
-						<Dialog>
-				<DialogTrigger asChild>
-					<Button>
-						Inscrever-se
-					</Button>
-				</DialogTrigger>
-				<DialogContent className="sm:max-w-[450px] p-5">
-					<DialogClose asChild className="absolute top-0 right-0">
-						<Button variant="ghost">
-							<X/>
-						</Button>
-					</DialogClose>
-					<DialogHeader className="flex flex-row gap-3 items-center pr-10">
-						<Image src={PhotoWebnar} alt="" className="w-10 h-10 rounded-full object-cover"/>
-						<DialogTitle className="text-md! text-[#333333]">
-							Sessões de atividade 
-							física 
-						</DialogTitle>
-					</DialogHeader>
-					<div className="block">
-						<p className="text-[#4f4f4f] text-sm leading-[1.0] font-normal pb-4">
-							Confira os detalhes do nosso evento abaixo e inscreva-se
-							para participar!
-						</p>
-						<ul className="space-y-1 mb-3">
-							<li className="flex items-center gap-1">
-								<MapPin className="text-primary h-3 w-3"/>
-								<span className="text-[#4f4f4f] text-sm leading-[1.1] font-normal">Sala de Videoconferência no Microsoft Teams</span>
-							</li>
-							<li className="flex items-center gap-1">
-								<Clock className="text-primary h-3 w-3"/>
-								<span className="text-[#4f4f4f] text-sm leading-[1.1] font-normal">10 de Março às 09:00h</span>
-							</li>
-						</ul>
-					</div>
-					<DialogFooter className="flex gap-4">
-						<DialogClose asChild>
-							<Button variant="outline" className="flex-1 font-normal">
-								Cancelar
-							</Button>
-						</DialogClose>
-						<Button  className="flex-1 font-normal">
-							Inscreva-se						
-						</Button>
-					</DialogFooter>
-				</DialogContent>
+
+							{/* Etapa: Detalhes do Evento */}
+							<DialogHeader className="flex flex-row gap-3 items-center pr-10">
+								<Image src={PhotoWebnar} width={40} height={40} alt="Foto do evento" className="w-10 h-10 rounded-full object-cover" />
+								<DialogTitle className="text-md! text-[#333333]">
+									Sessões de atividade física
+								</DialogTitle>
+							</DialogHeader>
+							<div>
+								<p className="text-[#4f4f4f] text-sm leading-[1.0] font-normal pb-4">
+									Confira os detalhes do nosso evento abaixo e inscreva-se para participar!
+								</p>
+								<ul className="space-y-1 mb-3">
+									<li className="flex items-center gap-1">
+										<MapPin className="text-primary h-3 w-3" />
+										<span className="text-[#4f4f4f] text-xs leading-[1.1] font-normal">Sala de Videoconferência no Microsoft Teams</span>
+									</li>
+									<li className="flex items-center gap-1">
+										<Clock className="text-primary h-3 w-3" />
+										<span className="text-[#4f4f4f] text-xs leading-[1.1] font-normal">10 de Março às 09:00h</span>
+									</li>
+								</ul>
+							</div>
+							<DialogFooter className="grid grid-cols-2 gap-2">
+								<DialogClose asChild>
+									<Button variant="outline" className="font-normal">
+										Cancelar
+									</Button>
+								</DialogClose>
+								<Button onClick={() => setStep("confirmation")}>
+									Inscrever-se
+								</Button>
+							</DialogFooter>
+						</DialogContent>
+					)}
+
+					{step === "confirmation" && (
+						<DialogContent className="max-w-[350px] pt-10">
+							<DialogHeader className="relative">
+								<div className="w-[60px] h-[60px] bg-white rounded-full absolute left-[50%] translate-x-[-50%] -top-[70px] flex items-center justify-center">
+									<CircleCheck className="w-7 h-7 text-primary" />
+								</div>
+								<DialogTitle className="text-2xl! text-center text-[#333333] mb-4">
+									Inscrição confirmada!
+								</DialogTitle>
+							</DialogHeader>
+							<p className="text-[#4f4f4f] text-sm leading-[1.1] text-center font-normal mb-2">
+								Vemo-nos em breve! Fique de olho no seu e-mail para mais detalhes sobre o evento.
+							</p>
+							<DialogFooter className="flex gap-4">
+								<DialogClose asChild>
+									<Button className="flex-1 font-normal">
+										Fechar
+									</Button>
+								</DialogClose>
+							</DialogFooter>
+						</DialogContent>
+					)}
+
 			</Dialog>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
+		
 		</main>
 	);
 }

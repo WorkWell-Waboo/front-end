@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
 type SearchBarProps = {
   inputDisabled?: boolean;
@@ -78,7 +79,11 @@ export default function SearchBar({
             <DropdownMenuItem>Meus favoritos</DropdownMenuItem>
             <DropdownMenuItem>Botão de pânico</DropdownMenuItem>
             <DropdownMenuItem>Comprar sessões</DropdownMenuItem>
-            <DropdownMenuItem>Meus eventos</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/contents/my-events">
+                Meus eventos
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Política de privacidade</DropdownMenuItem>
             <DropdownMenuItem>Termos e condições</DropdownMenuItem>
