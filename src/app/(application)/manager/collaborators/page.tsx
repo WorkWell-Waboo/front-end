@@ -13,10 +13,15 @@ import {
 
 import Photo from "@/assets/imgs/cliente.png"
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Ellipsis, FileX2, Filter, Plus } from "lucide-react";
+import { Ellipsis, FileX2, Filter, Plus, UserCheck, } from "lucide-react";
+
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 function ManagerCollaboratorsPage() {
+   const [step, setStep] = useState("details"); 
   return (
     <main className="p-10 flex flex-col gap-4">
       <div className="flex justify-between items-center gap-5">
@@ -35,10 +40,72 @@ function ManagerCollaboratorsPage() {
             <FileX2/>
             Upload de Arquivo Excel
           </Button>
-          <Button >
-            <Plus/>
-            Adicionar
-          </Button>
+         
+          <Dialog>
+            <DialogTrigger asChild>
+             <Button>
+                <Plus/>
+                Adicionar
+              </Button>
+            </DialogTrigger>
+              {step === "details" && (
+                <DialogContent className="max-w-[450px] pt-10 px-12">
+                  <DialogHeader className="relative">
+                    <div className="w-[60px] h-[60px] bg-white rounded-full absolute left-[50%] translate-x-[-50%] -top-[70px] flex items-center justify-center">
+                      <UserCheck className="w-7 h-7 text-primary" />
+                    </div>
+                    <DialogTitle className="text-2xl! text-center text-[#333333] mb-4">
+                      Adicionar colaboradores
+                    </DialogTitle>
+                    <DialogDescription className="text-center">
+                      Insira o nome e e-mail abaixo para cadastrar 
+                      um novo colaborador
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-2">
+                    <Input type="text" placeholder="Nome" className="text-sm"/>
+                    <Input type="email" placeholder="Email" className="text-sm"/>
+                    <Input type="number" placeholder="Telefone" className="text-sm"/>
+                    <Input type="text" placeholder="Função" className="text-sm"/>
+                  </div>
+                  <DialogFooter className="flex gap-4">
+                    <DialogClose asChild>
+                      <Button variant="outline" className="font-normal">
+                        Cancelar
+                      </Button>
+                    </DialogClose>
+                    <Button className="flex-1 font-normal"  onClick={() => setStep("confirmation")}>
+                      Confirmar registo
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              )}
+
+              {step === "confirmation" && (
+                <DialogContent className="max-w-[450px] pt-10 px-12">
+                  <DialogHeader className="relative">
+                    <div className="w-[60px] h-[60px] bg-white rounded-full absolute left-[50%] translate-x-[-50%] -top-[70px] flex items-center justify-center">
+                      <UserCheck className="w-7 h-7 text-primary" />
+                    </div>
+                    <DialogTitle className="text-2xl! text-center text-[#333333] mb-4">
+                      Solicitação confirmada
+                    </DialogTitle>
+                  </DialogHeader>
+                  <p className="text-[#4f4f4f] text-sm leading-[1.1] text-center font-normal mb-2">
+                    O colaborador deve aceder ao email enviado 
+                    para concluir o registo e ter acesso à plataforma
+                  </p>
+                  <DialogFooter className="flex gap-4">
+                    <DialogClose asChild>
+                      <Button className="flex-1 font-normal"  onClick={() => setStep("details")}>
+                        Fechar
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              )}
+
+          </Dialog>
         </div>
       </div>
        <ScrollArea className="h-[calc(100vh-100px)]">
