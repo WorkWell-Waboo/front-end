@@ -2,18 +2,14 @@
 
 import ImageEquipe from '@/assets/imgs/AppWorkwell.jpg';
 import InfinitySVG from '@/assets/svgs/infinity';
+import { HotTopicsChart } from '@/components/bar-chart';
+import DonutChart from '@/components/donutsChart';
+import { LineCharts } from '@/components/line-chart';
 import {} from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent,
-} from '@/components/ui/chart';
+import {} from '@/components/ui/chart';
 import {
   Select,
   SelectContent,
@@ -21,48 +17,30 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import {} from '@/components/ui/tabs';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Pie, PieChart } from 'recharts';
-const chartData = [
-  { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-  { browser: 'firefox', visitors: 187, fill: 'var(--color-firefox)' },
-  { browser: 'edge', visitors: 173, fill: 'var(--color-edge)' },
-  { browser: 'other', visitors: 90, fill: 'var(--color-other)' },
-];
-const chartConfig = {
-  visitors: {
-    label: 'Visitors',
-  },
-  chrome: {
-    label: 'Psicologia',
-    color: '#4067E9',
-  },
-  safari: {
-    label: 'Psiquiatria',
-    color: '#905DF3',
-  },
-  firefox: {
-    label: 'Nutrição',
-    color: '#3B3498',
-  },
-  edge: {
-    label: 'Fisioterapia',
-    color: '#9F9CCF',
-  },
-  other: {
-    label: 'Coach',
-    color: '#133AB9',
-  },
-} satisfies ChartConfig;
+import {} from 'recharts';
+
 export default function ManagerDashboardPage() {
   const [period, setPeriod] = useState('mes');
   const [year, setYear] = useState('ano');
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  const colaboradores = [
+    'COLAB12345',
+    'COLAB98765',
+    'COLAB12356',
+    'COLAB12346',
+    'COLAB42346',
+    'COLAB54321',
+    'COLAB67890',
+    'COLAB13579',
+  ];
 
   return (
-    <main className="container mx-auto p-10 space-y-6">
+    <main className="container mx-auto p-10 space-y-6 overflow-auto">
       {/* Top Section */}
       <div className="grid grid-cols-1 md:grid-cols-[2fr_.6fr] gap-4">
         {/* Left Card - Call to Action */}
@@ -71,21 +49,21 @@ export default function ManagerDashboardPage() {
           <Image
             src={ImageEquipe}
             alt="Equipe"
-            className="absolute inset-0 w-full h-full object-cover "
+            className="absolute transform scale-x-[-1] scale-95 -translate-y-16 object-cover filter grayscale"
           />
 
           {/* Overlay roxo com transparência */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#736CCE] to-[#736CCE80] via-20% via-[#736CCE]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#736CCE] to-[#736CCE]/80" />
 
-          <CardContent className="relative z-10 text-white p-6">
+          <CardContent className="relative z-10 text-white ">
             <h2 className="text-2xl font-bold">
               Invista no bem-estar da sua equipe
             </h2>
-            <p className="mt-2">
+            <p className="mt-2 text-sm">
               Adquira sessões e ofereça mais recursos para o desenvolvimento dos
               seus colaboradores.
             </p>
-            <Button className="mt-4 bg-white text-purple-700 font-semibold px-4 py-2 rounded">
+            <Button className="mt-4 bg-white text-[#736CCE] font-semibold text-xs px-4 py-2 rounded-md">
               Comprar sessões
             </Button>
           </CardContent>
@@ -138,173 +116,125 @@ export default function ManagerDashboardPage() {
         </div>
 
         {/* Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Card>
-            <CardContent className="p-6 flex flex-col items-center">
-              <span className="text-sm text-gray-500 mb-2">
-                Sessões realizadas
-              </span>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-[#7C3AED]">1200</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6 flex flex-col items-center">
-              <div className="flex items-center gap-1 mb-2">
-                <span className="text-sm text-gray-500">Sessões agendadas</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <Card className="bg-[#736CCE] ">
+            <CardContent className=" flex flex-col items-start ">
+              <div className="flex items-center gap-1 mb-2 ">
+                <span className="text-sm text-[#F2F2F2]  ">
+                  Sessões realizadas
+                </span>
                 <Badge
                   variant="outline"
-                  className="bg-green-100 text-green-800 border-green-200"
+                  className="bg-[#25B72E] text-[#FFFFFF] border-none  p-1 w-4 h-4 rounded"
                 >
-                  5
+                  <ArrowUpRight className="w-2 h-2" />
                 </Badge>
               </div>
-              <span className="text-2xl font-bold text-[#7C3AED]">12000</span>
+
+              <div className="flex items-center gap-2">
+                <span className="text-3xl font-bold text-[#FFFFFF]">12000</span>
+              </div>
             </CardContent>
           </Card>
           <Card>
-            <CardContent className="p-6 flex flex-col items-center">
+            <CardContent className=" flex flex-col items-start">
+              <div className="flex items-center justify-center gap-1 mb-2 ">
+                <span className="text-sm text-[#828282]">
+                  Sessões agendadas
+                </span>
+                <Badge
+                  variant="outline"
+                  className="bg-[#25B72E] text-[#FFFFFF] border-none  p-1 w-4 h-4 rounded"
+                >
+                  <ArrowUpRight className="w-fit h-fit" />
+                </Badge>
+              </div>
+              <span className="text-3xl font-bold text-[#736CCE]">12000</span>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className=" flex flex-col items-start">
               <div className="flex items-center gap-1 mb-2">
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-[#828282]">
                   Colaboradores ativos
                 </span>
                 <Badge
                   variant="outline"
-                  className="bg-green-100 text-green-800 border-green-200"
+                  className="bg-[#25B72E] text-[#FFFFFF] border-none  p-1 w-4 h-4 rounded"
                 >
-                  5
+                  <ArrowUpRight className="w-fit h-fit" />
                 </Badge>
               </div>
-              <span className="text-2xl font-bold text-[#7C3AED]">12000</span>
+              <span className="text-3xl font-bold text-[#736CCE]">12000</span>
             </CardContent>
           </Card>
 
           <Card>
-            <CardContent className="p-6 flex flex-col items-center">
-              <span className="text-sm text-gray-500 mb-2">
+            <CardContent className=" flex flex-col items-start">
+              <span className="text-sm text-[#828282] mb-2">
                 Tempo médio nas consultas
               </span>
-              <span className="text-2xl font-bold text-[#7C3AED]">50min</span>
+              <span className="text-3xl font-bold text-[#736CCE]">50min</span>
             </CardContent>
           </Card>
         </div>
 
         {/* Charts Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* Service Utilization Chart */}
-          <Card>
-            <CardHeader className="pb-2">
+          <Card className="h-full">
+            <CardHeader className="">
               <CardTitle className="text-base font-semibold">
-                Percentual de utilização por serviço
+                Utilização por serviço
               </CardTitle>
             </CardHeader>
 
-            <CardContent>
-              <ChartContainer
-                config={chartConfig}
-                className="flex items-center justify-center gap-6"
-              >
-                <PieChart width={200} height={200}>
-                  <ChartTooltip
-                    cursor={true}
-                    content={
-                      <ChartTooltipContent
-                        hideLabel
-                        hideIndicator={true}
-                        indicator="dashed"
-                      />
-                    }
-                  />
-                  <Pie
-                    data={chartData}
-                    dataKey="visitors"
-                    nameKey="browser"
-                    innerRadius={60}
-                    outerRadius={100}
-                    label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-                    labelLine={false}
-                  />{' '}
-                  <ChartLegend
-                    content={<ChartLegendContent nameKey="browser" />}
-                    className="flex flex-col gap-2 text-sm text-muted-foreground"
-                  />
-                </PieChart>
-              </ChartContainer>
+            <CardContent className="p-0">
+              <DonutChart />
             </CardContent>
           </Card>
 
           {/* Collaborators Card */}
-          <Card>
-            <CardHeader className="pb-2 flex flex-row items-center justify-between">
-              <CardTitle className="text-sm font-medium">
+          <Card className="">
+            <CardHeader className="pb-2 flex flex-row items-center justify-between px-7">
+              <CardTitle className="text-lg font-medium ">
                 Colaboradores
               </CardTitle>
-              <Badge variant="outline" className="text-xs">
+              <span className="text-sm flex gap-1 items-center ">
+                <ChevronDown className="text-[#504DA6]" />
                 Hoje
-              </Badge>
+              </span>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between border-b pb-2">
-                <span className="text-xs text-gray-500">COLABORADOR</span>
-                <span className="text-xs text-[#7C3AED]">Ver relatório</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">COLABORADOR</span>
-                <span className="text-xs text-[#7C3AED]">Ver relatório</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">COLABORADOR</span>
-                <span className="text-xs text-[#7C3AED]">Ver relatório</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">COLABORADOR</span>
-                <span className="text-xs text-[#7C3AED]">Ver relatório</span>
+            <CardContent className="space-y-2 px-4 overflow-y-auto max-h-[200px] scrollbar-custom">
+              {/* Contêiner de colaboradores com rolagem vertical */}
+              <div className="flex flex-col ">
+                {colaboradores.map((colab) => (
+                  <div
+                    key={colab}
+                    className="px-4 py-4.5 rounded-sm hover:bg-[#504DA6]/10 transition-colors flex items-center justify-between"
+                  >
+                    <span className="text-sm text-[#736CCE] font-semibold">
+                      {colab}
+                    </span>
+                    <Button
+                      onClick={() => console.log(`Ver relatório de ${colab}`)}
+                      variant="ghost"
+                      className="text-xs font-normal p-0 text-[#504DA6] underline hover:text-[#504DA6] focus:outline-none focus:ring-1 focus:ring-[#C4B5FD] rounded-sm"
+                    >
+                      Ver relatório
+                    </Button>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
 
           {/* Risk Level Chart */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">
-                Percentual de nível de risco
-              </CardTitle>
-              <Badge className="bg-[#7C3AED] text-white">Alto</Badge>
-            </CardHeader>
-            <CardContent>
-              <div className="h-[150px] w-full">d</div>
-              <div className="flex justify-between text-xs text-gray-500 mt-2">
-                <span>Jan</span>
-                <span>Fev</span>
-                <span>Mar</span>
-                <span>Abr</span>
-                <span>Mai</span>
-                <span>Jun</span>
-              </div>
-            </CardContent>
-          </Card>
+
+          <LineCharts />
 
           {/* Most Used Tags */}
-          <Card>
-            <CardHeader className="pb-2 flex flex-row items-center justify-between">
-              <CardTitle className="text-sm font-medium">
-                Tags mais utilizadas
-              </CardTitle>
-              <Tabs defaultValue="especialidades">
-                <TabsList className="h-8">
-                  <TabsTrigger value="especialidades" className="text-xs">
-                    Especialidades
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-end justify-between h-[150px] pt-4">
-                d
-              </div>
-            </CardContent>
-          </Card>
+          <HotTopicsChart />
         </div>
       </div>
     </main>
