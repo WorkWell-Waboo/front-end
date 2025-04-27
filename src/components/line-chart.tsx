@@ -6,6 +6,7 @@ import {
   AreaChart,
   CartesianGrid,
   ResponsiveContainer,
+  Scatter,
   Tooltip,
   XAxis,
   YAxis,
@@ -17,8 +18,11 @@ const chartData = [
   { month: 'Mar', value: 3.5 },
   { month: 'Apr', value: 2.8 },
   { month: 'May', value: 3.2 },
-  { month: 'Jun', value: 3.3 },
+  { month: 'Jun', value: 2 },
 ];
+
+// Calcular o valor total para determinar a porcentagem
+const totalValue = chartData.reduce((acc, curr) => acc + curr.value, 0);
 
 export function LineCharts() {
   return (
@@ -35,7 +39,8 @@ export function LineCharts() {
                 <stop offset="100%" stopColor="#736CCE" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} strokeDasharray="3 3" />
+            {/* Removendo a linha pontilhada do CartesianGrid */}
+            <CartesianGrid vertical={false} strokeDasharray="" />
             <XAxis
               dataKey="month"
               tickLine={false}
@@ -53,9 +58,12 @@ export function LineCharts() {
             <Tooltip
               content={({ active, payload }) => {
                 if (active && payload && payload.length) {
+                  const value = Number(payload[0].value);
+                  const percentage = ((value / totalValue) * 100).toFixed(2);
+
                   return (
                     <div className="rounded bg-[#736CCE] text-white px-2 py-1 text-xs">
-                      +$40 (4%)
+                      +${percentage} ({value}%)
                     </div>
                   );
                 }
@@ -64,23 +72,18 @@ export function LineCharts() {
               cursor={false}
             />
             <Area
-              type="monotone"
+              type="natural"
               dataKey="value"
               stroke="#736CCEBF"
               strokeWidth={3}
               fill="url(#colorRisk)"
-              dot={{
-                fill: '#736CCE',
-                stroke: 'white',
-                strokeWidth: 2,
-                r: 4,
-              }}
-              activeDot={{
-                r: 6,
-                stroke: '#736CCE',
-                strokeWidth: 2,
-                fill: 'white',
-              }}
+            />
+            <Scatter
+              data={chartData}
+              dataKey="value"
+              shape="circle"
+              fill="#736CCE"
+              line={{ stroke: '#736CCE', strokeWidth: 2 }}
             />
           </AreaChart>
         </ResponsiveContainer>

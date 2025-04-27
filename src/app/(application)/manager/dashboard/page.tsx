@@ -3,7 +3,7 @@
 import ImageEquipe from '@/assets/imgs/AppWorkwell.jpg';
 import InfinitySVG from '@/assets/svgs/infinity';
 import { HotTopicsChart } from '@/components/bar-chart';
-import DonutChart from '@/components/donutsChart';
+import { DonutChart } from '@/components/donutsChart';
 import { LineCharts } from '@/components/line-chart';
 import {} from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -182,17 +182,8 @@ export default function ManagerDashboardPage() {
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
           {/* Service Utilization Chart */}
-          <Card className="h-full">
-            <CardHeader className="">
-              <CardTitle className="text-base font-semibold">
-                Utilização por serviço
-              </CardTitle>
-            </CardHeader>
 
-            <CardContent className="p-0">
-              <DonutChart />
-            </CardContent>
-          </Card>
+          <DonutChart />
 
           {/* Collaborators Card */}
           <Card className="">
