@@ -17,8 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Calendar } from '@/components/ui/calendar
-';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
@@ -26,6 +25,7 @@ import {
 } from '@/components/ui/popover';
 import { format } from 'date-fns';
 import { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 // Dados simulados
 const reportData = [
@@ -68,20 +68,25 @@ function ManagerReportsPage() {
   return (
     <main className="p-8 bg-[#F4F5FA] min-h-screen">
       {/* Filtros */}
-      <div className="flex flex-wrap items-center gap-4 mb-8">
+      <div className="flex flex-wrap items-center gap-4 mb-5 justify-end border-none">
         <Select>
-          <SelectTrigger className="w-[220px] bg-white">
+          <SelectTrigger
+            className="w-[220px] bg-white border-none shadow-none"
+            iconColor="text-[#736CCE]"
+          >
             <SelectValue placeholder="Uso do colaborador" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="baixo">Baixo</SelectItem>
-            <SelectItem value="médio">Médio</SelectItem>
-            <SelectItem value="alto">Alto</SelectItem>
+            <SelectItem value="baixo">Uso do Coloborador</SelectItem>
+            <SelectItem value="médio">Uso do </SelectItem>
           </SelectContent>
         </Select>
 
         <Select>
-          <SelectTrigger className="w-[220px] bg-white">
+          <SelectTrigger
+            className="w-[220px] bg-white border-none shadow-none"
+            iconColor="text-[#736CCE]"
+          >
             <SelectValue placeholder="Especialidade" />
           </SelectTrigger>
           <SelectContent>
@@ -95,10 +100,11 @@ function ManagerReportsPage() {
         <Popover>
           <PopoverTrigger asChild>
             <Button
-              variant="outline"
-              className="w-[220px] justify-start text-left font-normal bg-white"
+              variant="ghost"
+              className="w-[130px] justify-between text-left font-normal bg-white tex"
             >
-              {date ? format(date, 'dd/MM/yyyy') : 'Período'}
+              {date ? format(date, 'dd/MM/yyyy') : 'Período'}{' '}
+              <ChevronDown className="text-[#736CCE] size-5 opacity-100	" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0 bg-white">
@@ -111,13 +117,13 @@ function ManagerReportsPage() {
           </PopoverContent>
         </Popover>
 
-        <Button className="bg-[#7B61FF] hover:bg-[#6a51e6] text-white">
+        <Button className="bg-[#736CCE] hover:bg-[#6a51e6] text-white">
           Baixar relatório
         </Button>
       </div>
 
       {/* Tabela */}
-      <ScrollArea className="rounded-lg border bg-white">
+      <ScrollArea className="rounded-lg border-none bg-white">
         <Table>
           <TableHeader>
             <TableRow>
