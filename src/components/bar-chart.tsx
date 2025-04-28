@@ -57,9 +57,9 @@ export function HotTopicsChart() {
     <Card>
       <CardHeader className="flex justify-between items-center">
         <CardTitle>Hot topics</CardTitle>
-        <div className="bg-muted rounded-md px-3 py-1 text-sm flex items-center gap-2 cursor-pointer">
+        <div className="bg-[#504DA61A] rounded-md px-3 py-1 text-sm flex items-center gap-2 cursor-pointer">
           Especialidade
-          <ChevronDown />
+          <ChevronDown className="text-[#736CCE]" />
         </div>
       </CardHeader>
       <CardContent>
