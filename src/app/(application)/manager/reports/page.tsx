@@ -48,9 +48,6 @@ const reportData = [
   { id: 8, sessions: 15, chat: 10, total: 5, status: 'Ativo' },
   { id: 9, sessions: 10, chat: 9, total: 1, status: 'Sem sessões recentes' },
   { id: 11, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
-  { id: 12, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
-  { id: 13, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
-  { id: 14, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
 ];
 
 const serviceData = [

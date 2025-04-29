@@ -31,7 +31,7 @@ export default function SearchBar({
   const router = useRouter();
 
   return (
-    <div className="flex items-center justify-between pt-5 pb-7 rounded-xl bg-transparent">
+    <div className="flex items-center justify-between pt-5 pb-6 rounded-xl bg-transparent">
       {/* Search Input ou mensagem */}
       <div className="rounded-full w-full border-0">
         {inputDisabled ? (

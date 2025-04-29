@@ -37,9 +37,10 @@ import SearchBar from '@/components/searchbar';
 function ManagerCollaboratorsPage() {
   const [step, setStep] = useState('details');
   return (
-    <main className="px-10 pb-10 flex flex-col gap-4">
+    <main className="px-10 pb-10 flex flex-col ">
       <SearchBar placeholder="Procure por nome" />
-      <div className="flex justify-between items-center gap-5">
+
+      <div className="flex justify-between items-center gap-5 mb-5">
         <div className="flex items-center gap-2 bg-primary text-white rounded-md py-1 px-4">
           <span className=" text-xs font-normal">
             Colaboradores registrados
@@ -138,6 +139,7 @@ function ManagerCollaboratorsPage() {
           </Dialog>
         </div>
       </div>
+
       <ScrollArea className="h-[calc(100vh-100px)]">
         <Table>
           <TableHeader>

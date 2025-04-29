@@ -151,9 +151,10 @@ export default function ManagerPlansPage() {
   }, [carousel]);
 
   return (
-    <main className="px-10 pb-10 flex flex-col gap-4">
+    <main className="px-10 pb-10 flex flex-col ">
       <SearchBar inputDisabled={true} />
-      <div>
+
+      <div className="">
         <h2 className="font-semibold text-base mb-1">Assinaturas</h2>
         <p className="text-sm mb-4">
           Com o plano ilimitado, os seus colaboradores têm acesso a várias
@@ -162,7 +163,7 @@ export default function ManagerPlansPage() {
 
         <div className="flex flex-col gap-4">
           {/* Simulação de pacotes */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 mb-6">
             {subscriptions.map((subscription) => (
               <div
                 className="flex flex-col gap-4 justify-between p-4 bg-[#736CCE] rounded-md"
@@ -210,7 +211,7 @@ export default function ManagerPlansPage() {
       {/* Titulo e controles do carousel de especialidades */}
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-md text-[#4f4f4f] mb-2">
-          Escolha a especialidade de interesse
+          Compre por especialidade
         </h2>
         <div className="flex gap-2">
           <Button
@@ -354,7 +355,7 @@ export default function ManagerPlansPage() {
       </Carousel>
 
       {/* Blocos dos planos */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 mt-6">
         <h2 className="font-bold text-md text-[#4f4f4f] mb-2">
           Pacotes de sessões
         </h2>
