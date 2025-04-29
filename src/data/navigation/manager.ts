@@ -4,6 +4,7 @@ import { DashboardSVG } from '@/assets/svgs/dashboard';
 import { LayersSVG } from '@/assets/svgs/layers';
 import { ReportSVG } from '@/assets/svgs/report';
 import { UsersSVG } from '@/assets/svgs/users';
+import { FileSVG } from '@/assets/svgs/file';
 
 const navigationManager: Omit<NavigationProps, 'active'>[] = [
 	{
@@ -22,9 +23,9 @@ const navigationManager: Omit<NavigationProps, 'active'>[] = [
 		href: '/collaborators',
 	},
 	{
-		label: 'Conteúdos',
-		icon: LayersSVG,
-		href: '/contents',
+		label: 'Planos',
+		icon: FileSVG,
+		href: '/plans',
 	},
 ];
 
