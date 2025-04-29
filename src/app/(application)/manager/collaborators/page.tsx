@@ -47,7 +47,7 @@ function ManagerCollaboratorsPage() {
           </span>
           <span className="text-lg font-bold">12354</span>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           <Button
             variant="outline"
             className="bg-white text-[#202020] border-[#DCDCDC]"

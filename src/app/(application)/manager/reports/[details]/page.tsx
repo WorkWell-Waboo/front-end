@@ -107,12 +107,15 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        <Card className="p-6 bg-[#7B6CD9] text-white">
-          <h3 className="text-lg font-medium mb-2">Sessões realizadas</h3>
-          <p className="text-3xl font-bold">12000</p>
+        <Card className="py-y bg-[#7B6CD9] text-white pl-14">
+          <strong className="text-lg font-medium text-[#F2F2F2]">
+            Sessões realizadas
+          </strong>
+          <span className="text-3xl font-bold">12000</span>
         </Card>
-        <Card className="p-6 bg-white">
-          <h3 className="text-lg font-medium text-[#828282] mb-2">
+
+        <Card className="py-7 bg-white pl-14">
+          <h3 className="text-lg font-medium text-[#828282] ">
             Sessões agendadas
           </h3>
           <p className="text-3xl font-bold text-[#7B6CD9]">12000</p>
