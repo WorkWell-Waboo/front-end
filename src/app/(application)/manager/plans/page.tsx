@@ -30,6 +30,8 @@ import { Button } from '@/components/ui/button';
 import { Check, CircleHelp, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import SearchBar from '@/components/searchbar';
 
 interface Expertise {
   id: number;
@@ -89,6 +91,35 @@ export default function ManagerPlansPage() {
     },
   ];
 
+  const subscriptions = [
+    {
+      id: 1,
+      name: 'Mensal',
+      sessions: 'Acesso ilimitado',
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      coin: '€',
+      price: '800,00',
+    },
+    {
+      id: 2,
+      name: 'Trimestral',
+      sessions: 'Acesso ilimitado',
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      coin: '€',
+      price: '2000,00',
+    },
+    {
+      id: 3,
+      name: 'Anual',
+      sessions: 'Acesso Ilimitado',
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+      coin: '€',
+      price: '5000,00',
+    },
+  ];
   //Separa as especialidade em grupos para o caroucel
   const chunkArray = <T,>(array: T[], size: number): T[][] =>
     array.reduce((chunks, item, index) => {
@@ -120,7 +151,62 @@ export default function ManagerPlansPage() {
   }, [carousel]);
 
   return (
-    <main className="p-10 flex flex-col gap-4">
+    <main className="px-10 pb-10 flex flex-col gap-4">
+      <SearchBar inputDisabled={true} />
+      <div>
+        <h2 className="font-semibold text-base mb-1">Assinaturas</h2>
+        <p className="text-sm mb-4">
+          Com o plano ilimitado, os seus colaboradores têm acesso a várias
+          especialidades, sem limite de consumo
+        </p>
+
+        <div className="flex flex-col gap-4">
+          {/* Simulação de pacotes */}
+          <div className="grid grid-cols-3 gap-4">
+            {subscriptions.map((subscription) => (
+              <div
+                className="flex flex-col gap-4 justify-between p-4 bg-[#736CCE] rounded-md"
+                key={subscription.id}
+              >
+                <div className="block">
+                  <h3 className="text-[#FFFFFF] font-medium text-xl">
+                    {subscription.name}
+                  </h3>
+                  <span className="font-normal text-md text-[#F2F2F2]">
+                    {subscription.sessions}
+                  </span>
+                  <hr className="border-[#F2F2F2] my-2" />
+                  <p className="font-normal text-sm text-[#F2F2F2] mb-2">
+                    {subscription.description}
+                  </p>
+                  <div className="flex gap-1 items-center text-[#FFFFFF] font-medium">
+                    <span className="text-2xl mr-2">{subscription.coin}</span>
+                    {subscription.price.split(',')[0] && (
+                      <span className="text-5xl">
+                        {subscription.price.split(',')[0]}
+                      </span>
+                    )}
+                    {subscription.price.split(',')[1] && (
+                      <span className="text-lg -mt-2">
+                        ,{subscription.price.split(',')[1]}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <Button variant="secondary" className="flex-1 " asChild>
+                    <Link href="/plans/checkout">Comprar agora</Link>
+                  </Button>
+                  <Button variant="outline" className="border border-[#FFFFFF]">
+                    <ShoppingCart color="#FFFFFF" />
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Titulo e controles do carousel de especialidades */}
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-md text-[#4f4f4f] mb-2">
