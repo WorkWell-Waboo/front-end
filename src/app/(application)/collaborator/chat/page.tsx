@@ -2,7 +2,7 @@
 import PessoasImg from '@/assets/imgs/pessoas.jpeg';
 import BancoSVG from '@/assets/svgs/banco';
 import { SupportSVG } from '@/assets/svgs/support';
-import SearchBar from '@/components/header';
+import SearchBar from '@/components/searchbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Image from 'next/image';
@@ -11,9 +11,9 @@ import { useRouter } from 'next/navigation';
 function CollaboratorChatPage() {
   const router = useRouter();
   return (
-    <div>
+    <div className="px-10 pb-10">
       <SearchBar inputDisabled={true} />
-      <main className="p-4 sm:p-10 flex flex-col gap-5">
+      <main className=" flex flex-col gap-5">
         <span className="font-bold text-lg sm:text-xl">
           Escolha a área de atendimento
         </span>

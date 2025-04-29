@@ -26,7 +26,16 @@ import {
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-
+import SearchBar from '@/components/searchbar';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
+import { useRouter } from 'next/navigation';
 // Dados simulados
 const reportData = [
   { id: 1, sessions: 10, chat: 8, total: 2, status: 'Ativo' },
@@ -38,7 +47,23 @@ const reportData = [
   { id: 7, sessions: 5, chat: 5, total: 0, status: 'Em avaliação' },
   { id: 8, sessions: 15, chat: 10, total: 5, status: 'Ativo' },
   { id: 9, sessions: 10, chat: 9, total: 1, status: 'Sem sessões recentes' },
-  { id: 10, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
+  { id: 11, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
+  { id: 12, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
+  { id: 13, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
+  { id: 14, sessions: 5, chat: 1, total: 4, status: 'Em pausa - usuário' },
+];
+
+const serviceData = [
+  { especialidade: 'Psicologia', compradas: 10, utilizadas: 8, saldo: 2 },
+  { especialidade: 'Psiquiatria', compradas: 15, utilizadas: 10, saldo: 5 },
+  { especialidade: 'Nutrição', compradas: 10, utilizadas: 9, saldo: 1 },
+  { especialidade: 'Coach', compradas: 5, utilizadas: 4, saldo: 1 },
+  { especialidade: 'Fisioterapia', compradas: 10, utilizadas: 10, saldo: 0 },
+  { especialidade: 'Psicologia', compradas: 3, utilizadas: 2, saldo: 1 },
+  { especialidade: 'Psiquiatria', compradas: 5, utilizadas: 5, saldo: 0 },
+  { especialidade: 'Nutrição', compradas: 15, utilizadas: 10, saldo: 5 },
+  { especialidade: 'Coach', compradas: 10, utilizadas: 9, saldo: 1 },
+  { especialidade: 'Fisioterapia', compradas: 5, utilizadas: 1, saldo: 4 },
 ];
 
 // Badge de status colorido
@@ -53,8 +78,8 @@ function StatusBadge({ status }: { status: string }) {
 
   return (
     <span
-      className={`px-2 py-1 rounded-full text-xs font-medium ${
-        statusClasses[status] || 'bg-gray-100 text-gray-800'
+      className={`px-3 py-1 text-xs ${
+        statusClasses[status] || 'bg-gray-200 border border-gray-400 rounded-md'
       }`}
     >
       {status}
@@ -64,92 +89,187 @@ function StatusBadge({ status }: { status: string }) {
 
 function ManagerReportsPage() {
   const [date, setDate] = useState<Date>();
-
+  const [filterType, setFilterType] = useState<'collaborator' | 'service'>(
+    'collaborator'
+  );
+  const filteredData = filterType === 'collaborator' ? reportData : serviceData;
+  const router = useRouter();
   return (
-    <main className="p-8 bg-[#F4F5FA] min-h-screen">
-      {/* Filtros */}
-      <div className="flex flex-wrap items-center gap-4 mb-5 justify-end border-none">
-        <Select>
-          <SelectTrigger
-            className="w-[220px] bg-white border-none shadow-none"
-            iconColor="text-[#736CCE]"
+    <div className="px-10 pb-10 min-h-screen">
+      <SearchBar inputDisabled={true} />
+      <main>
+        {/* Filtros */}
+        <div className="flex flex-wrap items-center gap-4 mb-5 justify-end border-none">
+          <Select
+            onValueChange={(value) =>
+              setFilterType(value as 'collaborator' | 'service')
+            }
           >
-            <SelectValue placeholder="Uso do colaborador" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="baixo">Uso do Coloborador</SelectItem>
-            <SelectItem value="médio">Uso do </SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Select>
-          <SelectTrigger
-            className="w-[220px] bg-white border-none shadow-none"
-            iconColor="text-[#736CCE]"
-          >
-            <SelectValue placeholder="Especialidade" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="psicologia">Psicologia</SelectItem>
-            <SelectItem value="nutricao">Nutrição</SelectItem>
-            <SelectItem value="coaching">Health Coaching</SelectItem>
-          </SelectContent>
-        </Select>
-
-        {/* Período (Date Picker) */}
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant="ghost"
-              className="w-[130px] justify-between text-left font-normal bg-white tex"
+            <SelectTrigger
+              className="w-[220px] bg-white border-none shadow-none"
+              iconColor="text-[#736CCE]"
             >
-              {date ? format(date, 'dd/MM/yyyy') : 'Período'}{' '}
-              <ChevronDown className="text-[#736CCE] size-5 opacity-100	" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 bg-white">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
+              <SelectValue placeholder="Uso do colaborador" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="collaborator">Uso do colaborador</SelectItem>
+              <SelectItem value="service">Uso do serviço</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger
+              className="w-[220px] bg-white border-none shadow-none"
+              iconColor="text-[#736CCE]"
+            >
+              <SelectValue placeholder="Especialidade" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Psicologia">Psicologia</SelectItem>
+              <SelectItem value="Psiquiatria">Psiquiatria</SelectItem>
+              <SelectItem value="Nutrição">Nutrição</SelectItem>
+              <SelectItem value="Coach">Coach</SelectItem>
+              <SelectItem value="Fisioterapia">Fisioterapia</SelectItem>
+            </SelectContent>
+          </Select>
 
-        <Button className="bg-[#736CCE] hover:bg-[#6a51e6] text-white">
-          Baixar relatório
-        </Button>
-      </div>
+          {/* Filtro de especialidade apenas se for "service" */}
+          {filterType === 'service' ? (
+            <Select>
+              <SelectTrigger
+                className="w-[220px] bg-white border-none shadow-none"
+                iconColor="text-[#736CCE]"
+              >
+                <SelectValue placeholder="Selecione" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Psicologia">Psicologia</SelectItem>
+                <SelectItem value="Psiquiatria">Psiquiatria</SelectItem>
+                <SelectItem value="Nutrição">Nutrição</SelectItem>
+                <SelectItem value="Coach">Coach</SelectItem>
+                <SelectItem value="Fisioterapia">Fisioterapia</SelectItem>
+              </SelectContent>
+            </Select>
+          ) : null}
 
-      {/* Tabela */}
-      <ScrollArea className="rounded-lg border-none bg-white">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Código do colaborador</TableHead>
-              <TableHead>Sessões utilizadas</TableHead>
-              <TableHead>Aconselhamento em chat</TableHead>
-              <TableHead>Total utilizado</TableHead>
-              <TableHead>Status acompanhamento</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {reportData.map((data) => (
-              <TableRow key={data.id} className="text-sm text-[#202020]">
-                <TableCell className="py-6">COLAB12345</TableCell>
-                <TableCell>{data.sessions}</TableCell>
-                <TableCell>{data.chat}</TableCell>
-                <TableCell>{data.total}</TableCell>
-                <TableCell>
-                  <StatusBadge status={data.status} />
-                </TableCell>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="ghost"
+                className="w-[130px] justify-between text-left font-normal bg-white"
+              >
+                {date ? format(date, 'dd/MM/yyyy') : 'Período'}
+                <ChevronDown className="text-[#736CCE] size-5 opacity-100" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0 bg-white">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+
+          <Button className="bg-[#736CCE] hover:bg-[#6a51e6] text-white">
+            Baixar relatório
+          </Button>
+        </div>
+
+        {/* Tabela */}
+        <ScrollArea className="border-none">
+          <Table className="border-none">
+            <TableHeader>
+              <TableRow>
+                {filterType === 'collaborator' ? (
+                  <>
+                    <TableHead>Código do colaborador</TableHead>
+                    <TableHead>Sessões utilizadas</TableHead>
+                    <TableHead>Aconselhamento em chat</TableHead>
+                    <TableHead>Total utilizado</TableHead>
+                    <TableHead>Status acompanhamento</TableHead>
+                  </>
+                ) : (
+                  <>
+                    <TableHead>Especialidade</TableHead>
+                    <TableHead>Sessões compradas</TableHead>
+                    <TableHead>Sessões utilizadas</TableHead>
+                    <TableHead>Saldo</TableHead>
+                    <TableHead></TableHead>
+                  </>
+                )}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </ScrollArea>
-    </main>
+            </TableHeader>
+            <TableBody>
+              {filteredData.map((data, index) => (
+                <TableRow key={index} className="text-sm text-[#202020]">
+                  {filterType === 'collaborator' ? (
+                    <>
+                      <TableCell className="py-4">
+                        COLAB57{(data as { id: number }).id}
+                      </TableCell>
+                      <TableCell>
+                        {(data as { sessions: number }).sessions}
+                      </TableCell>
+                      <TableCell>{(data as { chat: number }).chat}</TableCell>
+                      <TableCell>{(data as { total: number }).total}</TableCell>
+                      <TableCell>
+                        <StatusBadge
+                          status={(data as { status: string }).status}
+                        />
+                      </TableCell>
+                    </>
+                  ) : (
+                    <>
+                      <TableCell className="py-4">
+                        {(data as { especialidade: string }).especialidade}
+                      </TableCell>
+                      <TableCell>
+                        {(data as { compradas: number }).compradas}
+                      </TableCell>
+                      <TableCell>
+                        {(data as { utilizadas: number }).utilizadas}
+                      </TableCell>
+                      <TableCell>{(data as { saldo: number }).saldo}</TableCell>
+                      <TableCell className="flex justify-end">
+                        <Button
+                          onClick={() => router.push('/reports/2894820904')}
+                        >
+                          Ver detalhes
+                        </Button>
+                      </TableCell>
+                    </>
+                  )}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </ScrollArea>
+
+        {/* Paginação */}
+        <Pagination className="justify-end pt-6">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#" isActive={true}>
+                1
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">2</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">3</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </main>
+    </div>
   );
 }
 

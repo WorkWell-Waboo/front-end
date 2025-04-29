@@ -1,7 +1,7 @@
 'use client';
 import { CameraSVG } from '@/assets/svgs/camera';
 import { UserFormSVG } from '@/assets/svgs/userForm';
-import SearchBar from '@/components/header';
+import SearchBar from '@/components/searchbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';

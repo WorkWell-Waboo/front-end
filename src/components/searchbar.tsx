@@ -20,18 +20,25 @@ import Link from 'next/link';
 type SearchBarProps = {
   inputDisabled?: boolean;
   placeholder?: string;
+  isManager?: boolean;
 };
 
 export default function SearchBar({
   inputDisabled = false,
   placeholder,
+  isManager = false,
 }: SearchBarProps) {
   const router = useRouter();
+
   return (
-    <div className="flex items-center justify-between px-10 pt-12 rounded-xl">
-      {/* Search Input (condicional) */}
-      {!inputDisabled && (
-        <div className="rounded-full w-full border-0">
+    <div className="flex items-center justify-between pt-5 pb-7 rounded-xl bg-transparent">
+      {/* Search Input ou mensagem */}
+      <div className="rounded-full w-full border-0">
+        {inputDisabled ? (
+          isManager ? (
+            <p className="text-[#9E9EA8]">Olá, nome do gestor</p>
+          ) : null
+        ) : (
           <Input
             placeholder={placeholder || 'Buscar nome...'}
             rounded="full"
@@ -40,8 +47,8 @@ export default function SearchBar({
               content: <SearchSVG className="text-muted-foreground ml-6" />,
             }}
           />
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Icons */}
       <div
@@ -49,7 +56,6 @@ export default function SearchBar({
           !inputDisabled ? 'ml-4' : 'ml-0 w-full justify-end'
         }`}
       >
-        {/* Outros ícones */}
         {[
           <CartSVG key="cart" />,
           <GloboSVG key="globe" />,
@@ -63,7 +69,6 @@ export default function SearchBar({
           </Button>
         ))}
 
-        {/* Dropdown do usuário */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition">
@@ -80,9 +85,7 @@ export default function SearchBar({
             <DropdownMenuItem>Botão de pânico</DropdownMenuItem>
             <DropdownMenuItem>Comprar sessões</DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/contents/my-events">
-                Meus eventos
-              </Link>
+              <Link href="/contents/my-events">Meus eventos</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Política de privacidade</DropdownMenuItem>

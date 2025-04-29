@@ -5,6 +5,7 @@ import InfinitySVG from '@/assets/svgs/infinity';
 import { HotTopicsChart } from '@/components/bar-chart';
 import { DonutChart } from '@/components/donutsChart';
 import { LineCharts } from '@/components/line-chart';
+import SearchBar from '@/components/searchbar';
 import TermsModal from '@/components/termsmodal';
 import {} from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -62,12 +63,13 @@ export default function ManagerDashboardPage() {
   };
 
   return (
-    <main className="container mx-auto p-4 sm:p-10 space-y-6 overflow-auto">
+    <main className="container mx-auto px-10 pb-10 space-y-5 overflow-auto">
+      <SearchBar inputDisabled={true} isManager={true} />
       {/* Dialog for Terms of Use */}
       <TermsModal />
 
       {/* Top Section */}
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_.6fr] gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_.6fr] gap-4 -mt-6">
         {/* Left Card - Call to Action */}
         <Card className="relative overflow-hidden rounded-xl h-fit ">
           <Image
@@ -103,7 +105,7 @@ export default function ManagerDashboardPage() {
       </div>
 
       {/* Overview Section */}
-      <div className="space-y-6">
+      <div className="space-y-5">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <span className="text-xl font-semibold">Visão geral</span>
