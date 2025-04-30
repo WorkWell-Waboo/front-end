@@ -108,7 +108,7 @@ export default function ManagerDashboardPage() {
       <div className="space-y-5">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <span className="text-xl font-semibold">Visão geral</span>
+            <span className="text-2xl ">Visão geral</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500">Selecione um período</span>

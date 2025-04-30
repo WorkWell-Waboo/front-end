@@ -63,8 +63,8 @@ export function HotTopicsChart() {
         </div>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data} margin={{ top: -0.4, left: 22, right: 0 }}>
+        <ResponsiveContainer width="100%" height={210}>
+          <BarChart data={data} margin={{ top: 30, left: 22, right: 0 }}>
             <CartesianGrid
               vertical={false} // remove linhas verticais
               stroke="#E5E7EB" // cor cinza sólida (gray-200)
@@ -74,7 +74,7 @@ export function HotTopicsChart() {
               dataKey="topic"
               tickLine={false}
               axisLine={false}
-              tickMargin={8}
+              tickMargin={10}
               interval={0}
               tick={(props) => <CustomTick {...props} />} // <- corrige aqui!
             />
@@ -104,7 +104,7 @@ export function HotTopicsChart() {
               dataKey="mentions"
               fill="#736CCE"
               radius={[20, 20, 0, 0]}
-              maxBarSize={40}
+              maxBarSize={33}
             />
           </BarChart>
         </ResponsiveContainer>

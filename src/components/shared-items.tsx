@@ -20,8 +20,8 @@ export default function SharedItems() {
   };
 
   return (
-    <Card className="">
-      <div className="flex justify-between items-center mb-4 p-6">
+    <Card className="py-0 gap-0">
+      <div className="flex justify-between items-center p-6">
         <h3 className="text-lg font-medium text-gray-800">
           Itens compartilhados
         </h3>

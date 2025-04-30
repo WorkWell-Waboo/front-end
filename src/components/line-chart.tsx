@@ -14,11 +14,11 @@ import {
 
 const chartData = [
   { month: 'Jan', value: 2 },
-  { month: 'Feb', value: 2.2 },
-  { month: 'Mar', value: 3.5 },
-  { month: 'Apr', value: 2.8 },
-  { month: 'May', value: 3.2 },
-  { month: 'Jun', value: 2 },
+  { month: 'Feb', value: 3 },
+  { month: 'Mar', value: 4 },
+  { month: 'Abr', value: 3 },
+  { month: 'May', value: 4 },
+  { month: 'Jun', value: 3.2 },
 ];
 
 // Calcular o valor total para determinar a porcentagem
@@ -26,13 +26,13 @@ const totalValue = chartData.reduce((acc, curr) => acc + curr.value, 0);
 
 export function LineCharts() {
   return (
-    <Card>
+    <Card className="py-4">
       <CardHeader>
         <CardTitle>Nível de risco</CardTitle>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={250}>
-          <AreaChart data={chartData} margin={{ top: 20, left: 12, right: 12 }}>
+          <AreaChart data={chartData} margin={{ top: 40, left: 0, right: 0 }}>
             <defs>
               <linearGradient id="colorRisk" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#736CCE" stopOpacity={0.6} />
@@ -72,7 +72,7 @@ export function LineCharts() {
               cursor={false}
             />
             <Area
-              type="natural"
+              type="bump"
               dataKey="value"
               stroke="#736CCEBF"
               strokeWidth={3}
