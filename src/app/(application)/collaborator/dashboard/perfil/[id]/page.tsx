@@ -19,9 +19,9 @@ import { useState } from 'react';
 export default function PerfilUsuario() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   return (
-    <div>
+    <div className="px-10 pb-10">
       <SearchBar inputDisabled={true} />
-      <div className="max-w-6xl mx-auto p-10 space-y-6">
+      <div className="max-w-6xl mx-auto  space-y-6">
         {/* Header com nome e avatar */}
         <div className="flex items-center gap-6 bg-[#736CCE1A] p-6 rounded-2xl">
           <div className="relative shadow-sm shadow-gray-400 w-35 h-35 bg-gradient-to-b from-[#691FB1] to-[#736CCE] rounded-xl flex items-center justify-center text-white text-3xl font-semibold p-4">

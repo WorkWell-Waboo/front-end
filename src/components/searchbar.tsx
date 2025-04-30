@@ -13,9 +13,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
-import Link from 'next/link';
 
 type SearchBarProps = {
   inputDisabled?: boolean;
@@ -76,11 +76,13 @@ export default function SearchBar({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
-            <DropdownMenuItem onClick={() => router.push('/dashboard/9309848')}>
+            <DropdownMenuItem
+              onClick={() => router.push('/dashboard/perfil/123')}
+            >
               Meu perfil
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => router.push('../containers/[transactionList]')}
+              onClick={() => router.push('/dashboard/transactions/456 ')}
             >
               Minhas sessões
             </DropdownMenuItem>
