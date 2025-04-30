@@ -36,6 +36,12 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import { useRouter } from 'next/navigation';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 // Dados simulados
 const reportData = [
   { id: 1, sessions: 10, chat: 8, total: 2, status: 'Ativo' },
@@ -168,9 +174,17 @@ function ManagerReportsPage() {
             </PopoverContent>
           </Popover>
 
-          <Button className="bg-[#736CCE] hover:bg-[#6a51e6] text-white">
-            Baixar relatório
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Button className="bg-[#736CCE] hover:bg-[#6a51e6] text-white">
+                Baixar relatório
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-[#FFFFFF] p-2 border border-[#E0E0E0] rounded-lg">
+              <DropdownMenuItem>Baixar em Excel</DropdownMenuItem>
+              <DropdownMenuItem>Baixar em PDF</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* Tabela */}

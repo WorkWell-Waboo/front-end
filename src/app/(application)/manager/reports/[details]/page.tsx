@@ -21,6 +21,12 @@ import {
 } from '@/components/ui/select';
 import { useState } from 'react';
 import { format } from 'date-fns';
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu';
 export default function Dashboard() {
   const [date, setDate] = useState<Date>();
   const [filterType, setFilterType] = useState<'collaborator' | 'service'>(
@@ -101,9 +107,17 @@ export default function Dashboard() {
           </PopoverContent>
         </Popover>
 
-        <Button className="bg-[#736CCE] hover:bg-[#6a51e6] text-white">
-          Baixar relatório
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button className="bg-[#736CCE] hover:bg-[#6a51e6] text-white">
+              Baixar relatório
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="bg-[#FFFFFF] p-2 border border-[#E0E0E0] rounded-lg">
+            <DropdownMenuItem>Baixar em Excel</DropdownMenuItem>
+            <DropdownMenuItem>Baixar em PDF</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
