@@ -229,7 +229,7 @@ export function AgendaScroll() {
             )}
 
             {dialogType === 'reminder' && (
-              <span className="bg-amber-50 block px-10">
+              <span className=" block px-10">
                 Por favor, certifique-se de que pode comparecer à consulta
                 agendada. Caso cancele com menos de 24 horas de antecedência, o
                 acesso a novas marcações ficará temporariamente limitado até

@@ -1,5 +1,6 @@
 'use client';
 import ImageClient from '@/assets/imgs/cliente.png';
+import HeartLikeSVG from '@/assets/svgs/heartlike';
 import PersonaSVG from '@/assets/svgs/persona';
 import StarOpSVG from '@/assets/svgs/starop';
 import YoutubeSVG from '@/assets/svgs/youtube';
@@ -20,8 +21,13 @@ import { ChevronLeft, Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 export default function SpecialistProfile() {
-  const [favorite, setFavorite] = useState(false);
-
+  const [favorites, setFavorites] = useState<Record<string, boolean>>({});
+  const toggleFavorite = (name: string) => {
+    setFavorites((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }));
+  };
   const today = new Date();
   const weekDays = Array.from({ length: 7 }, (_, i) => {
     const date = addDays(today, i);
@@ -113,60 +119,60 @@ export default function SpecialistProfile() {
                         <p className="text-sm text-gray-600">Psicanalista</p>
                       </div>
                     </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="text-gray-400 hover:text-red-500 hover:bg-transparent"
-                      onClick={() => setFavorite(!favorite)}
+                    <button
+                      type="button"
+                      onClick={() => toggleFavorite('Sandra Amaral')}
                     >
-                      <Heart
-                        className={`h-6 w-6 ${
-                          favorite ? 'fill-red-500 text-red-500' : ''
-                        }`}
+                      <HeartLikeSVG
+                        className={
+                          favorites['Sandra Amaral']
+                            ? 'fill-primary text-primary'
+                            : 'text-primary'
+                        }
                       />
+                    </button>
+
+                    <Button
+                      variant="outline"
+                      className=" mb-4 text-sm text-white bg-primary border-[#6B5DD3]"
+                    >
+                      <YoutubeSVG />
+                      Meu vídeo de apresentação
                     </Button>
+
+                    <p className="text-sm text-gray-600 mb-4">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
                   </div>
 
-                  <Button
-                    variant="outline"
-                    className=" mb-4 text-sm text-white bg-primary border-[#6B5DD3]"
-                  >
-                    <YoutubeSVG />
-                    Meu vídeo de apresentação
-                  </Button>
+                  <div>
+                    <div className="flex items-center mb-3 text-sm text-gray-700">
+                      <div className="flex items-center mr-4">
+                        <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
+                        <span className="font-medium">5</span>
+                        <span className="text-xs text-gray-500 ml-1">
+                          (12 comentários)
+                        </span>
+                      </div>
 
-                  <p className="text-sm text-gray-600 mb-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                </div>
-
-                <div>
-                  <div className="flex items-center mb-3 text-sm text-gray-700">
-                    <div className="flex items-center mr-4">
-                      <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
-                      <span className="font-medium">5</span>
-                      <span className="text-xs text-gray-500 ml-1">
-                        (12 comentários)
-                      </span>
+                      <div className="flex items-center">
+                        <PersonaSVG className="h-4 w-4 mr-1" />
+                        <span className="font-medium">18 atendimentos</span>
+                      </div>
                     </div>
-
-                    <div className="flex items-center">
-                      <PersonaSVG className="h-4 w-4 mr-1" />
-                      <span className="font-medium">18 atendimentos</span>
+                    <div className="flex flex-wrap gap-2 mt-6">
+                      {specialties.map((tag, index) => (
+                        <Badge
+                          key={index.toString()}
+                          variant="default"
+                          className="bg-gray-100 text-[#828282] text-md"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
                     </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mt-6">
-                    {specialties.map((tag, index) => (
-                      <Badge
-                        key={index.toString()}
-                        variant="default"
-                        className="bg-gray-100 text-[#828282] text-md"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
                   </div>
                 </div>
               </div>
@@ -227,7 +233,7 @@ export default function SpecialistProfile() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                  “A Sandra é uma profissional incrível! Desde a primeira
+                  "A Sandra é uma profissional incrível! Desde a primeira
                   consulta, ela demonstrou muita atenção, empatia e dedicação, o
                   que me fez sentir totalmente à vontade para compartilhar
                   minhas questões. Sua abordagem é acolhedora e, ao mesmo tempo,
@@ -236,7 +242,7 @@ export default function SpecialistProfile() {
                   início do tratamento, e cada sessão tem sido essencial para
                   meu crescimento e bem-estar. Sou extremamente grato pelo seu
                   trabalho e pela forma cuidadosa com que conduz cada
-                  atendimento. Recomendo de olhos fechados!”
+                  atendimento. Recomendo de olhos fechados!"
                 </p>
                 <div className="flex justify-center items-center">
                   <div className="flex justify-center">
