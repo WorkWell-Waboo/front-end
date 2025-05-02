@@ -57,7 +57,12 @@ export default function SearchBar({
           !inputDisabled ? 'ml-4' : 'ml-0 w-full justify-end'
         }`}
       >
-        <Button className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition">
+        <Button
+          onClick={() =>
+            router.push('/front-end/src/app/(application)/collaborator/plans')
+          }
+          className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition"
+        >
           <CartSVG key="cart" />
         </Button>
 
@@ -117,7 +122,7 @@ export default function SearchBar({
             <DropdownMenuItem>Botão de pânico</DropdownMenuItem>
             <DropdownMenuItem>Comprar sessões</DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => router.push('/dashboard/detalhes/4426 ')}
+              onClick={() => router.push('/dashboard/detalhes/4426')}
             >
               Detalhes sobre consumo
             </DropdownMenuItem>

@@ -236,20 +236,18 @@ function CollaboratorServicesCategory(): React.ReactNode {
                       </p>
                     </div>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => toggleFavorite(pro.name)}
-                    className={
-                      isFavorited ? 'text-red-500' : 'text-muted-foreground'
-                    }
+                  <button
+                    type="button"
+                    onClick={() => toggleFavorite(pro.name)} // Alterna favorito
                   >
                     <HeartLikeSVG
-                      className={`transition-all duration-200 ${
-                        isFavorited ? 'fill-red-500' : 'fill-none'
-                      }`}
+                      className={
+                        isFavorited
+                          ? 'fill-primary text-primary'
+                          : 'text-primary'
+                      }
                     />
-                  </Button>
+                  </button>
                 </div>
 
                 {/* Descrição */}

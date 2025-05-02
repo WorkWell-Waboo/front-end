@@ -66,7 +66,7 @@ export default function WBox({
             />
           </button>
         );
-      case 'heart':{
+      case 'heart': {
         const isFavorite = favorites[id]; // Verifica se este ID está ativo
         return (
           <button
@@ -77,16 +77,17 @@ export default function WBox({
             <HeartLikeSVG
               className={cn(
                 isFavorite
-                ? variant === "white"
-                  ? "fill-primary text-primary" 
-                  : "fill-white text-white" 
-                : variant === "white"
-                  ? "text-primary" 
-                  : "text-white" 
+                  ? variant === 'white'
+                    ? 'fill-primary text-primary'
+                    : 'fill-white text-white'
+                  : variant === 'white'
+                  ? 'text-primary'
+                  : 'text-white'
               )}
             />
           </button>
-        )}
+        );
+      }
       default:
         return null;
     }
@@ -139,12 +140,11 @@ export default function WBox({
             {time ? time : ''}
           </span>
           <div className="flex gap-2">
-            {buttons 
+            {buttons
               ? buttons.map((buttonType) => (
-              <div key={buttonType}>{renderButton(buttonType)}</div>
-              ))
-              : ""
-            }
+                  <div key={buttonType}>{renderButton(buttonType)}</div>
+                ))
+              : ''}
           </div>
         </div>
       </div>
