@@ -1,7 +1,7 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -35,10 +35,14 @@ export default function SharedItems() {
           const isActive = selectedIndex === index;
 
           return (
-            <div className="relative">
+            <div key={`item-${index.toString()}`} className="relative">
               <div
-                key={index}
                 onClick={() => setSelectedIndex(index)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setSelectedIndex(index);
+                  }
+                }}
                 className={`relative cursor-pointer p-3 transition-all mr-1
     ${isActive ? 'bg-primary/10' : 'hover:bg-gray-100'}
     rounded-md pr-6`}

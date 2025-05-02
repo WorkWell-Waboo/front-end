@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { NotificationBell } from './NotificationBell';
 import { Button } from './ui/button';
 
 type SearchBarProps = {
@@ -56,19 +57,44 @@ export default function SearchBar({
           !inputDisabled ? 'ml-4' : 'ml-0 w-full justify-end'
         }`}
       >
-        {[
-          <CartSVG key="cart" />,
-          <GloboSVG key="globe" />,
-          <BellSVG key="bell" />,
-        ].map((Icon, idx) => (
-          <Button
-            key={idx.toString()}
-            className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition"
-          >
-            {Icon}
-          </Button>
-        ))}
+        <Button className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition">
+          <CartSVG key="cart" />
+        </Button>
 
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition">
+              <GloboSVG key="globe" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuItem>Português PT</DropdownMenuItem>
+            <DropdownMenuItem>Português BR</DropdownMenuItem>
+            <DropdownMenuItem>Inglês</DropdownMenuItem>
+            <DropdownMenuItem>Francês</DropdownMenuItem>
+            <DropdownMenuItem>Espanhol</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <NotificationBell
+          count={3}
+          notifications={[
+            {
+              id: 1,
+              title: 'Consulta agendada',
+              message: 'Você tem uma consulta amanhã às 10h',
+            },
+            {
+              id: 2,
+              title: 'Novo documento',
+              message: 'Seu exame foi adicionado ao prontuário',
+            },
+            {
+              id: 3,
+              title: 'Mensagem',
+              message: 'Seu especialista enviou uma nova mensagem',
+            },
+          ]}
+        />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition">
@@ -90,6 +116,11 @@ export default function SearchBar({
             <DropdownMenuItem>Meus favoritos</DropdownMenuItem>
             <DropdownMenuItem>Botão de pânico</DropdownMenuItem>
             <DropdownMenuItem>Comprar sessões</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push('/dashboard/detalhes/4426 ')}
+            >
+              Detalhes sobre consumo
+            </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link href="/contents/my-events">Meus eventos</Link>
             </DropdownMenuItem>
