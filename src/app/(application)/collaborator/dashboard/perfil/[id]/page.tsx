@@ -62,7 +62,7 @@ export default function PerfilUsuario() {
             <h1 className="text-3xl font-semibold text-[#504DA6]">
               Mariana Lemos
             </h1>
-            <p className="text-muted-foreground text-base block w-50">
+            <p className="text-muted-foreground text-base block w-fit">
               Assistente Administrativo na Empresa Global
             </p>
             <Button

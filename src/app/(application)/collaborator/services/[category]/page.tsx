@@ -1,5 +1,8 @@
 'use client';
-import Photo from '@/assets/imgs/cliente.png';
+import client from '@/assets/imgs/cliente.png';
+import client2 from '@/assets/imgs/cliente2.png';
+import client3 from '@/assets/imgs/cliente3.png';
+import client4 from '@/assets/imgs/cliente4.png';
 import HeartLikeSVG from '@/assets/svgs/heartlike';
 import PersonaSVG from '@/assets/svgs/persona';
 import StarSVG from '@/assets/svgs/star';
@@ -9,7 +12,6 @@ import { Label } from '@/components/ui/label';
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -23,7 +25,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import Image from 'next/image';
+import HeadPerfil from '@/containers/layout/heard-perfil';
+import type { StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -35,56 +38,59 @@ interface Professional {
   reviews: number;
   sessions: number;
   tags: string[];
+  photo: string | StaticImageData;
 }
 
 const professionals: Professional[] = [
   {
     name: 'Sandra Amaral',
-    role: 'Psicanalista',
+    role: 'Psicóloga',
     description:
-      'Especialista em atendimento clínico com foco em questões de ansiedade e autoconhecimento.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     rating: 5,
     reviews: 12,
     sessions: 18,
-    tags: ['angústia', 'ansiedade'],
+    tags: ['Angústia', 'Ansiedade'],
+    photo: client,
   },
   {
-    name: 'Carlos Silva',
-    role: 'Psicólogo Clínico',
+    name: 'André Leal',
+    role: 'Psiquiatra',
     description:
-      'Carlos atende com escuta ativa e empatia, com foco em depressão, estresse e autoestima.',
-    rating: 4.8,
-    reviews: 8,
-    sessions: 22,
-    tags: ['depressão', 'estresse'],
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    rating: 5,
+    reviews: 12,
+    sessions: 18,
+    tags: ['Depressão', 'Insônia'],
+    photo: client2,
   },
   {
-    name: 'Carlos Silva',
-    role: 'Psicólogo Clínico',
+    name: 'Leandro Gomes',
+    role: 'Psiquiatra',
     description:
-      'Carlos atende com escuta ativa e empatia, com foco em depressão, estresse e autoestima.',
-    rating: 4.8,
-    reviews: 8,
-    sessions: 22,
-    tags: ['depressão', 'estresse'],
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    rating: 5,
+    reviews: 12,
+    sessions: 18,
+    tags: ['Burnout', 'Estresse'],
+    photo: client3,
   },
   {
-    name: 'Carlos Silva',
-    role: 'Psicólogo Clínico',
+    name: 'Vanessa Pires',
+    role: 'Psicóloga',
     description:
-      'Carlos atende com escuta ativa e empatia, com foco em depressão, estresse e autoestima.',
-    rating: 4.8,
-    reviews: 8,
-    sessions: 22,
-    tags: ['depressão', 'estresse'],
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    rating: 5,
+    reviews: 12,
+    sessions: 18,
+    tags: ['Ansiedade', 'Relacionamentos'],
+    photo: client4,
   },
 ];
 
 function CollaboratorServicesCategory(): React.ReactNode {
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
-  const [selectedTimezone, setSelectedTimezone] = useState<string | undefined>(
-    undefined
-  );
+  const [selectedTimezone, setSelectedTimezone] = useState<string>();
 
   const toggleFavorite = (name: string) => {
     setFavorites((prev) => ({
@@ -112,6 +118,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
     formatarNomeFuso(selectedTimezone || timezoneAtual)
   );
   const router = useRouter();
+
   return (
     <div className="flex flex-col min-h-screen p-10 space-y-6 ">
       {/* Filtros e Favoritos */}
@@ -122,10 +129,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
             <span className="font-medium pr-10">Filtros</span>
             <Select>
               <SelectTrigger className="w-[210px]">
-                <SelectValue
-                  placeholder="Tipos de especialistas"
-                  className=""
-                />
+                <SelectValue placeholder="Tipos de especialistas" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="especialista1">Especialista 1</SelectItem>
@@ -218,37 +222,13 @@ function CollaboratorServicesCategory(): React.ReactNode {
             >
               <CardContent className="px-6 space-y-4">
                 {/* Header */}
-                <div className="flex justify-between">
-                  <div className="flex gap-2 items-center">
-                    <Image
-                      src={Photo}
-                      alt={`Foto de ${pro.name}`}
-                      width={50}
-                      height={50}
-                      className="rounded-full object-cover"
-                    />
-                    <div>
-                      <h3 className="font-semibold text-lg text-accent-foreground">
-                        {pro.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {pro.role}
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => toggleFavorite(pro.name)} // Alterna favorito
-                  >
-                    <HeartLikeSVG
-                      className={
-                        isFavorited
-                          ? 'fill-primary text-primary'
-                          : 'text-primary'
-                      }
-                    />
-                  </button>
-                </div>
+                <HeadPerfil
+                  name={pro.name}
+                  role={pro.role}
+                  photo={pro.photo}
+                  isFavorited={isFavorited}
+                  toggleFavorite={toggleFavorite}
+                />
 
                 {/* Descrição */}
                 <p className="text-sm text-muted-foreground">
@@ -291,16 +271,21 @@ function CollaboratorServicesCategory(): React.ReactNode {
         })}
       </div>
 
-      <Pagination>
+      <Pagination className=" pt-6">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious href="#" />
           </PaginationItem>
           <PaginationItem>
-            <PaginationLink href="#">1</PaginationLink>
+            <PaginationLink href="#" isActive={true}>
+              1
+            </PaginationLink>
           </PaginationItem>
           <PaginationItem>
-            <PaginationEllipsis />
+            <PaginationLink href="#">2</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">3</PaginationLink>
           </PaginationItem>
           <PaginationItem>
             <PaginationNext href="#" />

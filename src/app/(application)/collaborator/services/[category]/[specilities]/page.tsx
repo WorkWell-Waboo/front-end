@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/select';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { ChevronLeft, Heart, Star } from 'lucide-react';
+import { ChevronLeft, Ghost, Heart, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 export default function SpecialistProfile() {
@@ -103,34 +103,37 @@ export default function SpecialistProfile() {
             <CardContent className="h-full">
               <div className="flex flex-col justify-between h-full">
                 <div>
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center">
-                      <Image
-                        src={ImageClient}
-                        alt="Sandra Amaral"
-                        width={60}
-                        height={60}
-                        className="rounded-full"
-                      />
-                      <div className="ml-3">
-                        <h2 className="text-base font-semibold text-gray-900">
-                          Sandra Amaral
-                        </h2>
-                        <p className="text-sm text-gray-600">Psicanalista</p>
+                  <div className="flex flex-col justify-between items-start ">
+                    <div className="flex justify-between  w-full mb-4">
+                      <div className="flex items-center">
+                        <Image
+                          src={ImageClient}
+                          alt="Sandra Amaral"
+                          width={60}
+                          height={60}
+                          className="rounded-full"
+                        />
+                        <div className="ml-3">
+                          <h2 className="text-base font-semibold text-gray-900">
+                            Sandra Amaral
+                          </h2>
+                          <p className="text-sm text-gray-600">Psicanalista</p>
+                        </div>
                       </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        onClick={() => toggleFavorite('Sandra Amaral')}
+                      >
+                        <HeartLikeSVG
+                          className={
+                            favorites['Sandra Amaral']
+                              ? 'fill-primary text-primary'
+                              : 'text-primary'
+                          }
+                        />
+                      </Button>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => toggleFavorite('Sandra Amaral')}
-                    >
-                      <HeartLikeSVG
-                        className={
-                          favorites['Sandra Amaral']
-                            ? 'fill-primary text-primary'
-                            : 'text-primary'
-                        }
-                      />
-                    </button>
 
                     <Button
                       variant="outline"

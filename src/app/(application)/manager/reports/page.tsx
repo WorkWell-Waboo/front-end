@@ -1,32 +1,14 @@
 'use client';
 
-import { ScrollArea } from '@/components/ui/scroll-area';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import SearchBar from '@/components/searchbar';
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Calendar } from '@/components/ui/calendar';
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { format } from 'date-fns';
-import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
-import SearchBar from '@/components/searchbar';
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   Pagination,
   PaginationContent,
@@ -35,13 +17,31 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { useRouter } from 'next/navigation';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { format } from 'date-fns';
+import { ChevronDown } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 // Dados simulados
 const reportData = [
   { id: 1, sessions: 10, chat: 8, total: 2, status: 'Ativo' },
@@ -206,14 +206,16 @@ function ManagerReportsPage() {
                     <TableHead>Sessões compradas</TableHead>
                     <TableHead>Sessões utilizadas</TableHead>
                     <TableHead>Saldo</TableHead>
-                    <TableHead></TableHead>
                   </>
                 )}
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredData.map((data, index) => (
-                <TableRow key={index} className="text-sm text-[#202020]">
+                <TableRow
+                  key={index.toString()}
+                  className="text-sm text-[#202020]"
+                >
                   {filterType === 'collaborator' ? (
                     <>
                       <TableCell className="py-4">

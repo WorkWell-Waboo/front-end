@@ -33,7 +33,7 @@ function CollaboratorChatPage() {
               Fale com a equipa <br />
               de Saúde e Bem-Estar
             </span>
-            <p className="text-base mt-3 mb-8">
+            <p className="text-base mt-3 ">
               Para receber aconselhamento profissional de forma rápida e breve
             </p>
             <Button
