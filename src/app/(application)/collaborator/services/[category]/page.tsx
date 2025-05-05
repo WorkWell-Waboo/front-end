@@ -167,7 +167,8 @@ function CollaboratorServicesCategory(): React.ReactNode {
 
           {/* Meus Favoritos */}
           <div className="flex items-center gap-2 text-accent-foreground whitespace-nowrap">
-            <span>Meus Favoritos</span> <HeartLikeSVG />
+            <span>Meus Favoritos</span>
+            <HeartLikeSVG />
           </div>
         </div>
 
@@ -224,7 +225,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
                 {/* Header */}
                 <HeadPerfil
                   name={pro.name}
-                  role={pro.role}
+                  profession={pro.role}
                   photo={pro.photo}
                   isFavorited={isFavorited}
                   toggleFavorite={toggleFavorite}

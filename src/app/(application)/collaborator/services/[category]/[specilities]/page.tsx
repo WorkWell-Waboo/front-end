@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import HeadPerfil from '@/containers/layout/heard-perfil';
 import { addDays, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { ChevronLeft, Ghost, Heart, Star } from 'lucide-react';
@@ -104,45 +105,22 @@ export default function SpecialistProfile() {
 
       <div className="flex flex-col gap-6">
         {/* Coluna do especialista */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr] rounded-2xl bg-[#FBFBFB]">
+        <div className="grid grid-cols-[1fr_1.5fr] rounded-2xl bg-[#FBFBFB]">
           <Card className="h-full">
             <CardContent className="h-full">
               <div className="flex flex-col justify-between h-full">
                 <div className="flex flex-col justify-between items-start ">
-                  <div className="flex justify-between  w-full mb-4">
-                    <div className="flex items-center">
-                      <Image
-                        src={ImageClient}
-                        alt="Sandra Amaral"
-                        width={60}
-                        height={60}
-                        className="rounded-full"
-                      />
-                      <div className="ml-3">
-                        <h2 className="text-base font-semibold text-gray-900">
-                          Sandra Amaral
-                        </h2>
-                        <p className="text-sm text-gray-600">Psicanalista</p>
-                      </div>
-                    </div>
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      onClick={() => toggleFavorite('Sandra Amaral')}
-                    >
-                      <HeartLikeSVG
-                        className={
-                          favorites['Sandra Amaral']
-                            ? 'fill-primary text-primary'
-                            : 'text-primary'
-                        }
-                      />
-                    </Button>
-                  </div>
+                  <HeadPerfil
+                    name="Sandra amaral"
+                    profession="Psicológa"
+                    photo={ImageClient}
+                    isFavorited={favorites['Sandra amaral']}
+                    toggleFavorite={toggleFavorite}
+                  />
 
                   <Button
                     variant="outline"
-                    className=" mb-4 text-sm text-white bg-primary border-[#6B5DD3]"
+                    className=" my-4 text-sm text-white bg-primary border-[#6B5DD3]"
                   >
                     <YoutubeSVG />
                     Meu vídeo de apresentação
@@ -160,15 +138,17 @@ export default function SpecialistProfile() {
                   <div className="flex items-center mb-3 text-sm text-gray-700">
                     <div className="flex items-center mr-4">
                       <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
-                      <span className="font-medium">5</span>
-                      <span className="text-xs text-gray-500 ml-1">
+                      <span className=" text-base">5</span>
+                      <span className="text-xs text-[#333333] ml-1">
                         (12 comentários)
                       </span>
                     </div>
 
                     <div className="flex items-center">
                       <PersonaSVG className="h-4 w-4 mr-1" />
-                      <span className="font-medium">18 atendimentos</span>
+                      <span className="font-normal text-[#333333] text-xs">
+                        <span className="text-base">18</span> atendimentos
+                      </span>
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-6">
@@ -176,7 +156,7 @@ export default function SpecialistProfile() {
                       <Badge
                         key={index.toString()}
                         variant="default"
-                        className="bg-gray-100 text-[#828282] text-md"
+                        className="bg-gray-100 text-[#828282] text-sm font-normal"
                       >
                         {tag}
                       </Badge>
@@ -194,34 +174,37 @@ export default function SpecialistProfile() {
         </div>
 
         {/* Avaliações */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-[1fr_1.5fr] gap-3">
           <div className="flex flex-col gap-2">
-            <div className="flex gap-2 items-center">
-              <span className=" text-sm font-medium text-muted-foreground mb-1">
+            <div className="flex gap-3 items-center">
+              <span className=" text-sm font-semibold text-[#4F4F4F] mb-1">
                 Tipos de consulta:
               </span>
               <Select>
-                <SelectTrigger className="flex-1">
-                  <SelectValue placeholder="Selecione um tipo" />
+                <SelectTrigger
+                  className="flex-1 border-[#BDBDBD] data-[placeholder]:text-[#4F4F4F] data-[placeholder]:font-semibold"
+                  size="default"
+                  iconColor="text-[#4F4F4F] "
+                >
+                  <SelectValue placeholder="Particular" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="online">Online</SelectItem>
-                  <SelectItem value="presencial">Presencial</SelectItem>
-                  <SelectItem value="domicilio">Domicílio</SelectItem>
+                  <SelectItem value="particular">Particular</SelectItem>
+                  <SelectItem value="convenio">Convênil</SelectItem>
                 </SelectContent>
               </Select>
             </div>
-            <Card>
-              <CardHeader className="text-[#6B5DD3] font-semibold text-sm">
+            <Card className="h-full w-full">
+              <CardHeader className="text-[#1B45BC] font-semibold text-sm">
                 Experiência:
               </CardHeader>
-              <CardContent className="pb-14">
+              <CardContent className="">
                 <ul>
                   {experiences.map((exp) => {
                     return (
                       <li
                         key={exp}
-                        className="text-sm text-gray-600 leading-relaxed"
+                        className="text-sm text-[#828282] leading-relaxed"
                       >
                         • {exp}
                       </li>
@@ -235,12 +218,12 @@ export default function SpecialistProfile() {
             <Button className="w-full bg-[#6B5DD3] text-white hover:bg-[#594cc3]">
               Agendar
             </Button>
-            <Card>
-              <CardHeader className="text-[#6B5DD3] font-semibold text-sm ">
+            <Card className="h-full">
+              <CardHeader className="text-[#1B45BC] font-semibold text-sm ">
                 O que dizem sobre mim
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                <p className="text-sm text-[#828282] mb-4 leading-relaxed">
                   "A Sandra é uma profissional incrível! Desde a primeira
                   consulta, ela demonstrou muita atenção, empatia e dedicação, o
                   que me fez sentir totalmente à vontade para compartilhar

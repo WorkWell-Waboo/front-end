@@ -81,7 +81,7 @@ export default function WBox({
                     ? 'fill-primary text-primary'
                     : 'fill-white text-white'
                   : variant === 'white'
-                  ? 'text-primary'
+                  ? 'text-[#828282]'
                   : 'text-white'
               )}
             />

@@ -73,7 +73,7 @@ export function AgendaScroll() {
 
   return (
     <>
-      <div className="flex items-start gap-2 overflow-y-auto scrollbar-custom ">
+      <div className="flex items-start gap-2 overflow-y-auto scrollbar-custom px-3">
         <Button
           className={`mt-3 ${startIndex === 0 ? 'invisible' : ''}`}
           variant="ghost"
@@ -92,14 +92,19 @@ export function AgendaScroll() {
               selectedSlot.date.getFullYear() === date.getFullYear();
 
             return (
-              <div key={index.toString()} className="min-w-[120px] rounded-xl ">
+              <div
+                key={index.toString()}
+                className="min-w-[100px] rounded-xl mx-0.5"
+              >
                 <div
                   className={`text-center mb-4 p-1 rounded-md  ${
                     isDateSelected ? 'bg-[#F1E8FB] border border-primary' : ''
                   }`}
                 >
                   <div className="text-xs uppercase text-gray-500">
-                    {format(date, 'EEE', { locale: ptBR })}
+                    {format(date, 'EEE', { locale: ptBR })
+                      .slice(0, 3)
+                      .replace(/^./, (str) => str.toUpperCase())}
                   </div>
                   <div className="text-lg font-normal text-[#6B5DD3]">
                     {format(date, 'd')}

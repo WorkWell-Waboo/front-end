@@ -3,21 +3,21 @@ import Image, { type StaticImageData } from 'next/image';
 
 interface HeadPerfilProps {
   name: string;
-  role: string;
+  profession: string;
   photo: string | StaticImageData;
-  isFavorited: boolean;
+  isFavorited?: boolean;
   toggleFavorite: (name: string) => void;
 }
 
 function HeadPerfil({
   name,
-  role,
+  profession,
   photo,
   isFavorited,
   toggleFavorite,
 }: HeadPerfilProps) {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-start w-full">
       <div className="flex gap-2">
         <Image
           src={photo}
@@ -30,12 +30,15 @@ function HeadPerfil({
           <h3 className="font-semibold text-lg text-accent-foreground">
             {name}
           </h3>
-          <p className="text-sm text-muted-foreground">{role}</p>
+          <p className="text-sm text-muted-foreground">{profession}</p>
         </div>
       </div>
       <button type="button" onClick={() => toggleFavorite(name)}>
         <Heart
-          className={isFavorited ? 'fill-primary text-primary' : 'text-primary'}
+          size={20}
+          className={
+            isFavorited ? 'fill-primary text-primary' : 'text-[#4F4F4F] '
+          }
         />
       </button>
     </div>
