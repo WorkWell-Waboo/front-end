@@ -86,7 +86,7 @@ function CollaboratorDashboardPage() {
   }, [carousel2]);
 
   return (
-    <main className="p-10 flex flex-col gap-4">
+    <main className="px-10 pb-10 flex flex-col gap-4">
       {/* TOPO */}
       <SearchBar inputDisabled={true} />
       <TermsModal />

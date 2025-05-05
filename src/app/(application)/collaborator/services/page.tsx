@@ -54,7 +54,7 @@ export default function CollaboratorServices() {
   const [isSubscriber, setSubscriber] = useState(planoAtivo);
 
   return (
-    <div className="h-full px-10 pb-10">
+    <div className="h-full px-10 pb-10 flex flex-col gap-12">
       <SearchBar placeholder="Procurar por nome" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {services.map((service) => (
@@ -108,7 +108,7 @@ function ClickableCard({
     <>
       <Card
         data-status={status}
-        className={`p-7 cursor-pointer group text-center justify-center text-[#4F4F4F]
+        className={`p-6 cursor-pointer group text-center justify-center text-[#4F4F4F]
           ${status === 'active' ? 'bg-primary text-white' : ''} 
           ${
             status === 'disabled'

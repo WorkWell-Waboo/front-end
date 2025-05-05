@@ -6,6 +6,7 @@ import client4 from '@/assets/imgs/cliente4.png';
 import HeartLikeSVG from '@/assets/svgs/heartlike';
 import PersonaSVG from '@/assets/svgs/persona';
 import StarSVG from '@/assets/svgs/star';
+import SearchBar from '@/components/searchbar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -46,7 +47,7 @@ const professionals: Professional[] = [
     name: 'Sandra Amaral',
     role: 'Psicóloga',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi uta liquip  ex ea commodo consequat.',
     rating: 5,
     reviews: 12,
     sessions: 18,
@@ -57,7 +58,7 @@ const professionals: Professional[] = [
     name: 'André Leal',
     role: 'Psiquiatra',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi uta liquip  ex ea commodo consequat.',
     rating: 5,
     reviews: 12,
     sessions: 18,
@@ -68,7 +69,7 @@ const professionals: Professional[] = [
     name: 'Leandro Gomes',
     role: 'Psiquiatra',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi uta liquip  ex ea commodo consequat.',
     rating: 5,
     reviews: 12,
     sessions: 18,
@@ -79,7 +80,7 @@ const professionals: Professional[] = [
     name: 'Vanessa Pires',
     role: 'Psicóloga',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi uta liquip  ex ea commodo consequat.',
     rating: 5,
     reviews: 12,
     sessions: 18,
@@ -120,93 +121,115 @@ function CollaboratorServicesCategory(): React.ReactNode {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col min-h-screen p-10 space-y-6 ">
+    <div className="flex flex-col min-h-screen px-10 pb-10  ">
+      <SearchBar />
       {/* Filtros e Favoritos */}
       <div className="space-y-4">
         <div className="flex flex-wrap gap-4 justify-between items-center text-accent-foreground">
           {/* Filtros */}
           <div className="flex flex-wrap gap-2 items-center">
-            <span className="font-medium pr-10">Filtros</span>
-            <Select>
-              <SelectTrigger className="w-[210px]">
-                <SelectValue placeholder="Tipos de especialistas" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="especialista1">Especialista 1</SelectItem>
-                <SelectItem value="especialista2">Especialista 2</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[150px]">
-                <SelectValue placeholder="LGBTQIAPN+" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="sim">Sim</SelectItem>
-                <SelectItem value="nao">Não</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[100px]">
-                <SelectValue placeholder="Etnia" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="negra">Negra</SelectItem>
-                <SelectItem value="branca">Branca</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="md:w-[110px]">
-                <SelectValue placeholder="Gênero" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="masculino">Masculino</SelectItem>
-                <SelectItem value="feminino">Feminino</SelectItem>
-              </SelectContent>
-            </Select>
+            <span className="font-semibold pr-10 text-[#4F4F4F]">Filtros</span>
+            <div className="flex gap-5">
+              <Select>
+                <SelectTrigger
+                  iconColor="text-[#4F4F4F]"
+                  className="w-[210px] border-[#4F4F4F] data-[placeholder]:font-semibold data-[placeholder]:text-[#4F4F4F]"
+                >
+                  <SelectValue placeholder="Tipos de especialistas" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="especialista1">Especialista 1</SelectItem>
+                  <SelectItem value="especialista2">Especialista 2</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger
+                  iconColor="text-[#4F4F4F]"
+                  className="w-[150px]  border-[#4F4F4F] data-[placeholder]:font-semibold data-[placeholder]:text-[#4F4F4F]"
+                >
+                  <SelectValue placeholder="LGBTQIAPN+" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="sim">Sim</SelectItem>
+                  <SelectItem value="nao">Não</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger
+                  iconColor="text-[#4F4F4F]"
+                  className="w-[100px]  border-[#4F4F4F] data-[placeholder]:font-semibold data-[placeholder]:text-[#4F4F4F]"
+                >
+                  <SelectValue placeholder="Etnia" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="negra">Negra</SelectItem>
+                  <SelectItem value="branca">Branca</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger
+                  iconColor="text-[#4F4F4F]"
+                  className="w-[110px]  border-[#4F4F4F] data-[placeholder]:font-semibold data-[placeholder]:text-[#4F4F4F]"
+                >
+                  <SelectValue placeholder="Gênero" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="masculino">Masculino</SelectItem>
+                  <SelectItem value="feminino">Feminino</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
           {/* Meus Favoritos */}
-          <div className="flex items-center gap-2 text-accent-foreground whitespace-nowrap">
+          <div className="flex items-center gap-4 text-[#4F4F4F] font-bold text-base whitespace-nowrap">
             <span>Meus Favoritos</span>
             <HeartLikeSVG />
           </div>
         </div>
 
         {/* Ordenação */}
-        <div className="flex flex-wrap gap-2 items-center text-accent-foreground">
-          <span className="font-normal">Ordenar por:</span>
-          <Select>
-            <SelectTrigger className="w-[200px] border-0! bg-background! shadow-none data-[placeholder]:font-medium">
-              <SelectValue placeholder="Mais Relevantes" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="avaliacao">Avaliação</SelectItem>
-              <SelectItem value="atendimentos">Atendimentos</SelectItem>
-            </SelectContent>
-          </Select>
+        <div className="flex flex-wrap gap-2 items-center text-accent-foreground mb-4 ">
+          <span className="text-[#4F4F4F] pr-3">Ordenar por:</span>
 
-          {/* Fuso horário */}
-          <Select onValueChange={(value) => setSelectedTimezone(value)}>
-            <SelectTrigger className="w-[180px] border-0! bg-background! shadow-none">
-              <SelectValue placeholder={`Fuso horário: ${fusoFormatado}`} />
-            </SelectTrigger>
-            <SelectContent>
-              {timezones.map((tz) => (
-                <SelectItem key={tz} value={tz}>
-                  {capitalize(formatarNomeFuso(tz))}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <div className="-m-4 pl-4 border-l border-[#4F4F4F]">
-            <div className="flex items-center space-x-2">
-              <Label
-                htmlFor="airplane-mode"
-                className="text-[#4F4F4F] font-medium text-sm"
+          <div className="flex gap-2 ">
+            <Select>
+              <SelectTrigger
+                iconColor="text-[#4F4F4F]"
+                className="w-[200px] border-0! bg-background! shadow-none data-[placeholder]:font-semibold data-[placeholder]:text-[#4F4F4F]"
               >
-                Disponível Agora
-                <Switch className="bg-muted" id="airplane-mode" />
-              </Label>
+                <SelectValue placeholder="Mais Relevantes" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="avaliacao">Avaliação</SelectItem>
+                <SelectItem value="atendimentos">Atendimentos</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {/* Fuso horário */}
+            <Select onValueChange={(value) => setSelectedTimezone(value)}>
+              <SelectTrigger className="w-[210px] border-0! bg-background! shadow-none data-[placeholder]:text-[#4F4F4F]">
+                <SelectValue placeholder={`Fuso horário: ${fusoFormatado}`} />
+              </SelectTrigger>
+              <SelectContent>
+                {timezones.map((tz) => (
+                  <SelectItem key={tz} value={tz}>
+                    {capitalize(formatarNomeFuso(tz))}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <div className=" py-2 border-[#4F4F4F]">
+              <div className="flex items-center space-x-2">
+                <Label
+                  htmlFor="airplane-mode"
+                  className="text-[#4F4F4F] font-medium text-sm"
+                >
+                  Disponível Agora
+                  <Switch className="bg-muted" id="airplane-mode" />
+                </Label>
+              </div>
             </div>
           </div>
         </div>
@@ -232,9 +255,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
                 />
 
                 {/* Descrição */}
-                <p className="text-sm text-muted-foreground">
-                  {pro.description}
-                </p>
+                <p className="text-sm text-[#828282]">{pro.description}</p>
 
                 {/* Avaliações e sessões */}
                 <div className="flex justify-start gap-2 font-light text-sm text-foreground">

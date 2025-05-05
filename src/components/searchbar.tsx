@@ -41,7 +41,7 @@ export default function SearchBar({
           ) : null
         ) : (
           <Input
-            placeholder={placeholder || 'Buscar nome...'}
+            placeholder={placeholder || 'Procure por nome'}
             rounded="full"
             before={{
               variant: 'ghost',
