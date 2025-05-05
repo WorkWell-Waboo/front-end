@@ -21,6 +21,7 @@ import ArrowLeft from '@/assets/svgs/arrowLeft';
 import ArrowRight from '@/assets/svgs/arrowRight';
 import { EllipsisIcon } from '@/assets/svgs/ellipsis';
 import { FlagIcon } from '@/assets/svgs/flag';
+import SearchBar from '@/components/searchbar';
 import TermsModal from '@/components/termsmodal';
 
 function CollaboratorDashboardPage() {
@@ -87,6 +88,7 @@ function CollaboratorDashboardPage() {
   return (
     <main className="p-10 flex flex-col gap-4">
       {/* TOPO */}
+      <SearchBar inputDisabled={true} />
       <TermsModal />
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
         <div className="bg-gradient-to-r from-primary to-primary/50 p-5 rounded-lg">
