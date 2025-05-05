@@ -73,13 +73,12 @@ export function AgendaScroll() {
 
   return (
     <>
-      <div className="flex items-start gap-2 overflow-y-auto scrollbar-custom">
+      <div className="flex items-start gap-2 overflow-y-auto scrollbar-custom ">
         <Button
-          className="mt-3"
+          className={`mt-3 ${startIndex === 0 ? 'invisible' : ''}`}
           variant="ghost"
           size="icon"
           onClick={handlePrev}
-          disabled={startIndex === 0}
         >
           <ArrowRight className="w-5 h-5 text-primary" />
         </Button>
@@ -93,9 +92,9 @@ export function AgendaScroll() {
               selectedSlot.date.getFullYear() === date.getFullYear();
 
             return (
-              <div key={index.toString()} className="min-w-[85px] rounded-xl">
+              <div key={index.toString()} className="min-w-[120px] rounded-xl ">
                 <div
-                  className={`text-center mb-4 p-1 rounded-md ${
+                  className={`text-center mb-4 p-1 rounded-md  ${
                     isDateSelected ? 'bg-[#F1E8FB] border border-primary' : ''
                   }`}
                 >
@@ -110,7 +109,7 @@ export function AgendaScroll() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 max-h-[300px]">
+                <div className="flex flex-col gap-2 max-h-[300px] ">
                   {getTimeSlots().map((time, i) => {
                     const isSelected =
                       selectedSlot?.date.getDate() === date.getDate() &&
@@ -127,7 +126,7 @@ export function AgendaScroll() {
                       <Button
                         key={i.toString()}
                         onClick={() => handleTimeClick(date, time)}
-                        className={`text-sm text-center px-2 py-3 rounded-md 
+                        className={`text-sm font-normal text-center rounded-md shadow-none
                           ${
                             isSelected
                               ? 'bg-[#F1E8FB] text-[#333333] border border-primary'

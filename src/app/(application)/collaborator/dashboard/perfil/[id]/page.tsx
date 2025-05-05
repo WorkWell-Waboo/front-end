@@ -2,6 +2,7 @@
 import { CameraSVG } from '@/assets/svgs/camera';
 import { UserFormSVG } from '@/assets/svgs/userForm';
 import SearchBar from '@/components/searchbar';
+import TermsModal from '@/components/termsmodal';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -18,9 +19,11 @@ import { useState } from 'react';
 
 export default function PerfilUsuario() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
+
   return (
     <div className="px-10 pb-10">
       <SearchBar inputDisabled={true} />
+
       <div className="max-w-6xl mx-auto  space-y-6">
         {/* Header com nome e avatar */}
         <div className="flex items-center gap-6 bg-[#736CCE1A] p-6 rounded-2xl">

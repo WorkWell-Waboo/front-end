@@ -57,13 +57,17 @@ export default function SpecialistProfile() {
     'Relacionamentos Profissionais',
   ];
 
+  const handleBack = () => {
+    window.history.back();
+  };
   return (
     <div className="bg-[#EFF1F7] p-10 rounded-xl max-w-full">
       {/* Cabeçalho */}
       <div className="flex justify-between">
         <Button
+          onClick={handleBack}
           variant="ghost"
-          className="flex items-center text-[#6B5DD3] hover:bg-transparent"
+          className="flex items-center text-[#6B5DD3]"
         >
           <ChevronLeft className="h-5 w-5" />
           <span className="ml-1 font-medium">Especialista</span>
@@ -74,108 +78,109 @@ export default function SpecialistProfile() {
             Selecione o seu horário
           </span>
           <div className="flex gap-2">
-            <Select defaultValue="mes">
-              <SelectTrigger className="w-[90px] border-ring">
-                <SelectValue placeholder="Mês" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="mes">Mês</SelectItem>
-                <SelectItem value="dezembro">Dezembro</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select defaultValue="ano">
-              <SelectTrigger className="w-[100px]">
-                <SelectValue placeholder="Ano" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="2025">2025</SelectItem>
-                <SelectItem value="2026">2026</SelectItem>
-              </SelectContent>
-            </Select>
+            <div className="flex gap-2">
+              <Select>
+                <SelectTrigger className="w-[90px] border-ring">
+                  <SelectValue placeholder="Mês" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="mes">Mês</SelectItem>
+                  <SelectItem value="dezembro">Dezembro</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select>
+                <SelectTrigger className="w-[90px] border-ring">
+                  <SelectValue placeholder="Ano" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="2025">2025</SelectItem>
+                  <SelectItem value="2026">2026</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col gap-6">
         {/* Coluna do especialista */}
-        <div className="grid grid-cols-1 md:grid-cols-2 rounded-2xl bg-[#FBFBFB]">
+        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr] rounded-2xl bg-[#FBFBFB]">
           <Card className="h-full">
             <CardContent className="h-full">
               <div className="flex flex-col justify-between h-full">
-                <div>
-                  <div className="flex flex-col justify-between items-start ">
-                    <div className="flex justify-between  w-full mb-4">
-                      <div className="flex items-center">
-                        <Image
-                          src={ImageClient}
-                          alt="Sandra Amaral"
-                          width={60}
-                          height={60}
-                          className="rounded-full"
-                        />
-                        <div className="ml-3">
-                          <h2 className="text-base font-semibold text-gray-900">
-                            Sandra Amaral
-                          </h2>
-                          <p className="text-sm text-gray-600">Psicanalista</p>
-                        </div>
+                <div className="flex flex-col justify-between items-start ">
+                  <div className="flex justify-between  w-full mb-4">
+                    <div className="flex items-center">
+                      <Image
+                        src={ImageClient}
+                        alt="Sandra Amaral"
+                        width={60}
+                        height={60}
+                        className="rounded-full"
+                      />
+                      <div className="ml-3">
+                        <h2 className="text-base font-semibold text-gray-900">
+                          Sandra Amaral
+                        </h2>
+                        <p className="text-sm text-gray-600">Psicanalista</p>
                       </div>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        onClick={() => toggleFavorite('Sandra Amaral')}
-                      >
-                        <HeartLikeSVG
-                          className={
-                            favorites['Sandra Amaral']
-                              ? 'fill-primary text-primary'
-                              : 'text-primary'
-                          }
-                        />
-                      </Button>
                     </div>
-
                     <Button
-                      variant="outline"
-                      className=" mb-4 text-sm text-white bg-primary border-[#6B5DD3]"
+                      type="button"
+                      variant="ghost"
+                      onClick={() => toggleFavorite('Sandra Amaral')}
                     >
-                      <YoutubeSVG />
-                      Meu vídeo de apresentação
+                      <HeartLikeSVG
+                        className={
+                          favorites['Sandra Amaral']
+                            ? 'fill-primary text-primary'
+                            : 'text-primary'
+                        }
+                      />
                     </Button>
-
-                    <p className="text-sm text-gray-600 mb-4">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
                   </div>
 
-                  <div>
-                    <div className="flex items-center mb-3 text-sm text-gray-700">
-                      <div className="flex items-center mr-4">
-                        <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
-                        <span className="font-medium">5</span>
-                        <span className="text-xs text-gray-500 ml-1">
-                          (12 comentários)
-                        </span>
-                      </div>
+                  <Button
+                    variant="outline"
+                    className=" mb-4 text-sm text-white bg-primary border-[#6B5DD3]"
+                  >
+                    <YoutubeSVG />
+                    Meu vídeo de apresentação
+                  </Button>
 
-                      <div className="flex items-center">
-                        <PersonaSVG className="h-4 w-4 mr-1" />
-                        <span className="font-medium">18 atendimentos</span>
-                      </div>
+                  <p className="text-sm text-[#828282] mb-4 leading-[130%]">
+                    Lorem ipsum dolor sit amet, consectetur adipiscingelit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi uta liquip ex ea commodo consequat.
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex items-center mb-3 text-sm text-gray-700">
+                    <div className="flex items-center mr-4">
+                      <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
+                      <span className="font-medium">5</span>
+                      <span className="text-xs text-gray-500 ml-1">
+                        (12 comentários)
+                      </span>
                     </div>
-                    <div className="flex flex-wrap gap-2 mt-6">
-                      {specialties.map((tag, index) => (
-                        <Badge
-                          key={index.toString()}
-                          variant="default"
-                          className="bg-gray-100 text-[#828282] text-md"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
+
+                    <div className="flex items-center">
+                      <PersonaSVG className="h-4 w-4 mr-1" />
+                      <span className="font-medium">18 atendimentos</span>
                     </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-6">
+                    {specialties.map((tag, index) => (
+                      <Badge
+                        key={index.toString()}
+                        variant="default"
+                        className="bg-gray-100 text-[#828282] text-md"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
               </div>

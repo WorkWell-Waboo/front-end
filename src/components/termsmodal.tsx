@@ -18,10 +18,11 @@ export default function TermsModal() {
   useEffect(() => {
     // Verifica se os termos já foram aceitos anteriormente
     const accepted = localStorage.getItem('termsAccepted');
+    console.log('TermsModal - accepted:', accepted);
     if (accepted === 'true') {
       setModalVisible(true); // Se aceito, o modal não será exibido
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAccept = () => {
     if (termsAccepted) {

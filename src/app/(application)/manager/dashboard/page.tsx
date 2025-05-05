@@ -65,7 +65,7 @@ export default function ManagerDashboardPage() {
   return (
     <main className="container mx-auto px-10 pb-10 space-y-5 overflow-auto">
       <SearchBar inputDisabled={true} isManager={true} />
-      {/* Dialog for Terms of Use */}
+      {/* Modal para Termos de Uso */}
       <TermsModal />
 
       {/* Top Section */}
