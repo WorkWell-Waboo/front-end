@@ -64,6 +64,23 @@ function SuportChat() {
       time: makeTime(9, 21),
     },
   ]);
+  const typeMessage = [
+    {
+      title: 'Suporte Workwell',
+      type: 'Suporte técnico',
+      date: '20 Jan 2025',
+    },
+    {
+      title: 'Suporte Workwell',
+      type: 'Questões financeiras',
+      date: '07 Jan 2025',
+    },
+    {
+      title: 'Saúde Workwell',
+      type: 'Saúde Workwell',
+      date: '02 Jan 2025',
+    },
+  ];
   const [input, setInput] = useState('');
   const [open, setOpen] = useState(false); // controle do dialog
 
@@ -149,28 +166,12 @@ function SuportChat() {
 
             <div className="mt-6 mb-1">
               <span className="text-lg text-[#000000] font-medium ">
-                Mensagens: {messages.length.toString().padStart(2, '0')}
+                Mensagens: {typeMessage.length.toString().padStart(2, '0')}
               </span>
             </div>
 
             <div className="rounded-xl flex flex-col gap-2">
-              {[
-                {
-                  title: 'Suporte Workwell',
-                  type: 'Suporte técnico',
-                  date: '20 Jan 2025',
-                },
-                {
-                  title: 'Suporte Workwell',
-                  type: 'Questões financeiras',
-                  date: '07 Jan 2025',
-                },
-                {
-                  title: 'Saúde Workwell',
-                  type: 'Saúde Workwell',
-                  date: '02 Jan 2025',
-                },
-              ].map((item, i) => (
+              {typeMessage.map((item, i) => (
                 <div
                   key={i.toString()}
                   className="flex bg-[#FFFFFF] flex-col pt-4 pb-4 px-4 gap-2"
@@ -186,7 +187,7 @@ function SuportChat() {
                     </div>
                   </div>
 
-                  <span className="font-light  text-[#9C9C9C] ">
+                  <span className="font-light  text-[#9C9C9C] pl-2">
                     {item.date}
                   </span>
                 </div>

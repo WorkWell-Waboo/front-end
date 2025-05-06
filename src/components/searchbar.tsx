@@ -116,7 +116,11 @@ export default function SearchBar({
               Minhas sessões
             </DropdownMenuItem>
             <DropdownMenuItem>Conteúdos</DropdownMenuItem>
-            <DropdownMenuItem>Meus favoritos</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => router.push('/dashboard/favoritos/94095')}
+            >
+              Meus favoritos
+            </DropdownMenuItem>
             <DropdownMenuItem>Botão de pânico</DropdownMenuItem>
             <DropdownMenuItem>Comprar sessões</DropdownMenuItem>
             <DropdownMenuItem

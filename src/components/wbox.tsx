@@ -11,7 +11,7 @@ type ButtonType = 'flag' | 'heart' | 'ellipsis' | 'delete';
 interface WBoxProps {
   id: number;
   variant: 'white' | 'purple' | null;
-  imageSrc: StaticImageData;
+  imageSrc: string | StaticImageData;
   imageAlt: string;
   title: string;
   text: string;
