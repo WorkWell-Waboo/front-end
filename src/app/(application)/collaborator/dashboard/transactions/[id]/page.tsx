@@ -60,7 +60,7 @@ export default function PurchaseHistory() {
   };
 
   return (
-    <div className="bg-[#f5f6fb] min-h-screen px-6 py-10">
+    <div className="bg-[#f5f6fb] min-h-screen px-10 pt-15">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-[#333333]">
           Histórico de transações
