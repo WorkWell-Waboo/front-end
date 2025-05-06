@@ -58,9 +58,7 @@ export default function SearchBar({
         }`}
       >
         <Button
-          onClick={() =>
-            router.push('/front-end/src/app/(application)/collaborator/plans')
-          }
+          onClick={() => router.push('plans')}
           className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition"
         >
           <CartSVG key="cart" />

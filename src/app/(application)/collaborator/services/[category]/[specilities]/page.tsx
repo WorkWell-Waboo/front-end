@@ -5,6 +5,7 @@ import PersonaSVG from '@/assets/svgs/persona';
 import StarOpSVG from '@/assets/svgs/starop';
 import YoutubeSVG from '@/assets/svgs/youtube';
 import { AgendaScroll } from '@/components/agenda-scroll';
+import SearchBar from '@/components/searchbar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -62,8 +63,9 @@ export default function SpecialistProfile() {
     window.history.back();
   };
   return (
-    <div className="bg-[#EFF1F7] p-10 rounded-xl max-w-full">
+    <div className="bg-[#EFF1F7] px-10 pb-10 rounded-xl max-w-full">
       {/* Cabeçalho */}
+      <SearchBar />
       <div className="flex justify-between">
         <Button
           onClick={handleBack}

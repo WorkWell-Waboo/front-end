@@ -18,12 +18,12 @@ function CollaboratorChatPage() {
           Escolha a área de atendimento
         </span>
 
-        <div className="relative rounded-2xl overflow-hidden h-56 sm:h-64 md:h-72 lg:h-80">
+        <div className="relative rounded-2xl overflow-hidden h-64 ">
           <Image
             src={PessoasImg}
             alt="Grupo de pessoas"
             fill
-            className="object-cover scale-110 translate-x-32 sm:scale-107 sm:translate-x-56 transition-transform"
+            className="object-cover scale-110 translate-x-32 sm:scale-100 sm:translate-x-56 transition-transform"
           />
 
           <div className="absolute inset-0 bg-gradient-to-r from-[#736CCE] from-41% to-[#736CCE4D] to-70%" />

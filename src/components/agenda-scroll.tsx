@@ -27,18 +27,19 @@ export function AgendaScroll() {
     date: Date;
     time: string;
   } | null>(null);
+
   const [dialogType, setDialogType] = useState<
     null | 'confirm' | 'reminder' | 'success' | 'unavailable'
   >(null);
 
-  const unavailableSlots = [
-    { date: '2025-04-14', time: '09:00' },
-    { date: '2025-04-16', time: '13:00' },
-  ];
-
   const today = new Date();
   const days = Array.from({ length: totalDays }, (_, i) => addDays(today, i));
   const visibleDays = days.slice(startIndex, startIndex + visibleCount);
+
+  const unavailableSlots = {
+    date: '2025-05-06',
+    time: '10:00',
+  };
 
   const getTimeSlots = () =>
     Array.from({ length: 16 }, (_, i) =>
@@ -55,16 +56,6 @@ export function AgendaScroll() {
     if (startIndex + visibleCount < totalDays) {
       setStartIndex(startIndex + visibleCount);
     }
-  };
-
-  const handleTimeClick = (date: Date, time: string) => {
-    const dateStr = format(date, 'yyyy-MM-dd');
-    const isUnavailable = unavailableSlots.some(
-      (slot) => slot.date === dateStr && slot.time === time
-    );
-
-    setSelectedSlot({ date, time });
-    setDialogType(isUnavailable ? 'unavailable' : 'confirm');
   };
 
   const confirmAgendamento = () => {
@@ -114,7 +105,7 @@ export function AgendaScroll() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 max-h-[300px] ">
+                <div className="flex flex-col gap-2 max-h-[250px] ">
                   {getTimeSlots().map((time, i) => {
                     const isSelected =
                       selectedSlot?.date.getDate() === date.getDate() &&
@@ -123,30 +114,30 @@ export function AgendaScroll() {
                       selectedSlot?.time === time;
 
                     const dateStr = format(date, 'yyyy-MM-dd');
-                    const isUnavailable = unavailableSlots.some(
-                      (slot) => slot.date === dateStr && slot.time === time
-                    );
+                    const isUnavailable =
+                      unavailableSlots.date === dateStr &&
+                      unavailableSlots.time === time;
 
                     return (
                       <Button
                         key={i.toString()}
-                        onClick={() => handleTimeClick(date, time)}
                         className={`text-sm font-normal text-center rounded-md shadow-none
-                          ${
-                            isSelected
-                              ? 'bg-[#F1E8FB] text-[#333333] border border-primary'
-                              : isUnavailable
-                              ? 'bg-gray-200 text-[#333333] '
-                              : 'bg-white text-[#333333] hover:bg-gray-100'
-                          }
-                        `}
+                        ${
+                          isSelected
+                            ? 'bg-[#F1E8FB] text-[#333333] border border-primary'
+                            : isUnavailable
+                            ? 'bg-gray-200 text-[#333333]'
+                            : 'bg-white text-[#333333] hover:bg-gray-100'
+                        }
+                      `}
                         aria-pressed={isSelected}
-                        onKeyDown={(e) => {
-                          if (
-                            !isUnavailable &&
-                            (e.key === 'Enter' || e.key === ' ')
-                          ) {
-                            handleTimeClick(date, time);
+                        onClick={() => {
+                          if (!isUnavailable) {
+                            setSelectedSlot({ date, time });
+                            setDialogType('confirm');
+                          } else {
+                            setSelectedSlot({ date, time });
+                            setDialogType('unavailable');
                           }
                         }}
                         tabIndex={0}

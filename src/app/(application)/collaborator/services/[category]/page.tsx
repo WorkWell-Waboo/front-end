@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
 import { Switch } from '@/components/ui/switch';
 import HeadPerfil from '@/containers/layout/heard-perfil';
 import type { StaticImageData } from 'next/image';
@@ -124,7 +125,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
     <div className="flex flex-col min-h-screen px-10 pb-10  ">
       <SearchBar />
       {/* Filtros e Favoritos */}
-      <div className="space-y-4">
+      <div className="space-y-4 mt-4">
         <div className="flex flex-wrap gap-4 justify-between items-center text-accent-foreground">
           {/* Filtros */}
           <div className="flex flex-wrap gap-2 items-center">
@@ -192,7 +193,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
         <div className="flex flex-wrap gap-2 items-center text-accent-foreground mb-4 ">
           <span className="text-[#4F4F4F] pr-3">Ordenar por:</span>
 
-          <div className="flex gap-2 ">
+          <div className="flex space-x-1 items-center">
             <Select>
               <SelectTrigger
                 iconColor="text-[#4F4F4F]"
@@ -220,7 +221,12 @@ function CollaboratorServicesCategory(): React.ReactNode {
               </SelectContent>
             </Select>
 
-            <div className=" py-2 border-[#4F4F4F]">
+            <Separator
+              orientation="vertical"
+              className=" min-h-[2rem] mx-4 bg-[#4F4F4F]"
+            />
+
+            <div className="ml-2 py-2 border-[#4F4F4F]">
               <div className="flex items-center space-x-2">
                 <Label
                   htmlFor="airplane-mode"
