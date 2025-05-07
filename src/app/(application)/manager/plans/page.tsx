@@ -154,7 +154,7 @@ export default function ManagerPlansPage() {
     <main className="px-10 pb-2 flex flex-col ">
       <SearchBar inputDisabled={true} />
 
-      <div className="-mt-2">
+      <div className="-mt-4 ">
         <h2 className="font-semibold text-bases">Assinaturas</h2>
         <p className="text-sm mb-3">
           Com o plano ilimitado, os seus colaboradores têm acesso a várias
@@ -163,7 +163,7 @@ export default function ManagerPlansPage() {
 
         <div className="flex flex-col gap-4">
           {/* Simulação de pacotes */}
-          <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-3 gap-4 mb-3">
             {subscriptions.map((subscription) => (
               <div
                 className="flex flex-col gap-1 justify-between p-4 bg-[#736CCE] rounded-md"
@@ -173,17 +173,17 @@ export default function ManagerPlansPage() {
                   <h3 className="text-[#FFFFFF] font-medium text-xl">
                     {subscription.name}
                   </h3>
-                  <span className="font-normal text-md text-[#F2F2F2]">
+                  <span className="font-normal text-sm text-[#F2F2F2]">
                     {subscription.sessions}
                   </span>
-                  <hr className="border-[#F2F2F2] my-2" />
-                  <p className="font-normal text-sm text-[#F2F2F2] mb-2">
+                  <hr className="border-[#F2F2F2] my-1.5" />
+                  <p className="font-normal text-xs text-[#F2F2F2] mb-2">
                     {subscription.description}
                   </p>
-                  <div className="flex gap-1 items-center text-[#FFFFFF] font-medium">
-                    <span className="text-2xl mr-2">{subscription.coin}</span>
+                  <div className="flex items-center text-[#FFFFFF] font-medium">
+                    <span className="mr-2">{subscription.coin}</span>
                     {subscription.price.split(',')[0] && (
-                      <span className="text-4xl">
+                      <span className="text-3xl">
                         {subscription.price.split(',')[0]}
                       </span>
                     )}
@@ -356,33 +356,33 @@ export default function ManagerPlansPage() {
 
       {/* Blocos dos planos */}
       <div className="flex flex-col gap-2 mt-4">
-        <h2 className="font-bold text-md text-[#4f4f4f] mb-2">
+        <h2 className="font-bold text-md text-[#4f4f4f] ">
           Pacotes de sessões
         </h2>
         {/* Simulação de pacotes */}
         <div className="grid grid-cols-3 gap-4">
           {plans.map((plan) => (
             <div
-              className="flex flex-col gap-4 justify-between p-4 bg-white rounded-md"
+              className="flex flex-col gap-1 justify-between p-4 bg-white rounded-md"
               key={plan.id}
             >
               <div className="block">
                 <h3 className="text-primary font-medium text-xl">
                   {plan.name}
                 </h3>
-                <span className="font-normal text-md text-[#4F4F4F]">
+                <span className="font-normal text-sm text-[#4F4F4F]">
                   {plan.sessions >= 1
                     ? `${plan.sessions} sessão`
                     : `${plan.sessions} sessões`}{' '}
                 </span>
-                <hr className="border-[#4F4F4F] my-2" />
-                <p className="font-normal text-sm text-[#4F4F4F] mb-2">
+                <hr className="border-[#4F4F4F] my-1.5" />
+                <p className="font-normal text-xs text-[#4F4F4F] mb-2">
                   {plan.description}
                 </p>
-                <div className="flex gap-1 items-center text-primary font-medium">
-                  <span className="text-2xl mr-2">{plan.coin}</span>
+                <div className="flex items-center text-primary font-medium">
+                  <span className=" mr-2">{plan.coin}</span>
                   {plan.price.split(',')[0] && (
-                    <span className="text-4xl">{plan.price.split(',')[0]}</span>
+                    <span className="text-3xl">{plan.price.split(',')[0]}</span>
                   )}
                   {plan.price.split(',')[1] && (
                     <span className="text-lg -mt-2">
