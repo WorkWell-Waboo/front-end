@@ -17,37 +17,37 @@ import { navigationManager } from '@/data/navigation/manager';
 import { navigationSpecialist } from '@/data/navigation/specialist';
 
 function Sidebar({ role }: { role: Role }) {
-	const pathname = usePathname();
+  const pathname = usePathname();
 
-	const navigation: Record<Role, Omit<NavigationProps, 'active'>[]> = {
-		administrator: navigationAdministrator,
-		collaborator: navigationCollaborator,
-		manager: navigationManager,
-		specialist: navigationSpecialist,
-	};
+  const navigation: Record<Role, Omit<NavigationProps, 'active'>[]> = {
+    administrator: navigationAdministrator,
+    collaborator: navigationCollaborator,
+    manager: navigationManager,
+    specialist: navigationSpecialist,
+  };
 
-	const items = navigation[role];
+  const items = navigation[role];
 
-	return (
-		<aside className='bg-sidebar pl-4 pb-10 overflow-hidden flex flex-col justify-between'>
-			<div>
-				<Link href='/dashboard'>
-					<LogoWhiteSVG className='w-52 mt-5' />
-				</Link>
-				<nav className='list-none mt-5'>
-					{items.map((item, index) => (
-						<Navigation
-							key={index.toString()}
-							{...item}
-							active={pathname.includes(item.href)}
-						/>
-					))}
-				</nav>
-			</div>
-			{role === 'collaborator' && <NavigationSOS />}
-			{role === 'specialist' && <NavigationPanicReport />}
-		</aside>
-	);
+  return (
+    <aside className="h-dvh! sticky left-0 top-0 bg-sidebar pl-4 pb-10 overflow-hidden flex flex-col justify-between">
+      <div>
+        <Link href="/dashboard">
+          <LogoWhiteSVG className="w-52 mt-5" />
+        </Link>
+        <nav className="list-none mt-5">
+          {items.map((item, index) => (
+            <Navigation
+              key={index.toString()}
+              {...item}
+              active={pathname.includes(item.href)}
+            />
+          ))}
+        </nav>
+      </div>
+      {role === 'collaborator' && <NavigationSOS />}
+      {role === 'specialist' && <NavigationPanicReport />}
+    </aside>
+  );
 }
 
 export { Sidebar };

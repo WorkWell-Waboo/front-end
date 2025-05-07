@@ -82,11 +82,11 @@ export default function ManagerDashboardPage() {
             <h2 className="text-2xl font-bold">
               Invista no bem-estar da sua equipe
             </h2>
-            <p className="mt-2 text-sm">
+            <p className=" text-sm">
               Adquira sessões e ofereça mais recursos para o desenvolvimento dos
               seus colaboradores.
             </p>
-            <Button className="mt-4 bg-white text-[#736CCE] font-semibold text-xs px-4 py-2 rounded-md">
+            <Button className="mt-2 bg-white text-[#736CCE] font-semibold text-xs px-4 py-2 rounded-md">
               Comprar sessões
             </Button>
           </CardContent>
@@ -208,7 +208,7 @@ export default function ManagerDashboardPage() {
 
           {/* Collaborators Card */}
           <Card className="">
-            <CardHeader className="pb-2 flex flex-row items-center justify-between px-7">
+            <CardHeader className="flex flex-row items-center justify-between px-7">
               <CardTitle className="text-lg font-medium">
                 Colaboradores
               </CardTitle>
@@ -217,13 +217,13 @@ export default function ManagerDashboardPage() {
                 Hoje
               </span>
             </CardHeader>
-            <CardContent className="space-y-2 px-4 overflow-y-auto max-h-[200px] scrollbar-custom">
+            <CardContent className="space-y-2 px-4 overflow-y-auto max-h-[190px] scrollbar-custom">
               {/* Contêiner de colaboradores com rolagem vertical */}
               <div className="flex flex-col ">
                 {colaboradores.map((colab) => (
                   <div
                     key={colab}
-                    className="px-4 py-4.5 rounded-sm hover:bg-[#504DA6]/10 transition-colors flex items-center justify-between"
+                    className="px-4 py-3.5 rounded-sm hover:bg-[#504DA6]/10 transition-colors flex items-center justify-between"
                   >
                     <span className="text-sm text-[#736CCE] font-semibold">
                       {colab}

@@ -43,11 +43,11 @@ export default function SharedItems() {
                     setSelectedIndex(index);
                   }
                 }}
-                className={`relative cursor-pointer p-3 transition-all mr-1
-    ${isActive ? 'bg-primary/10' : 'hover:bg-gray-100'}
-    rounded-md pr-6`}
+                className={`relative cursor-pointer p-3 -ml-3 transition-all mr-1
+                 ${isActive ? 'bg-primary/10' : 'hover:bg-gray-100'}
+                 rounded-md pr-6`}
               >
-                <p className="text-[#7B6CD9]">{item}</p>
+                <p className="text-[#7B6CD9] text-sm ">{item}</p>
               </div>
               {isActive && (
                 <span className="absolute top-0 bottom-2 right-0 w-1.5 rounded-full bg-primary h-full" />

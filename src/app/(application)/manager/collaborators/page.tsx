@@ -30,14 +30,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Ellipsis, FileX2, Filter, Plus, UserCheck } from 'lucide-react';
 
+import SearchBar from '@/components/searchbar';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import SearchBar from '@/components/searchbar';
 
 function ManagerCollaboratorsPage() {
   const [step, setStep] = useState('details');
   return (
-    <main className="px-10 pb-10 flex flex-col ">
+    <main className="px-10 flex flex-col ">
       <SearchBar placeholder="Procure por nome" />
 
       <div className="flex justify-between items-center gap-5 mb-5">
@@ -140,7 +140,7 @@ function ManagerCollaboratorsPage() {
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100vh-100px)]">
+      <ScrollArea className="h-[calc(100vh-222px)] rounded-md">
         <Table>
           <TableHeader>
             <TableRow>

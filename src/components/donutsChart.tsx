@@ -28,8 +28,8 @@ export function DonutChart() {
         <CardTitle>Utilização por serviço</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col sm:flex-row sm:items-start gap-6">
-        <ResponsiveContainer width={220} height={220}>
-          <PieChart>
+        <ResponsiveContainer width={220} height={200}>
+          <PieChart margin={{ top: 0, left: 0, right: 0, bottom: 5 }}>
             <defs>
               <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
                 <feDropShadow

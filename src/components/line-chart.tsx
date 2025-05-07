@@ -31,7 +31,7 @@ export function LineCharts() {
         <CardTitle>Nível de risco</CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer width="100%" height={200}>
           <AreaChart data={chartData} margin={{ top: 40, left: 0, right: 0 }}>
             <defs>
               <linearGradient id="colorRisk" x1="0" y1="0" x2="0" y2="1">

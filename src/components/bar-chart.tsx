@@ -55,7 +55,7 @@ export function HotTopicsChart() {
 
   return (
     <Card>
-      <CardHeader className="flex justify-between items-center">
+      <CardHeader className="flex justify-between items-center ">
         <CardTitle>Hot topics</CardTitle>
         <div className="bg-[#504DA61A] rounded-md px-3 py-1 text-sm flex items-center gap-2 cursor-pointer">
           Especialidade
@@ -63,8 +63,11 @@ export function HotTopicsChart() {
         </div>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={210}>
-          <BarChart data={data} margin={{ top: 30, left: 22, right: 0 }}>
+        <ResponsiveContainer width="100%" height={200}>
+          <BarChart
+            data={data}
+            margin={{ top: 30, left: 22, right: 0, bottom: 5 }}
+          >
             <CartesianGrid
               vertical={false} // remove linhas verticais
               stroke="#E5E7EB" // cor cinza sólida (gray-200)

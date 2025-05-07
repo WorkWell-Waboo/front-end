@@ -26,12 +26,12 @@ import PsicologiaSVG from '@/assets/svgs/psicologia';
 import PsiquiatriaSVG from '@/assets/svgs/psiquiatria';
 import SonoSVG from '@/assets/svgs/sono';
 
+import SearchBar from '@/components/searchbar';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import { Check, CircleHelp, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import SearchBar from '@/components/searchbar';
 
 interface Expertise {
   id: number;
@@ -151,22 +151,22 @@ export default function ManagerPlansPage() {
   }, [carousel]);
 
   return (
-    <main className="px-10 pb-10 flex flex-col ">
+    <main className="px-10 pb-2 flex flex-col ">
       <SearchBar inputDisabled={true} />
 
-      <div className="">
-        <h2 className="font-semibold text-base mb-1">Assinaturas</h2>
-        <p className="text-sm mb-4">
+      <div className="-mt-2">
+        <h2 className="font-semibold text-bases">Assinaturas</h2>
+        <p className="text-sm mb-3">
           Com o plano ilimitado, os seus colaboradores têm acesso a várias
           especialidades, sem limite de consumo
         </p>
 
         <div className="flex flex-col gap-4">
           {/* Simulação de pacotes */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-3 gap-4 mb-4">
             {subscriptions.map((subscription) => (
               <div
-                className="flex flex-col gap-4 justify-between p-4 bg-[#736CCE] rounded-md"
+                className="flex flex-col gap-1 justify-between p-4 bg-[#736CCE] rounded-md"
                 key={subscription.id}
               >
                 <div className="block">
@@ -183,7 +183,7 @@ export default function ManagerPlansPage() {
                   <div className="flex gap-1 items-center text-[#FFFFFF] font-medium">
                     <span className="text-2xl mr-2">{subscription.coin}</span>
                     {subscription.price.split(',')[0] && (
-                      <span className="text-5xl">
+                      <span className="text-4xl">
                         {subscription.price.split(',')[0]}
                       </span>
                     )}
@@ -355,7 +355,7 @@ export default function ManagerPlansPage() {
       </Carousel>
 
       {/* Blocos dos planos */}
-      <div className="flex flex-col gap-2 mt-6">
+      <div className="flex flex-col gap-2 mt-4">
         <h2 className="font-bold text-md text-[#4f4f4f] mb-2">
           Pacotes de sessões
         </h2>
@@ -382,7 +382,7 @@ export default function ManagerPlansPage() {
                 <div className="flex gap-1 items-center text-primary font-medium">
                   <span className="text-2xl mr-2">{plan.coin}</span>
                   {plan.price.split(',')[0] && (
-                    <span className="text-5xl">{plan.price.split(',')[0]}</span>
+                    <span className="text-4xl">{plan.price.split(',')[0]}</span>
                   )}
                   {plan.price.split(',')[1] && (
                     <span className="text-lg -mt-2">

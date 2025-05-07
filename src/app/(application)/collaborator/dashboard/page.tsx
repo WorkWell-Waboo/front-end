@@ -86,13 +86,13 @@ function CollaboratorDashboardPage() {
   }, [carousel2]);
 
   return (
-    <main className="px-10 pb-10 flex flex-col gap-4">
+    <main className="px-10 flex flex-col gap-3">
       {/* TOPO */}
       <SearchBar inputDisabled={true} />
       <TermsModal />
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-        <div className="bg-gradient-to-r from-primary to-primary/50 p-5 rounded-lg">
-          <h2 className="font-medium text-2xl text-white mb-2">
+        <div className="bg-gradient-to-r from-primary to-primary/50 px-4 py-4 rounded-lg">
+          <h2 className="font-medium text-xl text-white mb-2">
             <span>Olá, Mariana Lemos</span>
           </h2>
           <p className="font-normal text-sm text-white ">
@@ -100,7 +100,7 @@ function CollaboratorDashboardPage() {
             um profissional e agende um horário para sua sessão.
           </p>
         </div>
-        <div className="bg-white border-b-2 border-b-primary p-5 rounded-lg">
+        <div className="bg-white border-b-2 border-b-primary p-4 rounded-lg">
           <div className="flex justify-between items-center">
             <h2 className="font-bold text-xl text-[#4f4f4f] mb-2">
               Sessões disponíveis
@@ -262,7 +262,7 @@ function CollaboratorDashboardPage() {
               alt="foto cliente"
               width={145}
               height={145}
-              className="rounded-lg h-[150] w-[150] object-cover"
+              className="rounded-lg h-[120] w-[120] object-cover"
             />
             <div className="flex flex-col flex-1 gap-3">
               <h3 className="font-bold text-sm text-white">
@@ -310,9 +310,9 @@ function CollaboratorDashboardPage() {
             <Image
               src={PhotoBlog}
               alt="foto cliente"
-              width={145}
-              height={145}
-              className="rounded-lg h-[150] w-[150] object-cover"
+              width={120}
+              height={120}
+              className="rounded-lg h-[120] w-[120] object-cover"
             />
             <div className="flex flex-col flex-1 gap-3">
               <h3 className="font-bold text-sm text-primary">
@@ -352,23 +352,27 @@ function CollaboratorDashboardPage() {
               Ver mais
             </Button>
           </div>
-          <div className="bg-white border-b-2 border-b-primary p-4 rounded-lg flex items-center gap-5">
+          <div className="bg-white border-b-2 border-b-primary p-4 rounded-lg flex flex-1 items-center gap-5">
             <Image
               src={PhotoQuiz}
               alt="foto cliente"
               width={145}
               height={145}
-              className="rounded-lg h-[150] w-[150] object-cover"
+              className="rounded-lg h-[120] w-[120] object-cover"
             />
-            <div className="flex flex-col flex-1 gap-3">
-              <h3 className="font-bold text-sm text-primary">
-                Você Se Conhece Bem o Suficiente? Teste Aqui!
-              </h3>
-              <p className="font-light text-xs text-[#4f4f4f]">
-                Explore aspectos únicos da sua personalidade e descubra como o
-                autoconhecimento impacta sua rotina.
-              </p>
-              <div className="flex justify-between items-center">
+            <div className="flex flex-col justify-between h-full py-2">
+              <div className="gap-2">
+                {' '}
+                <h3 className="font-bold text-sm text-primary">
+                  Você Se Conhece Bem o Suficiente? Teste Aqui!
+                </h3>
+                <p className="font-light text-xs text-[#4f4f4f]">
+                  Explore aspectos únicos da sua personalidade e descubra como o
+                  autoconhecimento impacta sua rotina.
+                </p>
+              </div>
+
+              <div className="flex justify-between items-center ">
                 <span className="font-light text-xs text-[#828282]">
                   5 min read
                 </span>

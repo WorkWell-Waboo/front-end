@@ -122,7 +122,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col min-h-screen px-10 pb-10  ">
+    <div className="flex flex-col min-h-screen px-10">
       <SearchBar />
       {/* Filtros e Favoritos */}
       <div className="space-y-4 mt-4">
@@ -242,7 +242,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {professionals.map((pro, index) => {
           const isFavorited = favorites[pro.name];
           return (
@@ -250,7 +250,7 @@ function CollaboratorServicesCategory(): React.ReactNode {
               key={index.toString()}
               className="shadow-md border rounded-xl"
             >
-              <CardContent className="px-6 space-y-4">
+              <CardContent className="px-6 space-y-3">
                 {/* Header */}
                 <HeadPerfil
                   name={pro.name}

@@ -63,10 +63,10 @@ export default function SpecialistProfile() {
     window.history.back();
   };
   return (
-    <div className="bg-[#EFF1F7] px-10 pb-10 rounded-xl max-w-full">
+    <div className="bg-[#EFF1F7] px-10 rounded-xl max-w-full">
       {/* Cabeçalho */}
       <SearchBar />
-      <div className="flex justify-between">
+      <div className="flex justify-between -mt-2">
         <Button
           onClick={handleBack}
           variant="ghost"
@@ -105,7 +105,7 @@ export default function SpecialistProfile() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         {/* Coluna do especialista */}
         <div className="grid grid-cols-[1fr_1.5fr] rounded-2xl bg-[#FBFBFB]">
           <Card className="h-full">
@@ -170,14 +170,14 @@ export default function SpecialistProfile() {
           </Card>
 
           {/* Coluna do agendamento */}
-          <div className="w-full py-4 ">
+          <div className="w-full py-2 ">
             <AgendaScroll />
           </div>
         </div>
 
         {/* Avaliações */}
         <div className="grid grid-cols-[1fr_1.5fr] gap-3">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col flex-1 gap-2">
             <div className="flex gap-3 items-center">
               <span className=" text-sm font-semibold text-[#4F4F4F] mb-1">
                 Tipos de consulta:
@@ -225,7 +225,7 @@ export default function SpecialistProfile() {
                 O que dizem sobre mim
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-[#828282] mb-4 leading-relaxed">
+                <p className="text-sm text-[#828282] leading-relaxed">
                   "A Sandra é uma profissional incrível! Desde a primeira
                   consulta, ela demonstrou muita atenção, empatia e dedicação, o
                   que me fez sentir totalmente à vontade para compartilhar
@@ -242,7 +242,7 @@ export default function SpecialistProfile() {
                     {[...Array(5)].map((_, i) => (
                       <StarOpSVG
                         key={i.toString()}
-                        className="h-5 w-5 text-yellow-400 fill-yellow-400"
+                        className="h-4 w-4 text-yellow-400 fill-yellow-400"
                       />
                     ))}
                   </div>

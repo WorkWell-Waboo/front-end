@@ -6,24 +6,24 @@ import { cookies } from 'next/headers';
 import { Fragment } from 'react';
 
 async function ApplicationLayoutRoot({ children }: React.PropsWithChildren) {
-	const auth = (await cookies()).get('token')?.value as string;
+  const auth = (await cookies()).get('token')?.value as string;
 
-	const payload = decodeJwt(auth);
+  const payload = decodeJwt(auth);
 
-	const role = payload.role;
+  const role = payload.role;
 
-	return (
-		<Fragment>
-			<ChangeProfile role={role} />
-			<section className='grid grid-cols-[256px_calc(100%-256px)] min-h-dvh'>
-				<Sidebar role={role} />
-				<main>
-					<Header />
-					{children}
-				</main>
-			</section>
-		</Fragment>
-	);
+  return (
+    <Fragment>
+      <ChangeProfile role={role} />
+      <section className="grid grid-cols-[256px_calc(100%-256px)] min-h-dvh">
+        <Sidebar role={role} />
+        <main className="overflow-auto min-h-dvh">
+          <Header />
+          {children}
+        </main>
+      </section>
+    </Fragment>
+  );
 }
 
 export default ApplicationLayoutRoot;

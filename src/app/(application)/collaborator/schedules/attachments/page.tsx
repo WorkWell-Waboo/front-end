@@ -18,7 +18,7 @@ function SchedulesAttachments() {
     window.history.back();
   };
   return (
-    <main className="px-10 pb-10 ">
+    <main className="px-10">
       <SearchBar inputDisabled={true} />
       <div className="flex flex-col gap-4">
         <div className="flex justify-between">
@@ -40,7 +40,7 @@ function SchedulesAttachments() {
             Filtro
           </Button>
         </div>
-        <ScrollArea className="h-[calc(100vh-140px)] rounded-md">
+        <ScrollArea className="h-[calc(100vh-160px)] rounded-md">
           <Table>
             <TableHeader>
               <TableRow>
