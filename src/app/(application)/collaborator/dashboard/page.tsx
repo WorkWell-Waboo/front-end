@@ -126,35 +126,40 @@ function CollaboratorDashboardPage() {
             <CarouselContent>
               {Array.from({ length: 5 }).map((_, index) => (
                 <CarouselItem key={`carousel-item-${Date.now()}-${index}`}>
-                  <div className="grid grid-cols-2 gap-2">
-                    <p className="font-bold text-sm text-primary">
-                      Psicologia:
-                      <span className="font-semibold text-[#4f4f4f]">
-                        {' '}
-                        0 sessões
-                      </span>
-                    </p>
-                    <p className="font-bold text-sm text-primary">
-                      Psiquiatria:
-                      <span className="font-semibold text-[#4f4f4f]">
-                        {' '}
-                        0 sessões
-                      </span>
-                    </p>
-                    <p className="font-bold text-sm text-primary">
-                      Nutrição:
-                      <span className="font-semibold text-[#4f4f4f]">
-                        {' '}
-                        0 sessões
-                      </span>
-                    </p>
-                    <p className="font-bold text-sm text-primary">
-                      Health coaching
-                      <span className="font-semibold text-[#4f4f4f]">
-                        {' '}
-                        0 sessões
-                      </span>
-                    </p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <p className="font-bold text-sm text-primary">
+                        Psicologia:
+                        <span className="font-semibold text-[#4f4f4f]">
+                          {' '}
+                          0 sessões
+                        </span>
+                      </p>
+                      <p className="font-bold text-sm text-primary">
+                        Psiquiatria:
+                        <span className="font-semibold text-[#4f4f4f]">
+                          {' '}
+                          0 sessões
+                        </span>
+                      </p>
+                    </div>
+                    <div>
+                      {' '}
+                      <p className="font-bold text-sm text-primary">
+                        Nutrição:
+                        <span className="font-semibold text-[#4f4f4f]">
+                          {' '}
+                          0 sessões
+                        </span>
+                      </p>
+                      <p className="font-bold text-sm text-primary">
+                        Health coaching
+                        <span className="font-semibold text-[#4f4f4f]">
+                          {' '}
+                          0 sessões
+                        </span>
+                      </p>
+                    </div>
                   </div>
                 </CarouselItem>
               ))}
