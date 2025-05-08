@@ -279,26 +279,26 @@ export default function CollaboratorPlansPage() {
           <div className="grid grid-cols-3 gap-4">
             {plans.map((plan) => (
               <div
-                className="flex flex-col gap-4 justify-between p-4 bg-white rounded-md"
+                className="flex flex-col gap-2 justify-between p-4 bg-white rounded-md"
                 key={plan.id}
               >
                 <div className="block">
                   <h3 className="text-primary font-medium text-xl">
                     {plan.name}
                   </h3>
-                  <span className="font-normal text-md text-[#4F4F4F]">
+                  <span className="font-normal text-sm text-[#4F4F4F]">
                     {plan.sessions >= 1
                       ? `${plan.sessions} sessão`
                       : `${plan.sessions} sessões`}{' '}
                   </span>
                   <hr className="border-[#4F4F4F] my-2" />
-                  <p className="font-normal text-sm text-[#4F4F4F] mb-2">
+                  <p className="font-normal text-xs text-[#4F4F4F] mt-1">
                     {plan.description}
                   </p>
                   <div className="flex gap-1 items-center text-primary font-medium">
-                    <span className="text-2xl mr-2">{plan.coin}</span>
+                    <span className="text-lg ">{plan.coin}</span>
                     {plan.price.split(',')[0] && (
-                      <span className="text-5xl">
+                      <span className="text-3xl">
                         {plan.price.split(',')[0]}
                       </span>
                     )}
