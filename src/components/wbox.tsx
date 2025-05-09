@@ -1,3 +1,4 @@
+'use client';
 import { EllipsisIcon } from '@/assets/svgs/ellipsis';
 import { FlagIcon } from '@/assets/svgs/flag';
 import HeartLikeSVG from '@/assets/svgs/heartlike';

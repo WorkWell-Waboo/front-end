@@ -22,12 +22,14 @@ type SearchBarProps = {
   inputDisabled?: boolean;
   placeholder?: string;
   isManager?: boolean;
+  isSpecility?: boolean;
 };
 
 export default function SearchBar({
   inputDisabled = false,
   placeholder,
   isManager = false,
+  isSpecility = false,
 }: SearchBarProps) {
   const router = useRouter();
 
@@ -38,6 +40,8 @@ export default function SearchBar({
         {inputDisabled ? (
           isManager ? (
             <p className="text-[#9E9EA8]">Olá, nome do gestor</p>
+          ) : isSpecility ? (
+            <p className="text-[#9E9EA8]">Olá, nome do especilista</p>
           ) : null
         ) : (
           <Input
