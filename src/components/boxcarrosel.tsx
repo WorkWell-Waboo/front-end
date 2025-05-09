@@ -46,14 +46,6 @@ export default function CarouselSection({
     <div className="block">
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-semibold text-lg text-[#4f4f4f] ">{title}</h2>
-        <Link href={link}>
-          <Button
-            variant="outline"
-            className="border-[#BDBDBD] rounded-lg text-sm text-[#333333] hover:text-[#333333]"
-          >
-            Ver mais
-          </Button>
-        </Link>
       </div>
 
       <div className="relative w-full">

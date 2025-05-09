@@ -1,21 +1,35 @@
+'use client';
 import PhotoBlog from '@/assets/imgs/blog.png';
 import CarouselSection from '@/components/boxcarrosel';
 import { SessionCarousel } from '@/components/contentsession/sessionCarrosel';
 import SearchBar from '@/components/searchbar';
+
+import { format } from 'date-fns';
+
 import { Button } from '@/components/ui/button';
 
 import { Card } from '@/components/ui/card';
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
   CalendarDays,
+  CalendarIcon,
   CheckSquare,
-  ChevronRight,
   MessageSquareText,
 } from 'lucide-react';
 
 import avatar from '@/assets/imgs/avatar.png';
 import avatar2 from '@/assets/imgs/avatar2.png';
 import avatar3 from '@/assets/imgs/avatar3.png';
+import { Calendar } from '@/components/ui/calendar';
+
+import { cn } from '@/libraries/utils';
+import React from 'react';
 function SpecialistDashboardPage() {
+  const [date, setDate] = React.useState<Date>();
   const sessions = [
     {
       name: 'João Silva',
@@ -35,23 +49,44 @@ function SpecialistDashboardPage() {
       time: '14:00 - 15:00 PM',
       avatar: avatar3,
     },
+    {
+      name: 'Juliana Lima',
+      date: 'Quinta - Jan 16',
+      time: '14:00 - 15:00 PM',
+      avatar: avatar2,
+    },
   ];
   return (
     <main className="px-10">
       <SearchBar isSpecility={true} inputDisabled={true} />
       {/* Period selector */}
-      <div className="flex justify-end mb-6">
-        <Button
-          variant="outline"
-          className="bg-white rounded-full px-4 py-2 flex items-center gap-2 text-gray-800"
-        >
-          <span>Selecionar o período</span>
-          <ChevronRight className="h-4 w-4 ml-2" />
-        </Button>
+      <div className="flex justify-end mb-4">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={'outline'}
+              className={cn(
+                'w-[240px] justify-start border-none bg-[#FFFFFF] text-left font-normal',
+                !date && 'text-muted-foreground'
+              )}
+            >
+              <CalendarIcon />
+              {date ? format(date, 'PPP') : <span>Selecione o periodo</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
       </div>
 
       {/* Stats cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
         <Card className="bg-[#736CCE] text-white p-6 flex flex-row items-center gap-4">
           <div className="bg-white rounded-full p-4 ">
             <MessageSquareText className="h-6 w-6 text-[#736CCE]" />
@@ -88,8 +123,9 @@ function SpecialistDashboardPage() {
       </div>
 
       <SessionCarousel title="Suas próximas sessões" sessions={sessions} />
-      <div className="h-10" />
+      <div className="h-5" />
       <SessionCarousel title="Amanhã" sessions={sessions} />
+      <div className="h-5" />
 
       <CarouselSection
         title="Matéria/Blog"

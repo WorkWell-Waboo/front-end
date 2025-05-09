@@ -8,7 +8,7 @@ interface SessionCardProps {
   time: string;
   avatar: string | StaticImageData;
   selected?: boolean;
-  showArrow?: boolean;
+  onClick?: () => void;
 }
 
 export function SessionCard({
@@ -17,32 +17,40 @@ export function SessionCard({
   time,
   avatar,
   selected = false,
-  showArrow = true,
+  onClick,
 }: SessionCardProps) {
   return (
     <div
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClick?.();
+        }
+      }}
       className={cn(
-        'flex items-center justify-between rounded-2xl px-6 py-4 w-full max-w-sm shadow-sm',
-        selected ? 'bg-[#736CCE] text-white' : 'bg-white text-gray-800'
+        'flex items-center rounded-lg px-7 py-7 w-full max-w-full shadow-sm',
+        selected
+          ? 'bg-[#736CCE] text-white border-b-3 border-white'
+          : 'bg-white text-gray-800'
       )}
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 justify-center">
         <Image
           src={avatar}
           alt={name}
-          className="h-12 w-12 rounded-full object-cover"
+          className="h-18 w-18 rounded-full object-cover"
         />
         <div className="flex flex-col">
           <span
             className={cn(
-              'font-semibold',
+              'font-bold text-lg',
               selected ? 'text-white' : 'text-[#736CCE]'
             )}
           >
             {name}
           </span>
-          <span className="text-sm">{date}</span>
-          <span className="text-sm">{time}</span>
+          <span className="text-sm font-normal ">{date}</span>
+          <span className="text-sm font-normal">{time}</span>
         </div>
       </div>
     </div>
