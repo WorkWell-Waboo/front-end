@@ -40,10 +40,10 @@ export function SessionCarousel({ title, sessions }: SessionCarouselProps) {
   }, [carousel]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {/* Título + botão */}
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold text-gray-800">{title}</h2>
+        <h2 className=" font-semibold text-gray-800">{title}</h2>
         <Button
           variant="outline"
           className="text-sm border px-3 py-1 rounded-2xl border-[#BDBDBD] text-[#333333]"
@@ -68,7 +68,7 @@ export function SessionCarousel({ title, sessions }: SessionCarouselProps) {
             {sessions.map((_, index) => (
               <CarouselItem
                 key={index.toString()}
-                className="basis-1/1 lg:basis-1/2 xl:basis-1/3 pl-0 pr-4 "
+                className="basis-1/1 lg:basis-1/2 xl:basis-1/3 pl-0 pr-7 "
               >
                 <SessionCard
                   {...sessions[index]}

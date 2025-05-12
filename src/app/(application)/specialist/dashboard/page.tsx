@@ -18,6 +18,7 @@ import {
   CalendarDays,
   CalendarIcon,
   CheckSquare,
+  ChevronDown,
   MessageSquareText,
 } from 'lucide-react';
 
@@ -66,12 +67,23 @@ function SpecialistDashboardPage() {
             <Button
               variant={'outline'}
               className={cn(
-                'w-[240px] justify-start border-none bg-[#FFFFFF] text-left font-normal',
+                'w-[240px] justify-between border-none bg-[#FFFFFF] text-left font-normal',
                 !date && 'text-muted-foreground'
               )}
             >
-              <CalendarIcon />
-              {date ? format(date, 'PPP') : <span>Selecione o periodo</span>}
+              <div className="flex items-center gap-2">
+                <CalendarIcon
+                  width={14}
+                  height={7}
+                  className="text-[#736CCE]"
+                />
+                {date ? format(date, 'PPP') : <span>Selecione o periodo</span>}
+              </div>
+              <ChevronDown
+                width={14}
+                height={7}
+                className="text-[#736CCE] w-3.5 h-2"
+              />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
