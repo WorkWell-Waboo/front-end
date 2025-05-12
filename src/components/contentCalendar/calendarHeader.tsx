@@ -29,12 +29,12 @@ export function CalendarHeader({ currentMonth }: CalendarHeaderProps) {
 
         <Button
           variant="ghost"
-          className="rounded-md px-3 py-1 text-sm font-medium text-[#333333]"
+          className="rounded-md px-3 py-1 text-sm font-medium text-[#333333] "
         >
           Hoje
         </Button>
 
-        <Button className="rounded-xl text-[#736CCE]  bg-[#FFFFFF]">
+        <Button className="rounded-xl text-[#736CCE]  bg-[#FFFFFF] h-8 w-8">
           <ChevronRight className="h-5 w-5" />
         </Button>
       </div>
