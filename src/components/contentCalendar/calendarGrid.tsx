@@ -21,7 +21,7 @@ export function CalendarGrid({ days }: CalendarGridProps) {
           {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'].map((day) => (
             <div
               key={day}
-              className="py-2 text-center font-medium text-indigo-600"
+              className="py-2 text-start font-medium text-[#736CCE]"
             >
               {day}
             </div>

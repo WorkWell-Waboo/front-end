@@ -13,7 +13,7 @@ function SpecialistCalendarPage() {
     <main className="px-10">
       <SearchBar inputDisabled={true} />
       <CalendarStats />
-      <div className="rounded-lg bg-white p-6 shadow-sm">
+      <div className="rounded-lg bg-white px-6 py-4 shadow-sm">
         <CalendarHeader currentMonth={currentMonth} />
         <CalendarGrid days={days} />
       </div>
