@@ -27,11 +27,13 @@ export function CalendarGrid({ days }: CalendarGridProps) {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-px border-t">
-          {days.map((day) => (
+        <div className="relative grid grid-cols-7 border rounded-lg border-[#E4E4E4]">
+          {days.map((day, index) => (
             <CalendarCell
               key={day.date + String(day.isCurrentMonth)}
               day={day}
+              index={index}
+              totalDays={days.length}
             />
           ))}
         </div>

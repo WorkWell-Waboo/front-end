@@ -13,14 +13,29 @@ export interface CalendarDay {
 
 interface CalendarCellProps {
   day: CalendarDay;
+  index: number;
+  totalDays: number;
 }
 
-export function CalendarCell({ day }: CalendarCellProps) {
+export function CalendarCell({ day, index, totalDays }: CalendarCellProps) {
+  const isFirstRow = index < 7;
+  const isLastRow = index >= totalDays - 7;
+  const isFirstCol = index % 7 === 0;
+  const isLastCol = (index + 1) % 7 === 0;
   return (
     <div
       className={cn(
-        'min-h-[120px] border-b border-r p-1',
-        day.isCurrentMonth ? 'bg-white' : 'bg-gray-50'
+        'min-h-[120px] p-1 overflow-auto',
+        !isLastCol && 'border-r',
+        !isLastRow && 'border-b',
+        'border-[#E4E4E4]',
+        day.isCurrentMonth ? 'bg-white' : 'text-[#B6B6B6]',
+
+        // Arredondamentos nos cantos
+        isFirstRow && isFirstCol && 'rounded-tl-lg',
+        isFirstRow && isLastCol && 'rounded-tr-lg',
+        isLastRow && isFirstCol && 'rounded-bl-lg',
+        isLastRow && isLastCol && 'rounded-br-lg'
       )}
     >
       <div className="p-1 text-sm font-medium">{day.date}</div>
@@ -29,7 +44,7 @@ export function CalendarCell({ day }: CalendarCellProps) {
           <div
             key={idx.toString()}
             className={cn(
-              'rounded px-2 py-1 text-xs',
+              'rounded px-2 py-1 text-[10px]',
               appointment.color === 'blue' && 'bg-[#E9EBFFFA] text-[#212FB1FA]',
               appointment.color === 'green' && 'bg-[#F8FFE9FA] text-[#658918]',
               appointment.color === 'pink' && 'bg-[#FFE9F6FA] text-[#EF5EB5FA]',

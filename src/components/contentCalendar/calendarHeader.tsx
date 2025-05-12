@@ -1,5 +1,7 @@
 'use client';
 import {
+  ArrowLeft,
+  ArrowRight,
   CalendarIcon,
   ChevronDown,
   ChevronLeft,
@@ -23,8 +25,8 @@ export function CalendarHeader({ currentMonth }: CalendarHeaderProps) {
     <div className=" flex items-center justify-between">
       <h2 className="text-2xl font-medium">{currentMonth}</h2>
       <div className="flex items-center gap-2 p-1 bg-[#FAFAFA] rounded-xl">
-        <Button className="rounded-xl text-[#736CCE] bg-[#FFFFFF] h-8 w-8">
-          <ChevronLeft className="h-5 w-5" />
+        <Button className="rounded-lg text-[#736CCE] shadow-xl bg-[#FFFFFF] h-8 w-8">
+          <ArrowLeft className="h-5 w-5" />
         </Button>
 
         <Button
@@ -34,8 +36,8 @@ export function CalendarHeader({ currentMonth }: CalendarHeaderProps) {
           Hoje
         </Button>
 
-        <Button className="rounded-xl text-[#736CCE]  bg-[#FFFFFF] h-8 w-8">
-          <ChevronRight className="h-5 w-5" />
+        <Button className="rounded-lg text-[#736CCE] shadow-xl bg-[#FFFFFF] h-8 w-8">
+          <ArrowRight className="h-5 w-5" />
         </Button>
       </div>
       <div className="flex items-center gap-2">
