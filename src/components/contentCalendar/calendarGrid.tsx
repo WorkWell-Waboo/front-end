@@ -3,9 +3,10 @@ import { CalendarCell } from './calendarCell';
 
 interface CalendarGridProps {
   days: CalendarDay[];
+  onAppointmentClick: (time: string, name: string, location: string) => void;
 }
 
-export function CalendarGrid({ days }: CalendarGridProps) {
+export function CalendarGrid({ days, onAppointmentClick }: CalendarGridProps) {
   return (
     <div className="overflow-x-auto">
       <div className="min-w-[800px]">
@@ -26,6 +27,7 @@ export function CalendarGrid({ days }: CalendarGridProps) {
               day={day}
               index={index}
               totalDays={days.length}
+              onAppointmentClick={onAppointmentClick}
             />
           ))}
         </div>

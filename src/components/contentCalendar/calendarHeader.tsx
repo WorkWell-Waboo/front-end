@@ -1,42 +1,63 @@
 'use client';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
-  ArrowLeft,
-  ArrowRight,
-  CalendarIcon,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { ArrowLeft, ArrowRight, CalendarIcon, ChevronDown } from 'lucide-react';
 import React from 'react';
-import { Button } from '../ui/button';
-import { Calendar } from '../ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 import { format } from 'date-fns';
 
 import { cn } from '@/libraries/utils';
+
 interface CalendarHeaderProps {
   currentMonth: string;
+  onPrevMonth: () => void;
+  onNextMonth: () => void;
+  onToday: () => void;
+  onDateSelect: (date: Date | undefined) => void;
 }
 
-export function CalendarHeader({ currentMonth }: CalendarHeaderProps) {
+export function CalendarHeader({
+  currentMonth,
+  onPrevMonth,
+  onNextMonth,
+  onToday,
+  onDateSelect,
+}: CalendarHeaderProps) {
   const [date, setDate] = React.useState<Date>();
+
+  const handleDateChange = (newDate: Date | undefined) => {
+    setDate(newDate);
+    onDateSelect(newDate);
+  };
+
   return (
-    <div className=" flex items-center justify-between">
+    <div className="flex items-center justify-between mb-4">
       <h2 className="text-2xl font-medium">{currentMonth}</h2>
       <div className="flex items-center gap-2 p-1 bg-[#FAFAFA] rounded-xl">
-        <Button className="rounded-lg text-[#736CCE] shadow-xl bg-[#FFFFFF] h-8 w-8">
+        <Button
+          className="rounded-lg text-[#736CCE] shadow-xl bg-[#FFFFFF] h-8 w-8"
+          onClick={onPrevMonth}
+        >
           <ArrowLeft className="h-5 w-5" />
         </Button>
 
         <Button
           variant="ghost"
-          className="rounded-md px-3 py-1 text-sm font-medium text-[#333333] "
+          className="rounded-md px-3 py-1 text-sm font-medium text-[#333333]"
+          onClick={onToday}
         >
           Hoje
         </Button>
 
-        <Button className="rounded-lg text-[#736CCE] shadow-xl bg-[#FFFFFF] h-8 w-8">
+        <Button
+          className="rounded-lg text-[#736CCE] shadow-xl bg-[#FFFFFF] h-8 w-8"
+          onClick={onNextMonth}
+        >
           <ArrowRight className="h-5 w-5" />
         </Button>
       </div>
@@ -69,7 +90,7 @@ export function CalendarHeader({ currentMonth }: CalendarHeaderProps) {
             <Calendar
               mode="single"
               selected={date}
-              onSelect={setDate}
+              onSelect={handleDateChange}
               initialFocus
             />
           </PopoverContent>
