@@ -1,14 +1,6 @@
+import type { CalendarDay } from '@/libraries/utils';
 import { CalendarCell } from './calendarCell';
-export type CalendarDay = {
-  date: string;
-  isCurrentMonth: boolean;
-  appointments: {
-    time: string;
-    name: string;
-    color: 'blue' | 'green' | 'pink' | 'red';
-    status?: string;
-  }[];
-};
+
 interface CalendarGridProps {
   days: CalendarDay[];
 }
