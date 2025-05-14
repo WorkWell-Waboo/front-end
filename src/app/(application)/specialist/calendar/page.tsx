@@ -92,7 +92,7 @@ function SpecialistCalendarPage() {
     <main className="px-10">
       <SearchBar inputDisabled={true} />
       <CalendarStats />
-      <div className="rounded-lg bg-white pl-6 pr- py-4 shadow-sm">
+      <div className="rounded-lg bg-white pl-6 pr-8 py-4 shadow-sm">
         <CalendarHeader
           currentMonth={currentMonthName}
           onPrevMonth={goToPreviousMonth}
