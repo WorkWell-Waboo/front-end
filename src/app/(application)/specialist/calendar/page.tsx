@@ -1,5 +1,6 @@
 'use client';
 
+import client from '@/assets/imgs/cliente.png';
 import { CalendarGrid } from '@/components/contentCalendar/calendarGrid';
 import { CalendarHeader } from '@/components/contentCalendar/calendarHeader';
 import { CalendarStats } from '@/components/contentCalendar/calendarStats';
@@ -30,9 +31,8 @@ import {
   User,
 } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import client from '../../../../assets/imgs/cliente.png';
-
 type Appointment = {
   id: number;
   name: string;
@@ -41,6 +41,7 @@ type Appointment = {
 };
 
 function SpecialistCalendarPage() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedAppointment, setSelectedAppointment] =
     useState<Appointment | null>(null);
@@ -119,15 +120,25 @@ function SpecialistCalendarPage() {
                   {selectedAppointment?.name}
                 </h2>
                 <div className="h-5 mt-2 flex gap-4 text-[#736CCE]">
-                  <CircleUserRound size={16} />
-
-                  <CalendarPlus size={16} />
-
-                  <FileText size={16} />
-
-                  <Paperclip size={16} />
-
-                  <MessageSquareText size={16} />
+                  <Button
+                    variant={'ghost'}
+                    size="icon"
+                    onClick={() => router.push('calendar/enchiridion/3808403')}
+                  >
+                    <CircleUserRound size={16} />
+                  </Button>
+                  <Button variant={'ghost'} size="icon">
+                    <CalendarPlus size={16} />
+                  </Button>
+                  <Button variant={'ghost'} size="icon">
+                    <FileText size={16} />
+                  </Button>
+                  <Button variant={'ghost'} size="icon">
+                    <Paperclip size={16} />
+                  </Button>
+                  <Button variant={'ghost'} size="icon">
+                    <MessageSquareText size={16} />
+                  </Button>
                 </div>
               </div>
             </div>

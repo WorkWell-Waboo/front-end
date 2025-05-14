@@ -229,7 +229,6 @@ export default function ManagerDashboardPage() {
                       {colab}
                     </span>
                     <Button
-                      onClick={() => console.log(`Ver relatório de ${colab}`)}
                       variant="ghost"
                       className="text-xs font-normal p-0 text-[#504DA6] underline hover:text-[#504DA6] focus:outline-none focus:ring-1 focus:ring-[#C4B5FD] rounded-sm"
                     >
