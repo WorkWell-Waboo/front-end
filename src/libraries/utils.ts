@@ -79,11 +79,11 @@ export function generateCalendarDays(): CalendarDay[] {
       times: {
         "11:00": {
           name: "Ana Beatriz Souza",
-          location: "Consultório 5",
+          location: "Sala de Videoconferência no Microsoft Teams",
         },
         "12:00": {
           name: "Lucas Almeida",
-          location: "Sala de Videoconferência",
+          location: "Sala de Videoconferência no Microsoft Teams",
         },
       },
     },
