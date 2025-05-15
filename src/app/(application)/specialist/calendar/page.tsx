@@ -1,6 +1,5 @@
 'use client';
 import client from '@/assets/imgs/cliente.png';
-import { CalendarForm } from '@/components/calendarinput/page';
 import { CalendarGrid } from '@/components/contentCalendar/calendarGrid';
 import { CalendarHeader } from '@/components/contentCalendar/calendarHeader';
 import { CalendarStats } from '@/components/contentCalendar/calendarStats';
@@ -244,7 +243,30 @@ function SpecialistCalendarPage({ onDateSelect }: CalendarHeaderProps) {
 
           <div className="space-y-4 mt-4">
             {/* Campo de Data */}
-            <CalendarForm />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant={'outline'}
+                  className={cn(
+                    'w-full justify-between border border-[#E6E6E8] bg-[#FFFFFF] text-left font-normal',
+                    !date && 'text-muted-foreground'
+                  )}
+                >
+                  <div className="flex items-center gap-2">
+                    {date ? format(date, 'PPP') : <span>Data</span>}
+                  </div>
+                  <ChevronDown className="text-[#736CCE] size-5" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-full p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={handleDateChange}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
             {/* Campo de Hora */}
             <Select value={selectedHour} onValueChange={setSelectedHour}>
               <SelectTrigger
