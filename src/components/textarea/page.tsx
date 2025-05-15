@@ -4,10 +4,8 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
@@ -32,13 +30,7 @@ export function TextareaForm() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast.success('fsdfdsfdsfdsf', {
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    toast.success('Enviado com sucesso!!', {});
   }
 
   return (
@@ -63,12 +55,12 @@ export function TextareaForm() {
         />
         <div className="flex gap-4 justify-end">
           <Button
-            variant="outline"
-            className="text-purple-600 border-purple-600"
+            variant="ghost"
+            className="text-[#691FB1] border border-[#691FB1] px-8 hover:text-[#681fb1eb] hover:border-[#681fb1f3] hover:bg-[#681fb115]"
           >
             Baixar PDF
           </Button>
-          <Button type="submit" className="bg-purple-600 hover:bg-purple-700">
+          <Button type="submit" className="bg-[#691FB1] hover:bg-[#681fb1f3]">
             Enviar prontuário
           </Button>
         </div>

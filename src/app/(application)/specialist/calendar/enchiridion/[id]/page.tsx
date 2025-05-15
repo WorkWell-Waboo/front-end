@@ -1,18 +1,18 @@
 'use client';
 import client from '@/assets/imgs/cliente.png';
+import GoBackButton from '@/components/go-back-button';
 import SearchBar from '@/components/searchbar';
 import { TextareaForm } from '@/components/textarea/page';
 import { Button } from '@/components/ui/button';
-import { Form, FormField } from '@/components/ui/form';
-import { ArrowLeft, Bell, Globe, User } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function MedicalRecord() {
+  const router = useRouter();
   return (
     <div className="min-h-screen px-10">
-      <SearchBar inputDisabled={true} />
-
-      <main className="px-5 pb-6">
+      <SearchBar inputDisabled={true} isSpecility={true} buttonActived={true} />
+      <main className="pb-6 px-6">
         <div className="grid grid-cols-[1fr_.16fr]">
           <div>
             <div className="flex justify-between items-center mb-4">
@@ -20,6 +20,9 @@ export default function MedicalRecord() {
                 Prontuário
               </h1>
               <Button
+                onClick={() => {
+                  router.push('../../calendar/anamnense/986987');
+                }}
                 variant="outline"
                 className="text-[#691FB1] border-[#691FB1]"
               >
@@ -57,7 +60,7 @@ export default function MedicalRecord() {
           Anamnese
         </h2>
 
-        <div className=" bg-[#F2F2F2] p-6 overflow-y-auto max-h-40">
+        <div className=" bg-[#F2F2F2] p-6 overflow-y-auto max-h-64 scrollbar-custom">
           <div className="flex gap-8 mb-2 text-[#636C77] text-sm font-bold ">
             <div className="flex gap-1">
               <span className="font-bold">Data:</span>
@@ -82,6 +85,22 @@ export default function MedicalRecord() {
               consectetur adipiscing elit, sed do eiusmod tempor incididunt
               utlabore et dolore magna aliqua. Ut enim ad minim veniam, quis
               nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+              occaecat cupidatat non proident, sunt in culpa qui officia
+              deserunt mollit ullamco laboris nisi ut aliquip ex ea Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt utlabore et dolore magna aliqua. Ut enim ad minim
+              veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+              ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+              officia deserunt mollit ullamco laboris nisi ut aliquip ex ea
+              commodo consequat. Duis aute irure dolor in reprehenderit in
+              voluptate velit esse Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit, sed do eiusmod tempor incididunt utlabore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+              exercitation ullamco laboris nisi ut aliquip ex ea commodo
               consequat. Duis aute irure dolor in reprehenderit in voluptate
               velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
               occaecat cupidatat non proident, sunt in culpa qui officia

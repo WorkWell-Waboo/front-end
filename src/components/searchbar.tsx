@@ -16,10 +16,12 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { NotificationBell } from './NotificationBell';
+import GoBackButton from './go-back-button';
 import { Button } from './ui/button';
 
 type SearchBarProps = {
   inputDisabled?: boolean;
+  buttonActived?: boolean;
   placeholder?: string;
   isManager?: boolean;
   isSpecility?: boolean;
@@ -27,6 +29,7 @@ type SearchBarProps = {
 
 export default function SearchBar({
   inputDisabled = false,
+  buttonActived = false,
   placeholder,
   isManager = false,
   isSpecility = false,
@@ -41,7 +44,11 @@ export default function SearchBar({
           isManager ? (
             <p className="text-[#9E9EA8]">Olá, nome do gestor</p>
           ) : isSpecility ? (
-            <p className="text-[#9E9EA8]">Olá, nome do especilista</p>
+            buttonActived ? (
+              <GoBackButton />
+            ) : (
+              <p className="text-[#9E9EA8]">Olá, nome do especialista</p>
+            )
           ) : null
         ) : (
           <Input
@@ -61,12 +68,14 @@ export default function SearchBar({
           !inputDisabled ? 'ml-4' : 'ml-0 w-full justify-end'
         }`}
       >
-        <Button
-          onClick={() => router.push('plans')}
-          className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition"
-        >
-          <CartSVG key="cart" />
-        </Button>
+        {!isSpecility ? (
+          <Button
+            onClick={() => router.push('plans')}
+            className="w-10 h-10 rounded-full text-[#736CCE] bg-[#736CCE0D] flex items-center justify-center hover:bg-[#e0e3f0] transition"
+          >
+            <CartSVG key="cart" />
+          </Button>
+        ) : null}
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
