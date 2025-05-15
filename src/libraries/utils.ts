@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export type CalendarDay = {
-  date: string
+  date: Date
   isCurrentMonth: boolean
   times: {
     [key: string]: {
@@ -13,14 +13,18 @@ export type CalendarDay = {
   }
 }
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 export function generateCalendarDays(): CalendarDay[] {
+  const year = 2025
+  const month = 4 // Maio (0-based index, 0=Janeiro, 4=Maio)
+
   return [
     {
-      date: "01",
+      date: new Date(year, month, 1),
       isCurrentMonth: true,
       times: {
         "09:00": {
@@ -30,12 +34,12 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "02",
+      date: new Date(year, month, 2),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "03",
+      date: new Date(year, month, 3),
       isCurrentMonth: true,
       times: {
         "10:00": {
@@ -49,7 +53,7 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "04",
+      date: new Date(year, month, 4),
       isCurrentMonth: true,
       times: {
         "10:00": {
@@ -64,17 +68,17 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "05",
+      date: new Date(year, month, 5),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "06",
+      date: new Date(year, month, 6),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "07",
+      date: new Date(year, month, 7),
       isCurrentMonth: true,
       times: {
         "11:00": {
@@ -88,7 +92,7 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "08",
+      date: new Date(year, month, 8),
       isCurrentMonth: true,
       times: {
         "10:00": {
@@ -106,12 +110,12 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "09",
+      date: new Date(year, month, 9),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "10",
+      date: new Date(year, month, 10),
       isCurrentMonth: true,
       times: {
         "14:00": {
@@ -121,17 +125,17 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "11",
+      date: new Date(year, month, 11),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "12",
+      date: new Date(year, month, 12),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "13",
+      date: new Date(year, month, 13),
       isCurrentMonth: true,
       times: {
         "11:00": {
@@ -149,22 +153,22 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "14",
+      date: new Date(year, month, 14),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "15",
+      date: new Date(year, month, 15),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "16",
+      date: new Date(year, month, 16),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "17",
+      date: new Date(year, month, 17),
       isCurrentMonth: true,
       times: {
         "09:00": {
@@ -182,12 +186,12 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "18",
+      date: new Date(year, month, 18),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "19",
+      date: new Date(year, month, 19),
       isCurrentMonth: true,
       times: {
         "12:00": {
@@ -201,22 +205,22 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "20",
+      date: new Date(year, month, 20),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "21",
+      date: new Date(year, month, 21),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "22",
+      date: new Date(year, month, 22),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "23",
+      date: new Date(year, month, 23),
       isCurrentMonth: true,
       times: {
         "14:00": {
@@ -230,12 +234,12 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "24",
+      date: new Date(year, month, 24),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "25",
+      date: new Date(year, month, 25),
       isCurrentMonth: true,
       times: {
         "14:00": {
@@ -253,12 +257,12 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "26",
+      date: new Date(year, month, 26),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "27",
+      date: new Date(year, month, 27),
       isCurrentMonth: true,
       times: {
         "13:00": {
@@ -272,12 +276,12 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "28",
+      date: new Date(year, month, 28),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "29",
+      date: new Date(year, month, 29),
       isCurrentMonth: true,
       times: {
         "09:00": {
@@ -291,12 +295,12 @@ export function generateCalendarDays(): CalendarDay[] {
       },
     },
     {
-      date: "30",
+      date: new Date(year, month, 30),
       isCurrentMonth: true,
       times: {},
     },
     {
-      date: "31",
+      date: new Date(year, month, 31),
       isCurrentMonth: true,
       times: {
         "10:00": {
@@ -313,23 +317,24 @@ export function generateCalendarDays(): CalendarDay[] {
         },
       },
     },
+    // Próximo mês (Junho)
     {
-      date: "01",
+      date: new Date(year, month + 1, 1),
       isCurrentMonth: false,
       times: {},
     },
     {
-      date: "02",
+      date: new Date(year, month + 1, 2),
       isCurrentMonth: false,
       times: {},
     },
     {
-      date: "03",
+      date: new Date(year, month + 1, 3),
       isCurrentMonth: false,
       times: {},
     },
     {
-      date: "04",
+      date: new Date(year, month + 1, 4),
       isCurrentMonth: false,
       times: {},
     },

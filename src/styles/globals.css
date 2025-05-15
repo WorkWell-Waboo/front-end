@@ -153,3 +153,9 @@
     scrollbar-color: var(--color-primary) transparent; /* thumb e track */
   }
 }
+/* Força o calendário ficar "por cima" e receber clique */
+.react-day-picker {
+  position: relative;
+  z-index: 60; /* maior que overlay (50) */
+  pointer-events: auto;
+}

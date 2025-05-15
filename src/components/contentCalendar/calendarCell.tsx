@@ -38,7 +38,9 @@ export function CalendarCell({
         isLastRow && isLastCol && 'rounded-br-lg'
       )}
     >
-      <div className="p-1 text-sm font-medium">{day.date}</div>
+      <div className="p-1 text-sm font-medium">
+        {day.date.toLocaleDateString('pt-BR', { day: '2-digit' })}
+      </div>
       <div className="space-y-1 max-h-[90px] overflow-y-auto scrollbar-custom">
         {Object.entries(day.times).map(([time, appointment], idx) => {
           const { name, isbloquead, location } = appointment as {
