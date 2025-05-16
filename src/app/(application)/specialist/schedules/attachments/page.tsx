@@ -13,7 +13,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-function CollaboratorSchedulesAttachments() {
+function SpecialistSchedulesAttachments() {
   const handleBack = () => {
     window.history.back();
   };
@@ -70,4 +70,4 @@ function CollaboratorSchedulesAttachments() {
   );
 }
 
-export default CollaboratorSchedulesAttachments;
+export default SpecialistSchedulesAttachments;

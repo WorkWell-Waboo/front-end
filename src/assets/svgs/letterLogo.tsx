@@ -17,14 +17,14 @@ function LetterLogoSVG(props: SVGProps<SVGSVGElement>) {
       />
       <circle cx="25" cy="29" r="25" fill="url(#pattern0_106_2706)" />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M8.77457 16.8421C13.4254 16.8421 17.1956 13.0719 17.1956 8.42105C17.1956 3.77023 13.4254 0 8.77457 0C4.12375 0 0.353516 3.77023 0.353516 8.42105C0.353516 13.0719 4.12375 16.8421 8.77457 16.8421Z"
         fill="white"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M8.774 12.6315C11.0994 12.6315 12.9845 10.7464 12.9845 8.42098C12.9845 6.09557 11.0994 4.21045 8.774 4.21045C6.44859 4.21045 4.56348 6.09557 4.56348 8.42098C4.56348 10.7464 6.44859 12.6315 8.774 12.6315Z"
         fill="#44CB6C"
       />
