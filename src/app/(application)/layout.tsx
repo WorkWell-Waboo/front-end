@@ -15,7 +15,7 @@ async function ApplicationLayoutRoot({ children }: React.PropsWithChildren) {
   return (
     <Fragment>
       <ChangeProfile role={role} />
-      <section className="grid grid-cols-[256px_calc(100%-256px)] min-h-dvh">
+      <section className="grid grid-cols-[256px_calc(100%-256px)] min-h-dvh max-w-[1920px] m-auto">
         <Sidebar role={role} />
         <main className="overflow-auto min-h-dvh">
           <Header />
